@@ -30,6 +30,15 @@ body {
     align-items: center;
 }
 
+/* Estilo para el icono de usuario en el menú de navegación */
+.header nav ul li.right a i {
+    margin-right: 5px; /* Ajusta el margen derecho del icono */
+    color: white; /* Cambia el color del icono a blanco */
+    font-size: 16px; /* Ajusta el tamaño del icono */
+}
+
+
+
 .title {
     background-color: #555;
     width: 100%;
@@ -75,6 +84,12 @@ body {
 
 .main-content h2 {
     margin-top: 0;
+}
+
+.main-content .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .image-container {
@@ -196,7 +211,7 @@ input {
     font-family: sans-serif;
 }
 
-.btn {
+button {
     grid-column: span 3;
     background-color: #F1C40F;
     border: none; 
@@ -204,18 +219,20 @@ input {
     border-radius: 4px; 
     cursor: pointer; 
     font-size: 16px; 
-    text-decoration: none;
-    color: inherit;
-    width: 100%;
 }
 
-.btn:hover {
+button a{
+    text-decoration: none;
+    color: inherit;
+}
+
+button:hover {
     background-color: #D4AC0D; 
 }
 
 .links-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; 
     width: 100%; 
     padding: 10px 0; 
 }
@@ -227,5 +244,22 @@ input {
 
 .links-container h5 a {
     text-decoration: none; 
-    color: inherit; 
+    color: inherit;
 }
+
+.form-group select {
+    width: calc(100% - 12px); 
+    padding: 10px; 
+    border: 1px solid #ccc; 
+    border-radius: 4px; 
+    box-sizing: border-box; 
+    font-size: 12px; 
+    font-family: sans-serif;
+    color: #333; 
+    background-color: white; 
+}
+
+
+
+
+

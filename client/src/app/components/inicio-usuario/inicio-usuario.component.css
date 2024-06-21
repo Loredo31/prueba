@@ -1,0 +1,218 @@
+:root {
+    --primary-bg-color: #333;
+    --secondary-bg-color: #555;
+    --text-color: white;
+    --button-bg-color: #efefef;
+    --button-text-color: black;
+    --hover-bg-color: #efefef;
+    --highlight-color: #ffcc00;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    overflow-x: hidden;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+.header {
+    background-color: var(--primary-bg-color);
+    color: var(--text-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.title {
+    background-color: var(--secondary-bg-color);
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+}
+
+.header nav {
+    background-color: var(--primary-bg-color);
+    width: 100%;
+}
+
+.header nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    margin: 0;
+    padding: 10px 20px;
+}
+
+.header nav ul li.left {
+    margin-right: auto;
+}
+
+.header nav ul li.right {
+    margin-left: 20px;
+}
+
+.header nav ul li a {
+    color: var(--text-color);
+    text-decoration: none;
+}
+
+.main-content {
+    background-color: #f2d694;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    width: 100%;
+}
+
+.main-content h2 {
+    margin-top: 0;
+}
+
+.expenses-agenda-calendar {
+    display: flex;
+    width: 100%;
+    justify-content: flex-start; 
+    align-items: flex-start;
+}
+
+.expenses-section {
+    width: 40%;
+    margin-right: 2%; 
+}
+
+.expenses-section label {
+    margin-left: 10%;
+    font-weight: bold;
+    font-family: sans-serif;
+    font-size: large;
+}
+
+.expenses {
+    clear: both;
+    width: 100%;
+}
+
+.expenses ul {
+    list-style: none;
+    padding: 0;
+    margin-left: 20px;
+}
+
+.expenses ul li {
+    background-color: var(--primary-bg-color);
+    margin-bottom: 2px;
+    padding: 4px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    border-radius: 2px;
+}
+
+.expenses ul li span {
+    font-weight: bold;
+}
+
+.expenses ul a {
+    background-color: var(--primary-bg-color);
+    margin-bottom: 2px;
+    padding: 4px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    border-radius: 2px;
+}
+
+.expenses ul li samp{
+    font-weight: bold;
+}
+
+.expenses button {
+    background-color: var(--button-bg-color);
+    color: var(--button-text-color);
+    border: none;
+    padding: 8px;
+    width: 100%;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.button_gastos {
+    font-family: sans-serif;
+    margin: 5px 0;
+    padding: 10px 20px;
+    color: var(--text-color);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.agenda-calendar {
+    width: 50%; 
+    display: flex;
+    flex-direction: column;
+    margin-left: 0;
+}
+
+.agenda {
+    margin-bottom: 20px;
+}
+
+.agenda h3, .calendar h3 {
+    text-align: left;
+    margin-top: 0;
+}
+
+.month {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.month button {
+    background-color: var(--primary-bg-color);
+    color: var(--text-color);
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.calendar table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.8em; 
+}
+
+.calendar th, .calendar td {
+    border: 1px solid #ddd;
+    padding: 5px; 
+    text-align: center;
+}
+
+.calendar th {
+    background-color: var(--primary-bg-color);
+    color: var(--text-color);
+}
+
+.calendar td {
+    background-color: #f9f9f9;
+}
+
+.calendar td:hover {
+    background-color: var(--hover-bg-color);
+    cursor: pointer;
+}
+
+.selected {
+    background-color: var(--highlight-color);
+}

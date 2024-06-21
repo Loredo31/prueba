@@ -8,7 +8,7 @@
             </div>
             <nav>
                 <ul>
-                    <li class="left"><a routerLink="/home">Control de Gastos</a></li>
+                    <li class="left"><a routerLink="/inicio-usuario">Control de Gastos</a></li>
                     <li class="right"><a routerLink="/registrarse">Registrarte</a></li>
                 </ul>
             </nav>
@@ -19,13 +19,13 @@
                 <h1>Inicia Sesión</h1>
                 <div class="mb-3">
                     <label for="exampleInputUser" class="form-label">Usuario</label>
-                    <input type="user" class="form-control" id="exampleInputUser" aria-describedby="emailUser" placeholder="username" required>
+                    <input type="user" class="form-control" id="exampleInputUser" aria-describedby="emailUser" placeholder="username" >
                 </div>
                 <div class="mb-3">
                     <label for="exampleInputPassword1" class="form-label">Contraseña</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="********" required>
+                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="********" >
                 </div>
-                <button type="submit" class="btn btn-primary">Entrar</button>
+                <a class="btn btn-primary" routerLink="/inicio-usuario">Entrar</a>
                 <div class="links-container">
                     <h5><a routerLink="/registrarse">Registrarse</a></h5>
                     <h5><a routerLink="/recuperar-contrasena">Olvide mi contraseña</a></h5>
