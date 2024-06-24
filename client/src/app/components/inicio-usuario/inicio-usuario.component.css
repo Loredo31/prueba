@@ -67,8 +67,6 @@ body {
     background-color: #f2d694;
     flex: 1;
     display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
     padding: 20px;
     width: 100%;
@@ -78,141 +76,117 @@ body {
     margin-top: 0;
 }
 
-.expenses-agenda-calendar {
-    display: flex;
-    width: 100%;
-    justify-content: flex-start; 
-    align-items: flex-start;
-}
-
-.expenses-section {
-    width: 40%;
-    margin-right: 2%; 
-}
-
-.expenses-section label {
-    margin-left: 10%;
-    font-weight: bold;
-    font-family: sans-serif;
-    font-size: large;
-}
-
-.expenses {
-    clear: both;
-    width: 100%;
-}
-
-.expenses ul {
-    list-style: none;
+* {
+    margin: 0;
     padding: 0;
-    margin-left: 20px;
+    box-sizing: border-box;
 }
 
-.expenses ul li {
-    background-color: var(--primary-bg-color);
-    margin-bottom: 2px;
-    padding: 4px;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    border-radius: 2px;
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2e3a9;
 }
 
-.expenses ul li span {
-    font-weight: bold;
-}
-
-.expenses ul a {
-    background-color: var(--primary-bg-color);
-    margin-bottom: 2px;
-    padding: 4px;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    border-radius: 2px;
-}
-
-.expenses ul li samp{
-    font-weight: bold;
-}
-
-.expenses button {
-    background-color: var(--button-bg-color);
-    color: var(--button-text-color);
-    border: none;
-    padding: 8px;
-    width: 100%;
+section {
+    background-color: #fff2cc;
+    padding: 20px;
     border-radius: 5px;
-    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.button_gastos {
-    font-family: sans-serif;
-    margin: 5px 0;
-    padding: 10px 20px;
-    color: var(--text-color);
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.agenda-calendar {
-    width: 50%; 
-    display: flex;
-    flex-direction: column;
-    margin-left: 0;
-}
-
-.agenda {
+section h2 {
     margin-bottom: 20px;
-}
-
-.agenda h3, .calendar h3 {
-    text-align: left;
-    margin-top: 0;
-}
-
-.month {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
-}
-
-.month button {
-    background-color: var(--primary-bg-color);
-    color: var(--text-color);
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-}
-
-.calendar table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 0.8em; 
-}
-
-.calendar th, .calendar td {
-    border: 1px solid #ddd;
-    padding: 5px; 
     text-align: center;
 }
 
-.calendar th {
-    background-color: var(--primary-bg-color);
-    color: var(--text-color);
+.gastos .botones {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.calendar td {
-    background-color: #f9f9f9;
+.gastos .botones button {
+    background-color: white;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 100%;
+    cursor: pointer;
+    border: none;
+    font-family: sans-serif;
+    font-size:medium;
+    font-weight: 400;
 }
 
-.calendar td:hover {
+.gastos .botones button:hover {
     background-color: var(--hover-bg-color);
+}
+
+.agenda .calendario {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.agenda .calendario .mes-año {
+    font-size: 20px;
+}
+
+.agenda .calendario table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+    background-color: white;
+}
+
+.agenda .calendario th,
+.agenda .calendario td {
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
+.agenda button {
+    background-color:#ffcc00;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    font-family: sans-serif;
+    font-size: medium;
+}
+
+.botones button:hover {
+    background-color: var(--hover-bg-color);
+}
+
+button.prev,
+button.next {
+    background-color: transparent;
+    border: none;
+    font-size: 20px;
     cursor: pointer;
 }
 
-.selected {
-    background-color: var(--highlight-color);
+.container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.gastos,
+.agenda {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.gastos {
+    order: 1;
+}
+
+.agenda {
+    order: 2;
 }

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <div class="title">
+        <h1>Ingresar</h1>
+      </div>
+      <nav>
+        <ul>
+          <li class="left"><a href="#">Control de Gastos</a></li>
+          <li class="right"><a routerLink="/gastos/list">Regresar</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main class="main-content">
+      <div class="container">
+        <h2>Crear gasto</h2>
+        <form id="registroForm" class="form-grid" (ngSubmit)="saveNewGasto()">
+          <div class="form-group">
+            <label for="usuario">Usuario</label>
+            <input type="text" id="usuario" name="usuario" [(ngModel)]="gasto.usuario" placeholder="usuario" required>
+          </div>
+          <div class="form-group">
+            <label for="servicio">Servicio</label>
+            <input type="text" id="servicio" name="servicio" [(ngModel)]="gasto.servicio" placeholder="servicio" required>
+          </div>
+          <div class="form-group">
+            <label for="categoria">Categoría</label>
+            <input type="text" id="categoria" name="categoria" [(ngModel)]="gasto.categoria" placeholder="categoría" required>
+          </div>
+          <div class="form-group">
+            <label for="cantidad">Cantidad</label>
+            <input type="number" id="cantidad" name="cantidad" [(ngModel)]="gasto.cantidad" placeholder="$ 00.0" required>
+          </div>
+          <div class="form-group">
+            <label for="fechaPago">Fecha de pago</label>
+            <input type="date" id="fechaPago" name="fechaPago" [(ngModel)]="gasto.fecha" required>
+          </div>
+          <button type="submit" class="btn btn-primary">Crear</button>
+        </form>
+      </div>
+    </main>   
+  </div>
+</body>
+</html>
+

@@ -2,12 +2,12 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { HomeComponent } from './components/home/home.component';
-import { LoginComponent } from './components/login/login.component';
-import { RecuperarContrasenaComponent } from './components/recuperar-contrasena/recuperar-contrasena.component';
-import { RegistrarseComponent } from './components/registrarse/registrarse.component';
+import { LoginComponent } from './components/auth/login/login.component';
+import { RecuperarContrasenaComponent } from './components/auth/recuperar-contrasena/recuperar-contrasena.component';
+import { RegistrarseComponent } from './components/auth/registrarse/registrarse.component';
 import { InicioUsuarioComponent } from './components/inicio-usuario/inicio-usuario.component';
-import { GastoComponent } from './components/gasto/gasto.component';
-import { ServicioComponent } from './components/servicio/servicio.component';
+import { GastoListComponent } from './components/gasto-list/gasto-list.component';
+import { GastoFormComponent } from './components/gasto-form/gasto-form.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent }, 
@@ -15,8 +15,8 @@ const routes: Routes = [
   { path: 'recuperar-contrasena', component: RecuperarContrasenaComponent }, 
   { path: 'registrarse', component: RegistrarseComponent },
   { path: 'inicio-usuario', component: InicioUsuarioComponent },
-  { path: 'gasto', component: GastoComponent},
-  { path: 'servicio', component: ServicioComponent},
+  { path: 'gastos/list', component: GastoListComponent},
+  { path: 'gastos/add', component: GastoFormComponent},
   { path: '**', redirectTo: '/' }
 ];
 

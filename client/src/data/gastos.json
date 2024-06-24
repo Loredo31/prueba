@@ -1,0 +1,36 @@
+{
+  "gastos": [
+    {
+      "id": 1,
+      "usuario": "Jaqueline",
+      "servicio": "Electricidad",
+      "categoria": "Gasto",
+      "cantidad": "500.00",
+      "fecha": "06/05/2024"
+    },
+    {
+      "id": 2,
+      "usuario": "Armando",
+      "servicio": "Renta Local",
+      "categoria": "Gasto",
+      "cantidad": "1500.00",
+      "fecha": "29/05/2024"
+    },
+    {
+      "id": 0,
+      "usuario": "",
+      "servicio": "",
+      "categoria": "",
+      "cantidad": 0,
+      "fecha": "2024-06-24T00:52:21.050Z"
+    },
+    {
+      "id": 0,
+      "usuario": "Alma",
+      "servicio": "Internet",
+      "categoria": "Gasto",
+      "cantidad": null,
+      "fecha": "2024-06-19"
+    }
+  ]
+}
