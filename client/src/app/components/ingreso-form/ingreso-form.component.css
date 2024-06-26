@@ -236,7 +236,7 @@ button:hover {
 .links-container {
     display: flex;
     justify-content: space-between; 
-    width: 100%; 
+    width: 100%;
     padding: 10px 0; 
 }
 
@@ -292,7 +292,6 @@ button:hover {
     color: #17a2b8;
     font-size: 1em;
 }
-
 
 
 

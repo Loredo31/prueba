@@ -3,65 +3,65 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 <body>
     <div class="container">
-    <header class="header">
+        <header class="header">
             <div class="title">
                 <h1>Ingresar</h1>
             </div>
             <nav>
                 <ul>
-                  <li class="left"><a href="#">Control de Gastos</a></li>
-                  <li class="right"><a routerLink="/gasto/list">Regresar</a></li>
+                    <li class="left"><a href="#">Control de Gastos</a></li>
+                    <li class="right"><a routerLink="/ingreso/list">Regresar</a></li>
                 </ul>
             </nav>
         </header>
         <main class="main-content">
             <div class="container">
-                <h2>Crear gasto</h2>
-                <form id="registroForm" class="form-grid" (ngSubmit)="saveNewGasto()">
+                <h2>Crear ingreso</h2>
+                <form id="registroForm" class="form-grid">
                     <div class="form-group">
-                        <label for="descripcion">Descripción
+                        <label for="tipoIngreso">Tipo de ingreso
                             <span class="info-icon">
                                 <i class="fas fa-info-circle"></i>
-                                <span class="tooltip">Detalles sobre qué compraste o pagaste.</span>
+                                <span class="tooltip">Puede ser "Recurrente" (si es una venta diaria) o "Extraordinario" (si es una venta especial).</span>
                             </span>
                         </label>
-                        <input type="text" id="descripcion" name="descripcion" [(ngModel)]="gasto.descripcion" placeholder="descripcion" required>
+                        <input type="text" id="tipoIngreso" name="tipoIngreso" placeholder="Tipo ingreso" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="origenIngreso">Origen del ingreso
+                            <span class="info-icon">
+                                <i class="fas fa-info-circle"></i>
+                                <span class="tooltip">Especifica de dónde proviene el ingreso.</span>
+                            </span>
+                        </label>
+                        <input type="text" id="origenIngreso" name="origenIngreso" placeholder="Origen ingreso" required>
                     </div>
                     <div class="form-group">
                         <label for="categoria">Categoría
                             <span class="info-icon">
                                 <i class="fas fa-info-circle"></i>
-                                <span class="tooltip">Ingrese la categoría correspondiente al gasto.</span>
+                                <span class="tooltip">Puedes categorizar tus ingresos si tienes varias fuentes.</span>
                             </span>
                         </label>
-                        <input type="text" id="categoria" name="categoria" [(ngModel)]="gasto.categoria" placeholder="categoría" required>
-                    </div>
+                        <input type="text" id="categoria" name="categoria" placeholder="categoría" required>
+                    </div>                  
                     <div class="form-group">
                         <label for="monto">Monto
                             <span class="info-icon">
                                 <i class="fas fa-info-circle"></i>
-                                <span class="tooltip">La cantidad exacta gastada.</span>
+                                <span class="tooltip">La cantidad exacta que recibiste.</span>
                             </span>
                         </label>
-                        <input type="number" id="monto" name="monto" [(ngModel)]="gasto.monto" placeholder="$ 00.0" required>
+                        <input type="number" id="monto" name="monto" placeholder="$ 00.0" required>
                     </div>
                     <div class="form-group">
-                        <label for="fechaTransaccion">Fecha de transacción
+                        <label for="fechaIngreso">Fecha de ingreso
                             <span class="info-icon">
                                 <i class="fas fa-info-circle"></i>
-                                <span class="tooltip">Clasifica el tipo de gasto para entender mejor en qué áreas se gasta más.</span>
+                                <span class="tooltip">Registra la fecha en que recibes el ingreso.</span>
                             </span>
                         </label>
-                        <input type="date" id="fechaTransaccion" name="fechaTransaccion" [(ngModel)]="gasto.fechaTransaccion" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="metodoPago">Método de pago
-                            <span class="info-icon">
-                                <i class="fas fa-info-circle"></i>
-                                <span class="tooltip">Registra cómo se realizó el pago.</span>
-                            </span>
-                        </label>
-                        <input type="text" id="metodoPago" name="metodoPago" [(ngModel)]="gasto.metodoPago" placeholder="metodoPago" required>
+                        <input type="date" id="fechaIngreso" name="fechaIngreso" required>
                     </div>
                     <button type="submit" class="btn btn-primary">Crear</button>
                 </form>

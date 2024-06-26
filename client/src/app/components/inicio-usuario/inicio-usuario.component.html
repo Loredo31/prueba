@@ -9,8 +9,9 @@
             </div>
             <nav>
                 <ul>
-                    <li class="left"><a href="#">Control de Gastos</a></li>
-                    <li class="left1"><a href="#">Resumen</a></li>
+                    <li class="left"><a routerLink="/inicio-usuario">Control de Gastos</a></li>
+                    <li class="right"><a routerLink="/home">Resumen</a></li>
+                    <li class="right"><a routerLink="/home">Cerrar sesión</a></li>
                     <li class="right"><a href="#">Usuario</a> <i class="fas fa-user"></i></li>
                 </ul>
             </nav>
@@ -19,9 +20,9 @@
             <section class="gastos">
                 <h2>Mis gastos</h2>
                 <div class="botones">
-                    <button><a routerLink="/gastos/list" routerLinkActive="active">Ver Gastos</a></button>
-                    <button><a>Ver Ingresos</a></button>
-                    <button><a>Ver Servicios</a></button>
+                    <a routerLink="/gastos/list">Ver Gastos</a>
+                    <a routerLink="/ingreso/list">Ver Ingresos</a>
+                    <a>Ver Servicios</a>
                 </div>
             </section>
             <section class="agenda">

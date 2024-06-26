@@ -12,11 +12,11 @@ export class GastoFormComponent {
 
   gasto: Gasto = {
     id: 0,
-    usuario: '',
-    servicio: '',
+    descripcion: '',
     categoria: '',
-    cantidad: 0,
-    fecha: new Date()
+    monto: 0,
+    fechaTransaccion: new Date(),
+    metodoPago: ''
   };
 
   constructor(private gastosService : GastosService){}

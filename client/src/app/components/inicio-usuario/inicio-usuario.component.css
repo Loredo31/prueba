@@ -12,6 +12,7 @@ body {
     margin: 0;
     font-family: Arial, sans-serif;
     overflow-x: hidden;
+    background-color: #f2e3a9;
 }
 
 .container {
@@ -61,6 +62,7 @@ body {
 .header nav ul li a {
     color: var(--text-color);
     text-decoration: none;
+    font-weight:600;
 }
 
 .main-content {
@@ -82,11 +84,6 @@ body {
     box-sizing: border-box;
 }
 
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f2e3a9;
-}
-
 section {
     background-color: #fff2cc;
     padding: 20px;
@@ -105,7 +102,7 @@ section h2 {
     align-items: center;
 }
 
-.gastos .botones button {
+.gastos .botones a {
     background-color: white;
     padding: 10px;
     margin-bottom: 10px;
@@ -116,12 +113,14 @@ section h2 {
     cursor: pointer;
     border: none;
     font-family: sans-serif;
-    font-size:medium;
+    font-size: medium;
     font-weight: 400;
+    text-decoration: none;
+    color: inherit
 }
 
 .gastos .botones button:hover {
-    background-color: var(--hover-bg-color);
+    background-color: #ffcc00;
 }
 
 .agenda .calendario {
@@ -149,7 +148,7 @@ section h2 {
 }
 
 .agenda button {
-    background-color:#ffcc00;
+    background-color: #ffcc00;
     color: white;
     padding: 10px;
     border: none;
@@ -158,10 +157,6 @@ section h2 {
     font-weight: bold;
     font-family: sans-serif;
     font-size: medium;
-}
-
-.botones button:hover {
-    background-color: var(--hover-bg-color);
 }
 
 button.prev,

@@ -97,7 +97,7 @@ body {
     max-width: 450px; 
     margin: auto; 
     margin-top: 50px; 
-    background-color:azure;
+    background-color: #fff2cc;
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -135,8 +135,8 @@ body {
     font-family:sans-serif;
 }
 
-.form-container .btn {
-    width: 95%; 
+.custom-btn {
+    width: 80%; 
     background-color: darkgoldenrod;
     color: white;
     border: none;
@@ -146,12 +146,13 @@ body {
     font-size: 1.2em;
     text-align: center;
     font-family: sans-serif;
+    display: inline-block;
+    text-decoration: none;
 }
 
-.form-container .btn:hover {
+.custom-btn:hover {
     background-color: goldenrod;
 }
-
 .contenido-principal {
     background-color: #f2d694; 
     flex: 1; 
@@ -197,7 +198,7 @@ input {
     font-family: sans-serif;
 }
 
-.btn {
+.btn bt {
     grid-column: span 3;
     background-color: #F1C40F;
     border: none; 

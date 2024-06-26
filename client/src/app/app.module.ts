@@ -13,6 +13,11 @@ import { GastoFormComponent } from './components/gasto-form/gasto-form.component
 import { GastoListComponent } from './components/gasto-list/gasto-list.component';
 import { GastosService } from './services/gastos.service';
 import { FormsModule } from '@angular/forms';
+import { IngresoFormComponent } from './components/ingreso-form/ingreso-form.component';
+import { IngresoListComponent } from './components/ingreso-list/ingreso-list.component';
+import { IngresosService } from './services/ingresos.service';
+import { ServicioFormComponent } from './components/servicio-form/servicio-form.component';
+import { ServicioListComponent } from './components/servicio-list/servicio-list.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +28,11 @@ import { FormsModule } from '@angular/forms';
     RecuperarContrasenaComponent,
     InicioUsuarioComponent,
     GastoFormComponent,
-    GastoListComponent
+    GastoListComponent,
+    IngresoFormComponent,
+    IngresoListComponent,
+    ServicioFormComponent,
+    ServicioListComponent
   ],
   imports: [
     BrowserModule,
@@ -32,8 +41,8 @@ import { FormsModule } from '@angular/forms';
     FormsModule
   ],
   providers: [
-    GastosService
-  ],
-  bootstrap: [AppComponent]
+    GastosService,
+    IngresosService
+  ]
 })
 export class AppModule { }

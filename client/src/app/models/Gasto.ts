@@ -1,8 +1,8 @@
 export interface Gasto{
     id?: number;
-    usuario?: string;
-    servicio?: string,
+    descripcion?: string;
     categoria?: string,
-    cantidad?: Number;
-    fecha?: Date;
+    monto?: number,
+    fechaTransaccion?: Date;
+    metodoPago?: string
 }
