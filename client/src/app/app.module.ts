@@ -18,6 +18,7 @@ import { IngresoListComponent } from './components/ingreso-list/ingreso-list.com
 import { IngresosService } from './services/ingresos.service';
 import { ServicioFormComponent } from './components/servicio-form/servicio-form.component';
 import { ServicioListComponent } from './components/servicio-list/servicio-list.component';
+import { ServiciosService } from './services/servicios.service';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 
 
@@ -44,7 +45,8 @@ import { provideHttpClient, withFetch } from '@angular/common/http';
   ],
   providers: [
     GastosService,
-    IngresosService
+    IngresosService,
+    ServiciosService
   ]
 })
 export class AppModule { }

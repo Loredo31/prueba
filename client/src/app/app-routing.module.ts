@@ -10,6 +10,8 @@ import { GastoListComponent } from './components/gasto-list/gasto-list.component
 import { GastoFormComponent } from './components/gasto-form/gasto-form.component';
 import { IngresoListComponent } from './components/ingreso-list/ingreso-list.component';
 import { IngresoFormComponent } from './components/ingreso-form/ingreso-form.component';
+import { ServicioFormComponent } from './components/servicio-form/servicio-form.component';
+import { ServicioListComponent } from './components/servicio-list/servicio-list.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent }, 
@@ -21,6 +23,8 @@ const routes: Routes = [
   { path: 'gastos/add', component: GastoFormComponent},
   { path: 'ingreso/list', component: IngresoListComponent},
   { path: 'ingreso/add', component: IngresoFormComponent},
+  { path: 'servicio/add', component: ServicioFormComponent},
+  { path: 'servicio/list', component: ServicioListComponent},
   { path: '**', redirectTo: '/' }
 ];
 

@@ -20,6 +20,6 @@ export class GastosService {
   }
 
   saveGastos(gasto: Gasto): Observable<any> {
-    return this.http.post<any>(this.API_URI, gasto);
+    return this.http.post<any>(this.API_URI,gasto);
   }
 }
