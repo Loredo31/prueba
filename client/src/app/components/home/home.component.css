@@ -1,36 +1,45 @@
-/* Reset CSS */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+.container h1 {
+    font-family: sans-serif;
+}
+
+.left {
+    font-family: sans-serif;
+    margin-left: 0%;
+}
+
+.right {
+    font-family: sans-serif;
 }
 
 body {
+    margin: 0;
     font-family: sans-serif;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
 }
 
 .container {
     display: flex;
     flex-direction: column;
-    flex: 1;
+    height: 100vh;
 }
 
 .header {
     background-color: #333;
     color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .title {
     background-color: #555;
+    width: 100%;
     text-align: center;
     padding: 10px 0;
 }
 
 .header nav {
     background-color: #333;
+    width: 100%;
 }
 
 .header nav ul {
@@ -52,7 +61,7 @@ body {
 .header nav ul li a {
     color: white;
     text-decoration: none;
-    font-weight: 600;
+    font-weight:600;
 }
 
 .main-content {
