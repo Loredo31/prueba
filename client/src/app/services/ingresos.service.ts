@@ -7,7 +7,7 @@ import { Ingreso } from '../models/Ingreso';
   providedIn: 'root'
 })
 export class IngresosService {
-  private API_URI = 'http://localhost:3000/ingreso'
+  private API_URI = 'http://localhost:3001/ingresos'
 
   constructor(private http: HttpClient) { }
 

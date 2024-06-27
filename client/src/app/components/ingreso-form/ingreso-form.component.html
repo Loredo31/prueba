@@ -17,7 +17,7 @@
         <main class="main-content">
             <div class="container">
                 <h2>Crear ingreso</h2>
-                <form id="registroForm" class="form-grid">
+                <form id="registroForm" class="form-grid" (ngSubmit)="saveNewIngreso()">
                     <div class="form-group">
                         <label for="tipoIngreso">Tipo de ingreso
                             <span class="info-icon">
@@ -25,7 +25,7 @@
                                 <span class="tooltip">Puede ser "Recurrente" (si es una venta diaria) o "Extraordinario" (si es una venta especial).</span>
                             </span>
                         </label>
-                        <input type="text" id="tipoIngreso" name="tipoIngreso" placeholder="Tipo ingreso" required>
+                        <input type="text" id="tipoIngreso" name="tipoIngreso" [(ngModel)]="ingreso.tipoIngreso" placeholder="Tipo ingreso" required>
                     </div>
                     <div class="form-group">
                         <label for="origenIngreso">Origen del ingreso
@@ -34,7 +34,7 @@
                                 <span class="tooltip">Especifica de dónde proviene el ingreso.</span>
                             </span>
                         </label>
-                        <input type="text" id="origenIngreso" name="origenIngreso" placeholder="Origen ingreso" required>
+                        <input type="text" id="origenIngreso" name="origenIngreso" [(ngModel)]="ingreso.origenIngreso" placeholder="Origen ingreso" required>
                     </div>
                     <div class="form-group">
                         <label for="categoria">Categoría
@@ -43,7 +43,7 @@
                                 <span class="tooltip">Puedes categorizar tus ingresos si tienes varias fuentes.</span>
                             </span>
                         </label>
-                        <input type="text" id="categoria" name="categoria" placeholder="categoría" required>
+                        <input type="text" id="categoria" name="categoria" [(ngModel)]="ingreso.categoria" placeholder="categoría" required>
                     </div>                  
                     <div class="form-group">
                         <label for="monto">Monto
@@ -52,7 +52,7 @@
                                 <span class="tooltip">La cantidad exacta que recibiste.</span>
                             </span>
                         </label>
-                        <input type="number" id="monto" name="monto" placeholder="$ 00.0" required>
+                        <input type="number" id="monto" name="monto" [(ngModel)]="ingreso.monto" placeholder="$ 00.0" required>
                     </div>
                     <div class="form-group">
                         <label for="fechaIngreso">Fecha de ingreso
@@ -61,7 +61,7 @@
                                 <span class="tooltip">Registra la fecha en que recibes el ingreso.</span>
                             </span>
                         </label>
-                        <input type="date" id="fechaIngreso" name="fechaIngreso" required>
+                        <input type="date" id="fechaIngreso" name="fechaIngreso" [(ngModel)]="ingreso.fechaIngreso" required>
                     </div>
                     <button type="submit" class="btn btn-primary">Crear</button>
                 </form>

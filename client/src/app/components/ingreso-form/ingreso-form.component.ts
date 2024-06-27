@@ -12,11 +12,11 @@ export class IngresoFormComponent {
 
   ingreso: Ingreso = {
     id: 0,
-    usuario: '',
-    fuente: '',
+    tipoIngreso: '',
+    origenIngreso: '',
     categoria: '',
-    cantidad: 0,
-    fecha: new Date() 
+    monto: 0,
+    fechaIngreso: new Date() 
   };
 
   constructor(private ingresosService : IngresosService){}

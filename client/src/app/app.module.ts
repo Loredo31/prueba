@@ -18,6 +18,8 @@ import { IngresoListComponent } from './components/ingreso-list/ingreso-list.com
 import { IngresosService } from './services/ingresos.service';
 import { ServicioFormComponent } from './components/servicio-form/servicio-form.component';
 import { ServicioListComponent } from './components/servicio-list/servicio-list.component';
+import { provideHttpClient, withFetch } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [

@@ -29,12 +29,12 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let gasto of ingresos">
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                            <tr *ngFor="let ingreso of ingresos">
+                                <td>{{ ingreso.tipoIngreso }}</td>
+                                <td>{{ ingreso.origenIngreso }}</td>
+                                <td>{{ ingreso.categoria }}</td>
+                                <td>$ {{ ingreso.monto }}</td>
+                                <td>{{ ingreso.fechaIngreso }}</td>
                                 <td>
                                     <button class="edit-button"><i class="fas fa-edit"></i></button>
                                     <button class="delete-button"><i class="fas fa-trash-alt"></i></button>

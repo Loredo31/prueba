@@ -23,14 +23,6 @@
       "monto": "2000.00",
       "fechaTransaccion": "15/04/2024",
       "metodoPago": "Tajeta Credito"
-    },
-    {
-      "id": 0,
-      "descripcion": "Compra de tinta",
-      "categoria": "Herramienta",
-      "monto": "1200.00",
-      "fechaTransaccion": "15/04/2024",
-      "metodoPago": "Efectivo"
     }
   ]
 }
