@@ -126,7 +126,7 @@ body {
 }
 
 .form-container .form-control {
-    width: 90%;
+    width: 100%;
     padding: 10px;
     margin-bottom: 10px;
     border: 1px solid #ccc;
@@ -136,7 +136,7 @@ body {
 }
 
 .custom-btn {
-    width: 80%; 
+    width: 90%; 
     background-color: darkgoldenrod;
     color: white;
     border: none;

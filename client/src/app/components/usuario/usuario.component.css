@@ -1,16 +1,14 @@
-.container h1 {
-    font-family: sans-serif;
+.container h1{
+    font-family:sans-serif;
 }
 
-.left {
-    font-family: sans-serif;
+.left{
+    font-family:sans-serif;
     margin-left: 0%;
-    font-weight: 600;
 }
 
-.right {
-    font-family: sans-serif;
-    font-weight: 600;
+.right{
+    font-family:sans-serif;
 }
 
 body {
@@ -30,13 +28,6 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-.header nav ul li.right a i {
-    margin-right: 5px; 
-    color: white; 
-    font-size: 16px; 
-    font-weight: bold;
 }
 
 .title {
@@ -70,6 +61,7 @@ body {
 .header nav ul li a {
     color: white;
     text-decoration: none;
+    font-weight:600;
 }
 
 .main-content {
@@ -84,26 +76,7 @@ body {
 
 .main-content h2 {
     margin-top: 0;
-}
-
-.main-content .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.image-container {
-    width: 80%;
-    height: 300px;
-    border: 2px solid black;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: white;
-}
-
-.image-container p {
-    margin: 0;
+    text-align: center;
 }
 
 .form-container {
@@ -111,7 +84,7 @@ body {
     max-width: 450px; 
     margin: auto; 
     margin-top: 50px; 
-    background-color:#fff2cc; 
+    background-color:azure;
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -191,6 +164,7 @@ body {
     background-color: #fff2cc;
 }
 
+
 .form-group {
     margin-bottom: 20px; 
 }
@@ -213,22 +187,23 @@ input {
 
 button {
     grid-column: span 3;
-    background-color:royalblue;
-    color: #fff2cc;
+    background-color: #F1C40F;
     border: none; 
     padding: 10px 20px; 
     border-radius: 4px; 
     cursor: pointer; 
     font-size: 16px; 
+    color: #fff2cc;
+    font-weight: 600;
 }
 
-button a {
+button a{
     text-decoration: none;
     color: inherit;
 }
 
 button:hover {
-    background-color: #17a2b8; 
+    background-color: #D4AC0D; 
 }
 
 .links-container {
@@ -248,46 +223,5 @@ button:hover {
     color: inherit; 
 }
 
-.form-group select {
-    width: calc(100% - 12px); 
-    padding: 10px; 
-    border: 1px solid #ccc; 
-    border-radius: 4px; 
-    box-sizing: border-box; 
-    font-size: 12px; 
-    font-family: sans-serif;
-    color: #333; 
-    background-color: white; 
-}
 
-.info-icon {
-    display: inline-block;
-    margin-left: 5px;
-    cursor: pointer;
-    position: relative;
-}
-
-.info-icon .tooltip {
-    display: none;
-    position: absolute;
-    top: -5px;
-    left: 25px;
-    background-color: #333;
-    color: #fff;
-    padding: 5px 10px;
-    border-radius: 5px;
-    white-space: nowrap;
-    z-index: 10;
-    font-size: small;
-    font-weight: normal;
-}
-
-.info-icon:hover .tooltip {
-    display: block;
-}
-
-.info-icon i {
-    color: #17a2b8;
-    font-size: 1em;
-}
 

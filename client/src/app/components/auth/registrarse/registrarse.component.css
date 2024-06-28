@@ -76,20 +76,7 @@ body {
 
 .main-content h2 {
     margin-top: 0;
-}
-
-.image-container {
-    width: 80%;
-    height: 300px;
-    border: 2px solid black;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: white;
-}
-
-.image-container p {
-    margin: 0;
+    text-align: center;
 }
 
 .form-container {
@@ -174,6 +161,7 @@ body {
     display: grid; 
     grid-template-columns: repeat(3, 1fr); 
     gap: 30px; 
+    background-color: #fff2cc;
 }
 
 
@@ -205,6 +193,7 @@ button {
     border-radius: 4px; 
     cursor: pointer; 
     font-size: 16px; 
+    color: #fff2cc;
 }
 
 button a{
@@ -218,19 +207,19 @@ button:hover {
 
 .links-container {
     display: flex;
-    justify-content: space-between; /* Esto separará los elementos por el espacio disponible */
-    width: 100%; /* Asegura que el contenedor ocupe el ancho completo del formulario */
-    padding: 10px 0; /* Añade algo de espacio arriba y abajo */
+    justify-content: space-between; 
+    width: 100%; 
+    padding: 10px 0; 
 }
 
 .links-container h5 {
-    margin: 0; /* Remueve márgenes por defecto */
-    font-family: sans-serif; /* Aplica la misma fuente que el resto del formulario */
+    margin: 0; 
+    font-family: sans-serif; 
 }
 
 .links-container h5 a {
-    text-decoration: none; /* Opcional: Remueve subrayado de los enlaces */
-    color: inherit; /* Mantiene el color del texto */
+    text-decoration: none; 
+    color: inherit; 
 }
 
 

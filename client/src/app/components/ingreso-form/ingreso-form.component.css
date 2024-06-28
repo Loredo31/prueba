@@ -1,15 +1,15 @@
-.container h1{
-    font-family:sans-serif;
+.container h1 {
+    font-family: sans-serif;
 }
 
-.left{
-    font-family:sans-serif;
+.left {
+    font-family: sans-serif;
     margin-left: 0%;
     font-weight: 600;
 }
 
-.right{
-    font-family:sans-serif;
+.right {
+    font-family: sans-serif;
     font-weight: 600;
 }
 
@@ -38,8 +38,6 @@ body {
     font-size: 16px; 
     font-weight: bold;
 }
-
-
 
 .title {
     background-color: #555;
@@ -193,7 +191,6 @@ body {
     background-color: #fff2cc;
 }
 
-
 .form-group {
     margin-bottom: 20px; 
 }
@@ -216,7 +213,8 @@ input {
 
 button {
     grid-column: span 3;
-    background-color: #F1C40F;
+    background-color:royalblue;
+    color: #fff2cc;
     border: none; 
     padding: 10px 20px; 
     border-radius: 4px; 
@@ -224,19 +222,19 @@ button {
     font-size: 16px; 
 }
 
-button a{
+button a {
     text-decoration: none;
     color: inherit;
 }
 
 button:hover {
-    background-color: #D4AC0D; 
+    background-color: #17a2b8; 
 }
 
 .links-container {
     display: flex;
     justify-content: space-between; 
-    width: 100%;
+    width: 100%; 
     padding: 10px 0; 
 }
 
@@ -292,6 +290,4 @@ button:hover {
     color: #17a2b8;
     font-size: 1em;
 }
-
-
 

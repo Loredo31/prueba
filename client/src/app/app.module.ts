@@ -20,6 +20,9 @@ import { ServicioFormComponent } from './components/servicio-form/servicio-form.
 import { ServicioListComponent } from './components/servicio-list/servicio-list.component';
 import { ServiciosService } from './services/servicios.service';
 import { provideHttpClient, withFetch } from '@angular/common/http';
+import { AgendaComponent } from './components/agenda/agenda.component';
+import { UsuarioComponent } from './components/usuario/usuario.component';
+import { ResumenComponent } from './components/resumen/resumen.component';
 
 
 @NgModule({
@@ -35,7 +38,10 @@ import { provideHttpClient, withFetch } from '@angular/common/http';
     IngresoFormComponent,
     IngresoListComponent,
     ServicioFormComponent,
-    ServicioListComponent
+    ServicioListComponent,
+    AgendaComponent,
+    UsuarioComponent,
+    ResumenComponent
   ],
   imports: [
     BrowserModule,

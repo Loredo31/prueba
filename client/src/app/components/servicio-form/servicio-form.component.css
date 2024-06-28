@@ -1,14 +1,16 @@
-.container h1{
-    font-family:sans-serif;
+.container h1 {
+    font-family: sans-serif;
 }
 
-.left{
-    font-family:sans-serif;
+.left {
+    font-family: sans-serif;
     margin-left: 0%;
+    font-weight: 600;
 }
 
-.right{
-    font-family:sans-serif;
+.right {
+    font-family: sans-serif;
+    font-weight: 600;
 }
 
 body {
@@ -32,11 +34,10 @@ body {
 
 .header nav ul li.right a i {
     margin-right: 5px; 
-    color: white;
+    color: white; 
     font-size: 16px; 
+    font-weight: bold;
 }
-
-
 
 .title {
     background-color: #555;
@@ -110,7 +111,7 @@ body {
     max-width: 450px; 
     margin: auto; 
     margin-top: 50px; 
-    background-color:azure;
+    background-color:#fff2cc; 
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -187,8 +188,8 @@ body {
     display: grid; 
     grid-template-columns: repeat(3, 1fr); 
     gap: 30px; 
+    background-color: #fff2cc;
 }
-
 
 .form-group {
     margin-bottom: 20px; 
@@ -212,7 +213,8 @@ input {
 
 button {
     grid-column: span 3;
-    background-color: #F1C40F;
+    background-color:royalblue;
+    color: #fff2cc;
     border: none; 
     padding: 10px 20px; 
     border-radius: 4px; 
@@ -220,30 +222,30 @@ button {
     font-size: 16px; 
 }
 
-button a{
+button a {
     text-decoration: none;
     color: inherit;
 }
 
 button:hover {
-    background-color: #D4AC0D; 
+    background-color: #17a2b8; 
 }
 
 .links-container {
     display: flex;
-    justify-content: space-between; /* Esto separará los elementos por el espacio disponible */
-    width: 100%; /* Asegura que el contenedor ocupe el ancho completo del formulario */
-    padding: 10px 0; /* Añade algo de espacio arriba y abajo */
+    justify-content: space-between; 
+    width: 100%; 
+    padding: 10px 0; 
 }
 
 .links-container h5 {
-    margin: 0; /* Remueve márgenes por defecto */
-    font-family: sans-serif; /* Aplica la misma fuente que el resto del formulario */
+    margin: 0; 
+    font-family: sans-serif; 
 }
 
 .links-container h5 a {
-    text-decoration: none; /* Opcional: Remueve subrayado de los enlaces */
-    color: inherit; /* Mantiene el color del texto */
+    text-decoration: none; 
+    color: inherit; 
 }
 
 .form-group select {
@@ -254,11 +256,38 @@ button:hover {
     box-sizing: border-box; 
     font-size: 12px; 
     font-family: sans-serif;
-    color: #333; /* Color del texto */
-    background-color: white; /* Color de fondo */
+    color: #333; 
+    background-color: white; 
 }
 
+.info-icon {
+    display: inline-block;
+    margin-left: 5px;
+    cursor: pointer;
+    position: relative;
+}
 
+.info-icon .tooltip {
+    display: none;
+    position: absolute;
+    top: -5px;
+    left: 25px;
+    background-color: #333;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    white-space: nowrap;
+    z-index: 10;
+    font-size: small;
+    font-weight: normal;
+}
 
+.info-icon:hover .tooltip {
+    display: block;
+}
 
+.info-icon i {
+    color: #17a2b8;
+    font-size: 1em;
+}
 

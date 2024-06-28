@@ -9,7 +9,7 @@
             </div>
             <nav>
                 <ul>
-                    <li class="left"><a href="#">Control de Gastos</a></li>
+                    <li class="left"><a routerLink="/inicio-usuario">Control de Gastos</a></li>
                     <li class="right"><a routerLink="/ingreso/list">Regresar</a></li>
                 </ul>
             </nav>
@@ -63,7 +63,7 @@
                         </label>
                         <input type="date" id="fechaIngreso" name="fechaIngreso" [(ngModel)]="ingreso.fechaIngreso" required>
                     </div>
-                    <button type="submit" class="btn btn-primary">Crear</button>
+                    <button type="submit"><i class="fas fa-check"></i></button>
                 </form>
             </div>
         </main>   
