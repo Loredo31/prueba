@@ -23,7 +23,7 @@ body {
 }
 
 .header {
-    background-color: #333;
+    background-color: #CB4154;
     color: white;
     display: flex;
     flex-direction: column;
@@ -31,14 +31,14 @@ body {
 }
 
 .title {
-    background-color: #555;
+    background-color: #E2725B;
     width: 100%;
     text-align: center;
     padding: 10px 0;
 }
 
 .header nav {
-    background-color: #333;
+    background-color: #CB4154;
     width: 100%;
 }
 
@@ -65,7 +65,7 @@ body {
 }
 
 .main-content {
-    background-color: #f2d694;
+    background-color: #f1edec;
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -81,11 +81,12 @@ body {
 .image-container {
     width: 80%;
     height: 300px;
-    border: 2px solid black;
+    border: 2px solid #d82c1a;
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: #f9f9f9;
+    border-radius: 15px;
 }
 
 .image-container p {

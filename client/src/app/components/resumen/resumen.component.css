@@ -23,7 +23,7 @@ body {
 }
 
 .header {
-    background-color: #333;
+    background-color: #CB4154;
     color: white;
     display: flex;
     flex-direction: column;
@@ -37,14 +37,14 @@ body {
 }
 
 .title {
-    background-color: #555;
+    background-color: #E2725B;
     width: 100%;
     text-align: center;
     padding: 10px 0;
 }
 
 .header nav {
-    background-color: #333;
+    background-color: #CB4154;
     width: 100%;
 }
 
@@ -72,7 +72,7 @@ body {
 }
 
 .main-content {
-    background-color: #f2d694;
+    background-color: #f1edec;
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -111,7 +111,7 @@ body {
 }
 
 .expenses-table th {
-    background-color: darkslategray;
+    background-color: #c94435;
     color: white;
 }
 
@@ -133,7 +133,7 @@ body {
     margin-right: auto;
     position: relative;
     margin-bottom: 20px;
-    background-color: chartreuse;
+    background-color: #b7392c;
     font-family: sans-serif;
     font-weight: 600;
     font-size: medium;

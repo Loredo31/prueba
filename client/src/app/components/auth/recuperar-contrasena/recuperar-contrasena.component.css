@@ -23,7 +23,7 @@ body {
 }
 
 .header {
-    background-color: #333;
+    background-color: #CB4154;
     color: white;
     display: flex;
     flex-direction: column;
@@ -31,14 +31,14 @@ body {
 }
 
 .title {
-    background-color: #555;
+    background-color: #E2725B;
     width: 100%;
     text-align: center;
     padding: 10px 0;
 }
 
 .header nav {
-    background-color: #333;
+    background-color: #CB4154;
     width: 100%;
 }
 
@@ -65,7 +65,7 @@ body {
 }
 
 .main-content {
-    background-color: #f2d694;
+    background-color: #f1edec;
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -137,7 +137,7 @@ body {
 
 .form-container .btn {
     width: 95%; 
-    background-color: darkgoldenrod;
+    background-color: #b7392c;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -149,7 +149,7 @@ body {
 }
 
 .form-container .btn:hover {
-    background-color: goldenrod;
+    background-color: #cd695e;
 }
 
 .contenido-principal {
@@ -195,21 +195,6 @@ input {
     box-sizing: border-box; 
     font-size: 12px; 
     font-family: sans-serif;
-}
-
-button {
-    grid-column: span 3;
-    background-color: #F1C40F;
-    border: none; 
-    padding: 10px 20px; 
-    border-radius: 4px; 
-    cursor: pointer; 
-    font-size: 16px; 
-}
-
-button a{
-    text-decoration: none;
-    color: inherit;
 }
 
 button:hover {

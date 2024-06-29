@@ -1,45 +1,44 @@
-:root {
-    --primary-bg-color: #333;
-    --secondary-bg-color: #555;
-    --text-color: white;
-    --button-bg-color: #efefef;
-    --button-text-color: black;
-    --hover-bg-color: #efefef;
-    --highlight-color: #ffcc00;
+.container h1{
+    font-family:sans-serif;
+}
+
+.left{
+    font-family:sans-serif;
+    margin-left: 0%;
+}
+
+.right{
+    font-family:sans-serif;
 }
 
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
-    overflow-x: hidden;
-    background-color: #f2e3a9;
+    font-family: sans-serif;
 }
 
 .container {
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
-    width: 100%;
-    overflow-x: hidden;
+    height: 100vh;
 }
 
 .header {
-    background-color: var(--primary-bg-color);
-    color: var(--text-color);
+    background-color: #CB4154;
+    color: white;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
 .title {
-    background-color: var(--secondary-bg-color);
+    background-color: #E2725B;
     width: 100%;
     text-align: center;
     padding: 10px 0;
 }
 
 .header nav {
-    background-color: var(--primary-bg-color);
+    background-color: #CB4154;
     width: 100%;
 }
 
@@ -60,13 +59,13 @@ body {
 }
 
 .header nav ul li a {
-    color: var(--text-color);
+    color: white;
     text-decoration: none;
     font-weight:600;
 }
 
 .main-content {
-    background-color: #f2d694;
+    background-color: #f1edec;
     flex: 1;
     display: flex;
     justify-content: center;
