@@ -79,7 +79,7 @@ body {
 }
 
 .image-container {
-    width: 80%;
+    width: 60%;
     height: 300px;
     border: 2px solid #d82c1a;
     display: flex;
