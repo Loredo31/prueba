@@ -66,6 +66,7 @@ body {
 
 .main-content {
     background-color: #f1edec;
+    background-image: url('/assets/FondoWebP.png');
     flex: 1;
     display: flex;
     justify-content: center;
