@@ -74,6 +74,7 @@ body {
 
 .main-content {
     background-color: #f1edec;
+    background-image: url('/assets/FondoWebP.png');
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -90,20 +91,6 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-.image-container {
-    width: 80%;
-    height: 300px;
-    border: 2px solid black;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: white;
-}
-
-.image-container p {
-    margin: 0;
 }
 
 .form-container {
