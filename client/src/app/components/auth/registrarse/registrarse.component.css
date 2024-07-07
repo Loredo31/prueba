@@ -1,3 +1,9 @@
+/* Importa los estilos de PrimeNG */
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeng/resources/primeng.min.css";
+@import "primeicons/primeicons.css";
+
+/* Tus estilos personalizados */
 .container h1{
     font-family:sans-serif;
 }
@@ -61,12 +67,12 @@ body {
 .header nav ul li a {
     color: white;
     text-decoration: none;
-    font-weight:600;
+    font-weight: 600;
 }
 
 .main-content {
     background-color: #f1edec;
-    background-image: url('/assets/FondoWebP.png');
+    background-image: url('/assets/FondoWebP.gif');
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -85,7 +91,7 @@ body {
     max-width: 450px; 
     margin: auto; 
     margin-top: 50px; 
-    background-color:azure;
+    background-color: azure;
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -98,10 +104,11 @@ body {
     font-family: sans-serif;
 }
 
-.form-container h5{
+.form-container h5 {
     margin-left: 80%;
     font-family: sans-serif;
 }
+
 .form-container .mb-3 {
     margin-bottom: 15px;
 }
@@ -110,7 +117,7 @@ body {
     display: block;
     margin-bottom: 5px;
     font-size: 1.2em; 
-    font-family:sans-serif;
+    font-family: sans-serif;
 }
 
 .form-container .form-control {
@@ -120,7 +127,7 @@ body {
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 1em; 
-    font-family:sans-serif;
+    font-family: sans-serif;
 }
 
 .contenido-principal {
@@ -147,7 +154,6 @@ body {
     gap: 30px; 
     background-color: #fff2cc;
 }
-
 
 .form-group {
     margin-bottom: 20px; 
@@ -180,7 +186,7 @@ button {
     color: #fff2cc;
 }
 
-button a{
+button a {
     text-decoration: none;
     color: inherit;
 }
@@ -205,6 +211,3 @@ button:hover {
     text-decoration: none; 
     color: inherit; 
 }
-
-
-

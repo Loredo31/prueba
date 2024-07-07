@@ -74,7 +74,7 @@ body {
 
 .main-content {
     background-color: #f1edec;
-    background-image: url('/assets/FondoWebP.png');
+    background-image: url('/assets/FondoWebP.gif');
     flex: 1;
     display: flex;
     flex-direction: column;
