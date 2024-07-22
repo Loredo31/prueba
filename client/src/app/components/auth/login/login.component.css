@@ -199,7 +199,8 @@ input {
 
 .links-container h5 {
     margin: 0;
-    font-family: sans-serif; 
+    font-family: sans-serif;
+    color: #fff;
 }
 
 .links-container h5 a {
