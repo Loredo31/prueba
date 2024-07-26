@@ -73,7 +73,7 @@ body {
 
 .main-content {
     background-color: #f1edec;
-    background-image:url('/assets/FondoL.jpg') ;
+    background-image:url('/assets/FondoFL.jpg') ;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -157,4 +157,39 @@ body {
 
 .edit-button:hover {
     background-color: deepskyblue;
+}
+
+.tooltip {
+    visibility: hidden;
+    width: 120px;
+    background-color: #5b4e76;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%; 
+    left: 50%;
+    margin-left: -60px; 
+    opacity: 0;
+    transition: opacity 0.3s;
+    font-family: sans-serif;
+    font-size: small;
+}
+
+.tooltip::after {
+    content: "";
+    position: absolute;
+    top: 100%; 
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #5b4e76 transparent transparent transparent;
+}
+
+li:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
 }
