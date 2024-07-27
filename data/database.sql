@@ -7,7 +7,7 @@ CREATE TABLE Usuario (
     NombreCompleto VARCHAR(50) NOT NULL,
     ApPaternoUsuario VARCHAR(50) NOT NULL,
     ApMaternoUsuario VARCHAR(50),
-    NumTelefono INT,
+    NumTelefono CHAR(10),
     Correo VARCHAR(50) NOT NULL,
     FechaNacimiento DATETIME,
     Usuario CHAR(20) NOT NULL,
