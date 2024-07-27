@@ -1,37 +1,44 @@
 <!DOCTYPE html>
 <html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+</head>
 <body>
-    <div class="container">
-        <header class="header">
-            <div class="title">
-                <h1>Inicia Sesión</h1>
-            </div>
-            <nav>
-                <ul>
-                    <li class="left"><a routerLink="/">Control de Gastos</a></li>
-                    <li class="right"><a routerLink="/registrarse">Registrarse</a></li>
-                </ul>
-            </nav>
-        </header>
-        <main class="main-content">
-            <form class="form-container">
-                <h1>Inicia Sesión</h1>
-                <div class="mb-3">
-                    <label for="exampleInputUser" class="form-label">Usuario</label>
-                    <input type="user" class="form-control" id="exampleInputUser" aria-describedby="emailUser" placeholder="usuario" >
-                </div>
-                <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">Contraseña</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="********" >
-                </div>
-                <a class="custom-btn custom-btn-primary" routerLink="/inicio-usuario">Entrar</a>
-                <div class="links-container">
-                    <h5><a routerLink="/registrarse">Registrarse</a></h5>
-                    <h5><a routerLink="/recuperar-contrasena">Olvide mi contraseña</a></h5>
-                </div>
-            </form>
-        </main>
-    </div>
+  <div class="container">
+    <header class="header">
+      <div class="title">
+        <h1>Inicia Sesión</h1>
+      </div>
+      <nav>
+        <ul>
+          <li class="left"><a routerLink="/home">Control de Gastos</a></li>
+          <li class="right"><a routerLink="/create-account">Registrarse</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main class="main-content">
+      <form class="form-container" (ngSubmit)="oonSubmit(loginForm)" #loginForm="ngForm">
+        <h1>Inicia Sesión</h1>
+        <div class="mb-3">
+          <label for="exampleInputUser" class="form-label">Usuario</label>
+          <input type="text" class="form-control" id="exampleInputUser" name="username" ngModel required>
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Contraseña</label>
+          <input type="password" class="form-control" id="exampleInputPassword1" name="password" ngModel required>
+        </div>
+        <button type="submit" class="custom-btn custom-btn-primary">Entrar</button>
+        <div *ngIf="errorMessage" class="error-message">
+          {{ errorMessage }}
+        </div>
+        <div class="links-container">
+          <h5><a routerLink="/create-account">Registrarse</a></h5>
+          <h5><a routerLink="/verify-email">Olvidé mi contraseña</a></h5>
+        </div>
+      </form>
+    </main>
+  </div>
 </body>
 </html>
-
