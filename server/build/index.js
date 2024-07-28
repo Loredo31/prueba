@@ -31,6 +31,5 @@ class Server {
         });
     }
 }
-new Server(); // ejecuta la clase y devuelve un objeto.
 const server = new Server();
 server.start();
