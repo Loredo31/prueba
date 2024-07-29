@@ -21,49 +21,49 @@
             <div class="container">
                 <form id="registroForm" class="form-grid" (ngSubmit)="saveNewGasto()">
                     <div class="form-group">
-                        <label for="descripcion">Descripción
+                        <label for="Descripción">Descripción
                             <span class="info-icon">
                                 <i class="fas fa-info-circle"></i>
                                 <span class="tooltip">Detalles sobre qué compraste o pagaste.</span>
                             </span>
                         </label>
-                        <input type="text" id="descripcion" name="descripcion" [(ngModel)]="gasto.descripcion" placeholder="descripcion" required>
+                        <input type="text" id="Descripcion" name="Descripcion" [(ngModel)]="gasto.Descripcion" placeholder="Descripcion" required>
                     </div>
                     <div class="form-group">
-                        <label for="categoria">Categoría
+                        <label for="Categoria">Categoría
                             <span class="info-icon">
                                 <i class="fas fa-info-circle"></i>
                                 <span class="tooltip">Ingrese la categoría correspondiente al gasto.</span>
                             </span>
                         </label>
-                        <input type="text" id="categoria" name="categoria" [(ngModel)]="gasto.categoria" placeholder="categoría" required>
+                        <input type="text" id="Categoria" name="Categoria" [(ngModel)]="gasto.Categoria" placeholder="Categoría" required>
                     </div>
                     <div class="form-group">
-                        <label for="monto">Monto
+                        <label for="Monto">Monto
                             <span class="info-icon">
                                 <i class="fas fa-info-circle"></i>
                                 <span class="tooltip">La cantidad exacta gastada.</span>
                             </span>
                         </label>
-                        <input type="number" id="monto" name="monto" [(ngModel)]="gasto.monto" placeholder="$ 00.0" required>
+                        <input type="number" id="Monto" name="Monto" [(ngModel)]="gasto.Monto" placeholder="$ 00.0" required>
                     </div>
                     <div class="form-group">
-                        <label for="fechaTransaccion">Fecha de transacción
+                        <label for="FechaTransaccion">Fecha de transacción
                             <span class="info-icon">
                                 <i class="fas fa-info-circle"></i>
                                 <span class="tooltip">Clasifica el tipo de gasto para entender mejor en qué áreas se gasta más.</span>
                             </span>
                         </label>
-                        <input type="date" id="fechaTransaccion" name="fechaTransaccion" [(ngModel)]="gasto.fechaTransaccion" required>
+                        <input type="date" id="FechaTransaccion" name="FechaTransaccion" [(ngModel)]="gasto.FechaTransaccion" required>
                     </div>
                     <div class="form-group">
-                        <label for="metodoPago">Método de pago
+                        <label for="MetodoPago">Método de pago
                             <span class="info-icon">
                                 <i class="fas fa-info-circle"></i>
                                 <span class="tooltip">Registra cómo se realizó el pago.</span>
                             </span>
                         </label>
-                        <input type="text" id="metodoPago" name="metodoPago" [(ngModel)]="gasto.metodoPago" placeholder="metodoPago" required>
+                        <input type="text" id="MetodoPago" name="MetodoPago" [(ngModel)]="gasto.MetodoPago" placeholder="MetodoPago" required>
                     </div>
                     <div class="form-group">
                         <label for="foto">Comprobante de gasto
@@ -74,7 +74,7 @@
                         </label>
                         <input type="file" id="foto" name="foto" class="file-input">
                     </div>
-                    <button type="submit"><i class="fas fa-save"></i> Guardar</button>
+                    <button type="submit"><i class="fas fa-check"></i> Guardar</button>
                 </form>
             </div>
         </main>   

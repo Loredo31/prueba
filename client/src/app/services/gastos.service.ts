@@ -7,7 +7,7 @@ import { Gasto } from '../models/Gasto';
   providedIn: 'root'
 })
 export class GastosService {
-  private API_URI = 'http://localhost:3000/gastos'
+  private API_URI = 'http://localhost:3000/api/gasto'; // Asegúrate de que la URL esté correcta.
 
   constructor(private http: HttpClient) { }
 
@@ -15,11 +15,19 @@ export class GastosService {
     return this.http.get<Gasto[]>(this.API_URI);
   }
 
-  getGasto(id:string){
-    return this.http.get('${this.API_URL}/${id}');
+  getGasto(id: string): Observable<Gasto> {
+    return this.http.get<Gasto>(`${this.API_URI}/${id}`);
   }
 
   saveGastos(gasto: Gasto): Observable<any> {
-    return this.http.post<any>(this.API_URI,gasto);
+    return this.http.post<any>(this.API_URI, gasto);
+  }
+
+  deleteGasto(id: string): Observable<any> {
+    return this.http.delete<any>(`${this.API_URI}/${id}`);
+  }
+
+  updateGasto(id: string, gasto: Gasto): Observable<any> {
+    return this.http.put<any>(`${this.API_URI}/${id}`, gasto);
   }
 }

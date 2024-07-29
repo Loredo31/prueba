@@ -4,17 +4,17 @@ import { GastosService } from '../../services/gastos.service';
 @Component({
   selector: 'app-gasto-list',
   templateUrl: './gasto-list.component.html',
-  styleUrl: './gasto-list.component.css'
+  styleUrls: ['./gasto-list.component.css']
 })
-export class GastoListComponent {
+export class GastoListComponent implements OnInit {
   gastos: any = [];
 
   constructor(private gastosService: GastosService) {}
 
   ngOnInit() {
     this.gastosService.getGastos().subscribe(
-      resp => {
-        this.gastos = resp;
+      (resp: any) => {
+        this.gastos = resp.gastos; // Asegúrate de acceder correctamente al arreglo de gastos.
       },
       err => console.log(err)
     );
