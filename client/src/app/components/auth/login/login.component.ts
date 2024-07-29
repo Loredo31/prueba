@@ -12,26 +12,27 @@ export class LoginComponent {
 
   constructor(private usuarioService: UsuarioService, private router: Router) {}
 
-  oonSubmit(loginForm: any) {
-    const { username, password } = loginForm.value;
-  
-    if (!username || !password) {
+  onSubmit(loginForm: any) {
+    if (loginForm.invalid) {
       this.errorMessage = 'Los campos no pueden estar vacíos';
       return;
     }
-  
+
+    const { username, password } = loginForm.value;
+
     console.log('Datos del formulario:', { username, password });
-  
+
     this.usuarioService.getUsuarios().subscribe(
       (usuarios: any[]) => {
         console.log('Usuarios obtenidos:', usuarios);
         const usuario = usuarios.find(u => u.Usuario === username && u.Contrasena === password);
-  
+
         if (usuario) {
           console.log('Usuario encontrado:', usuario);
           this.router.navigate(['/inicio-usuario']);
         } else {
           this.errorMessage = 'Usuario o contraseña incorrectos';
+          console.log('Usuario o contraseña incorrectos');
         }
       },
       error => {
@@ -40,4 +41,4 @@ export class LoginComponent {
       }
     );
   }
-}  
+}

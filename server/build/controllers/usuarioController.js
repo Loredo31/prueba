@@ -15,41 +15,48 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.usuarioController = void 0;
 const database_1 = __importDefault(require("../database"));
 class UsuarioController {
-    list(req, resp) {
+    list(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const usuarios = yield database_1.default.query('SELECT * FROM Usuario');
-            resp.json({ usuarios });
+            res.json({ usuarios });
         });
     }
-    create(req, resp) {
+    create(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            console.log(req.body);
-            yield database_1.default.query('INSERT INTO Usuario set ?', [req.body]);
-            resp.json({ message: 'User Saved' });
+            try {
+                console.log(req.body);
+                yield database_1.default.query('INSERT INTO Usuario set ?', [req.body]);
+                res.json({ message: 'User Saved' });
+            }
+            catch (err) {
+                res.status(500).json({ error: 'Error al crear usuario' });
+            }
         });
     }
-    delete(req, resp) {
+    delete(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
             yield database_1.default.query('DELETE FROM Usuario WHERE id = ?', [id]);
-            resp.json({ message: 'The user was deleted' });
+            res.json({ message: 'The user was deleted' });
         });
     }
-    update(req, resp) {
+    update(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
             yield database_1.default.query('UPDATE Usuario set ? WHERE id = ?', [req.body, id]);
-            resp.json({ message: 'The user was updated' });
+            res.json({ message: 'The user was updated' });
         });
     }
-    getOne(req, resp) {
+    getOne(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { id } = req.params; //Se recupera el id de request params
-            const games = yield database_1.default.query('SELECT * FROM Usuario WHERE id =?', [id]);
-            if (games.length > 0) {
-                return resp.json(games[0]);
+            const { id } = req.params;
+            const usuario = yield database_1.default.query('SELECT * FROM Usuario WHERE id = ?', [id]);
+            if (usuario.length > 0) {
+                res.json(usuario[0]);
             }
-            resp.status(404).json({ text: 'The user doesn´t exist' });
+            else {
+                res.status(404).json({ text: 'The user doesn\'t exist' });
+            }
         });
     }
 }
