@@ -47,5 +47,6 @@ import { ResumenComponent } from './components/resumen/resumen.component';
   providers: [
     provideHttpClient(withFetch())
   ],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
