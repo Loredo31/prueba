@@ -1,36 +1,35 @@
 import { Component, OnInit, HostBinding } from '@angular/core';
 import { Gasto } from '../../models/Gasto';
 import { GastosService } from '../../services/gastos.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-gasto-form',
   templateUrl: './gasto-form.component.html',
-  styleUrl: './gasto-form.component.css'
+  styleUrls: ['./gasto-form.component.css']
 })
-export class GastoFormComponent {
+export class GastoFormComponent implements OnInit {
   @HostBinding('class') classes = 'row';
 
   gasto: Gasto = {
-    id: 0,
-    descripcion: '',
-    categoria: '',
-    monto: 0,
-    fechaTransaccion: new Date(),
-    metodoPago: ''
+    Descripcion: '',
+    Categoria: '',
+    Monto: 0,
+    FechaTransaccion: '',
+    MetodoPago: ''
   };
 
-  constructor(private gastosService : GastosService){}
+  constructor(private gastosService: GastosService, private router: Router) {}
 
   ngOnInit() {}
 
   saveNewGasto() {
     this.gastosService.saveGastos(this.gasto).subscribe(
-      resp => {console.log(resp)},
+      res => {
+        console.log(res);
+        this.router.navigate(['/gastos/list']);
+      },
       err => console.log(err)
-    )
-  }
-
-  generarID(): string {
-    return Date.now().toString();
+    );
   }
 }

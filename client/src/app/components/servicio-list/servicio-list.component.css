@@ -93,7 +93,7 @@ body {
     border: 2px solid #262f57;
     background: transparent;
     backdrop-filter: blur(10px);
-    background: rgba(100, 247, 247, 0.199); 
+    background: rgba(112, 247, 100, 0.356); 
     width: 90%;
     margin: 0 auto;
 }
