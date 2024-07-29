@@ -94,7 +94,7 @@ body {
     border-radius: 5px; 
     box-shadow: 13px 13px 23px rgba(0, 0, 0, 0.5);
     border: 2px solid #262f57;
-    background: rgba(112, 247, 100, 0.356); 
+    background: rgba(100, 247, 247, 0.199);
     backdrop-filter: blur(10px);
     display: grid; 
     grid-template-columns: repeat(3, 1fr); 
@@ -153,6 +153,8 @@ button {
     border-radius: 4px; 
     cursor: pointer; 
     font-size: 16px; 
+    font-weight: 600;
+    font-family: sans-serif;
 }
 
 button:hover {
