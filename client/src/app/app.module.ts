@@ -16,7 +16,6 @@ import { IngresoFormComponent } from './components/ingreso-form/ingreso-form.com
 import { IngresoListComponent } from './components/ingreso-list/ingreso-list.component';
 import { ServicioFormComponent } from './components/servicio-form/servicio-form.component';
 import { ServicioListComponent } from './components/servicio-list/servicio-list.component';
-import { AgendaComponent } from './components/agenda/agenda.component';
 import { UsuarioComponent } from './components/usuario/usuario.component';
 import { ResumenComponent } from './components/resumen/resumen.component';
 
@@ -34,7 +33,6 @@ import { ResumenComponent } from './components/resumen/resumen.component';
     IngresoListComponent,
     ServicioFormComponent,
     ServicioListComponent,
-    AgendaComponent,
     UsuarioComponent,
     ResumenComponent
   ],

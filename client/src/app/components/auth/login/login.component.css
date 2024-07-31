@@ -207,3 +207,8 @@ input {
     text-decoration: none; 
     color: inherit; 
 }
+
+.error-message {
+    color: #1f1a35;
+    
+}

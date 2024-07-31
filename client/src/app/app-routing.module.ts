@@ -12,7 +12,6 @@ import { IngresoListComponent } from './components/ingreso-list/ingreso-list.com
 import { IngresoFormComponent } from './components/ingreso-form/ingreso-form.component';
 import { ServicioFormComponent } from './components/servicio-form/servicio-form.component';
 import { ServicioListComponent } from './components/servicio-list/servicio-list.component';
-import { AgendaComponent } from './components/agenda/agenda.component';
 import { UsuarioComponent } from './components/usuario/usuario.component';
 import { ResumenComponent } from './components/resumen/resumen.component';
 
@@ -28,7 +27,6 @@ const routes: Routes = [
   { path: 'ingreso/add', component: IngresoFormComponent},
   { path: 'servicio/add', component: ServicioFormComponent},
   { path: 'servicio/list', component: ServicioListComponent},
-  { path: 'agenda', component: AgendaComponent},
   { path: 'usuario', component: UsuarioComponent},
   { path: "resumen", component: ResumenComponent},
   { path: '**', redirectTo: '/' }
