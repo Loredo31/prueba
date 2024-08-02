@@ -20,24 +20,19 @@ export class LoginComponent {
 
     const { username, password } = loginForm.value;
 
-    console.log('Datos del formulario:', { username, password });
-
     this.usuarioService.getUsuarios().subscribe(
       (usuarios: any[]) => {
-        console.log('Usuarios obtenidos:', usuarios);
         const usuario = usuarios.find(u => u.Usuario === username && u.Contrasena === password);
 
         if (usuario) {
-          console.log('Usuario encontrado:', usuario);
           this.router.navigate(['/inicio-usuario']);
         } else {
           this.errorMessage = 'Usuario o contraseña incorrectos';
-          console.log('Usuario o contraseña incorrectos');
         }
       },
-      error => {
-        this.errorMessage = 'Error al validar usuario';
+      (error) => {
         console.error('Error fetching users:', error);
+        this.errorMessage = 'Ocurrió un error al verificar el usuario. Intente nuevamente más tarde.';
       }
     );
   }

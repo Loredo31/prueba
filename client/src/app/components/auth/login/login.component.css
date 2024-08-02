@@ -209,6 +209,8 @@ input {
 }
 
 .error-message {
-    color: #1f1a35;
-    
-}
+    color: red;
+    margin-top: 10px;
+    font-size: 14px;
+  }
+  
