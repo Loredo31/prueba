@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './components/auth/login/login.component';
 import { RegistrarseComponent } from './components/auth/registrarse/registrarse.component';
 import { RecuperarContrasenaComponent } from './components/auth/recuperar-contrasena/recuperar-contrasena.component';
+import { RecuperarContrasena2Component } from './components/auth/recuperar-contrasena2/recuperar-contrasena2.component';
 import { HomeComponent } from './components/home/home.component';
 import { InicioUsuarioComponent } from './components/inicio-usuario/inicio-usuario.component';
 import { GastoFormComponent } from './components/gasto-form/gasto-form.component';
@@ -26,6 +27,7 @@ import { ResumenComponent } from './components/resumen/resumen.component';
     LoginComponent,
     RegistrarseComponent,
     RecuperarContrasenaComponent,
+    RecuperarContrasena2Component,
     InicioUsuarioComponent,
     GastoFormComponent,
     GastoListComponent,

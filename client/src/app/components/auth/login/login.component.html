@@ -14,7 +14,7 @@
       <nav>
         <ul>
           <li class="left"><a routerLink="/home">Control de Gastos</a></li>
-          <li class="right"><a routerLink="/create-account">Registrarse</a></li>
+          <li class="right"><a routerLink="/registrarse">Registrarse</a></li>
         </ul>
       </nav>
     </header>
@@ -30,12 +30,12 @@
           <input type="password" class="form-control" id="exampleInputPassword1" name="password" ngModel required>
         </div>
         <button type="submit" class="custom-btn custom-btn-primary">Entrar</button>
-        <div *ngIf="errorMessage" class="error-message">
+        <div class="error-message" *ngIf="errorMessage">
           {{ errorMessage }}
         </div>
         <div class="links-container">
           <h5><a routerLink="/registrarse">Registrarse</a></h5>
-          <h5><a routerLink="/recuperar-contraseña">Olvidé mi contraseña</a></h5>
+          <h5><a routerLink="/recuperar-contrasena2">Olvidé mi contraseña</a></h5>
         </div>
       </form>
     </main>

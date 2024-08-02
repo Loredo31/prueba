@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { RecuperarContrasenaComponent } from './components/auth/recuperar-contrasena/recuperar-contrasena.component';
+import { RecuperarContrasena2Component } from './components/auth/recuperar-contrasena2/recuperar-contrasena2.component';
 import { RegistrarseComponent } from './components/auth/registrarse/registrarse.component';
 import { InicioUsuarioComponent } from './components/inicio-usuario/inicio-usuario.component';
 import { GastoListComponent } from './components/gasto-list/gasto-list.component';
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: '', component: HomeComponent }, 
   { path: 'login', component: LoginComponent }, 
   { path: 'recuperar-contrasena', component: RecuperarContrasenaComponent }, 
+  { path: 'recuperar-contrasena2', component: RecuperarContrasena2Component }, 
   { path: 'registrarse', component: RegistrarseComponent },
   { path: 'inicio-usuario', component: InicioUsuarioComponent },
   { path: 'gastos/list', component: GastoListComponent},
