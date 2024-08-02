@@ -187,8 +187,8 @@ justify-content: center;
 }
 
 .form-container .btn-group .btn {
-    flex: 1; /* Distribuye el espacio entre los botones */
-    max-width: 150px; /* Ajusta el ancho máximo de los botones */
+    flex: 1; 
+    max-width: 150px; 
     margin: 0 10px;
 }
 
