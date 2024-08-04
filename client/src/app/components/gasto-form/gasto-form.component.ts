@@ -1,7 +1,7 @@
-import { Component, OnInit, HostBinding } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Gasto } from '../../models/Gasto';
 import { GastosService } from '../../services/gastos.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-gasto-form',
@@ -9,27 +9,75 @@ import { Router } from '@angular/router';
   styleUrls: ['./gasto-form.component.css']
 })
 export class GastoFormComponent implements OnInit {
-  @HostBinding('class') classes = 'row';
 
   gasto: Gasto = {
     Descripcion: '',
     Categoria: '',
-    Monto: 0,
+    Monto: '',
     FechaTransaccion: '',
     MetodoPago: ''
   };
 
-  constructor(private gastosService: GastosService, private router: Router) {}
+  isEditMode = false;
+  gastoId: string | null = '';
+  errorMessages: { [key: string]: string } = {};
 
-  ngOnInit() {}
+  constructor(private gastosService: GastosService, private router: Router, private route: ActivatedRoute) {}
 
-  saveNewGasto() {
-    this.gastosService.saveGastos(this.gasto).subscribe(
-      res => {
-        console.log(res);
-        this.router.navigate(['/gastos/list']);
-      },
-      err => console.log(err)
-    );
+  ngOnInit() {
+    this.gastoId = this.route.snapshot.paramMap.get('id');
+    if (this.gastoId) {
+      this.isEditMode = true;
+      this.gastosService.getGasto(this.gastoId).subscribe(
+        (gasto: Gasto) => {
+          this.gasto = gasto;
+        },
+        err => console.log(err)
+      );
+    }
+  }
+
+  validateForm(): boolean {
+    this.errorMessages = {}; // Reset error messages
+
+    if (!this.gasto.Descripcion) {
+      this.errorMessages['Descripcion'] = 'Agregue una descripción*';
+    }
+    if (!this.gasto.Categoria) {
+      this.errorMessages['Categoria'] = 'Seleccione una categoría*';
+    }
+    if (!this.gasto.Monto) {
+      this.errorMessages['Monto'] = 'Ingrese un monto válido*';
+    }
+    if (!this.gasto.FechaTransaccion) {
+      this.errorMessages['FechaTransaccion'] = 'Seleccione una fecha de transacción*';
+    }
+    if (!this.gasto.MetodoPago) {
+      this.errorMessages['MetodoPago'] = 'Seleccione un método de pago*';
+    }
+
+    return Object.keys(this.errorMessages).length === 0;
+  }
+
+  saveGasto() {
+    if (this.validateForm()) {
+      if (this.isEditMode && this.gastoId) {
+        this.gastosService.updateGasto(this.gastoId, this.gasto).subscribe(
+          res => {
+            console.log(res);
+            this.router.navigate(['/gastos/list']);
+          },
+          err => console.log(err)
+        );
+      } else {
+        this.gastosService.saveGastos(this.gasto).subscribe(
+          res => {
+            console.log(res);
+            this.router.navigate(['/gastos/list']);
+          },
+          err => console.log(err)
+        );
+      }
+    }
   }
 }

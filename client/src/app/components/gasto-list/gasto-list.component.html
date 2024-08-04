@@ -13,7 +13,6 @@
         <nav>
           <ul>
             <li class="left"><a routerLink="/inicio-usuario">Control de Gastos</a></li>
-            <li class="right"><a routerLink="/inicio-usuario">Regresar</a></li>
             <li class="right"><a routerLink="/gastos/add" routerLinkActive="active"><i class="fas fa-plus"></i> Crear Gasto</a></li>
           </ul>
         </nav>
@@ -40,8 +39,8 @@
                 <td>{{ gasto.FechaTransaccion | date }}</td>
                 <td>{{ gasto.MetodoPago }}</td>
                 <td>
-                    <button class="edit-button" ><i class="fas fa-edit"></i></button>
-                    <button class="delete-button" ><i class="fas fa-trash-alt"></i></button>
+                  <button class="edit-button" (click)="editGasto(gasto.IdGasto)"><i class="fas fa-edit"></i></button>
+                  <button class="delete-button" (click)="deleteGasto(gasto.IdGasto)" ><i class="fas fa-trash-alt"></i></button>
                 </td>
               </tr>
             </tbody>

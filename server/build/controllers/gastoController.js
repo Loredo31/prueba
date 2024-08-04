@@ -41,7 +41,7 @@ class GastoController {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
             try {
-                yield database_1.default.query('DELETE FROM Gasto WHERE id = ?', [id]);
+                yield database_1.default.query('DELETE FROM Gasto WHERE IdGasto = ?', [id]);
                 res.json({ message: 'El gasto fue eliminado' });
             }
             catch (err) {
@@ -53,7 +53,7 @@ class GastoController {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
             try {
-                yield database_1.default.query('UPDATE Gasto SET ? WHERE id = ?', [req.body, id]);
+                yield database_1.default.query('UPDATE Gasto SET ? WHERE IdGasto = ?', [req.body, id]);
                 res.json({ message: 'El gasto fue actualizado' });
             }
             catch (err) {

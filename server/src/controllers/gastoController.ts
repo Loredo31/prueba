@@ -23,7 +23,7 @@ class GastoController {
   public async delete(req: Request, res: Response): Promise<void> {
     const { id } = req.params;
     try {
-      await pool.query('DELETE FROM Gasto WHERE id = ?', [id]);
+      await pool.query('DELETE FROM Gasto WHERE IdGasto = ?', [id]);
       res.json({ message: 'El gasto fue eliminado' });
     } catch (err) {
       res.status(500).json({ error: 'Error al eliminar el gasto' });
@@ -33,7 +33,7 @@ class GastoController {
   public async update(req: Request, res: Response): Promise<void> {
     const { id } = req.params;
     try {
-      await pool.query('UPDATE Gasto SET ? WHERE id = ?', [req.body, id]);
+      await pool.query('UPDATE Gasto SET ? WHERE IdGasto = ?', [req.body, id]);
       res.json({ message: 'El gasto fue actualizado' });
     } catch (err) {
       res.status(500).json({ error: 'Error al actualizar el gasto' });
