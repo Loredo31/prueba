@@ -15,6 +15,8 @@ import { ServicioFormComponent } from './components/servicio-form/servicio-form.
 import { ServicioListComponent } from './components/servicio-list/servicio-list.component';
 import { UsuarioComponent } from './components/usuario/usuario.component';
 import { ResumenComponent } from './components/resumen/resumen.component';
+import { AhorroComponent } from './components/ahorro/ahorro.component';
+import { BilleteraComponent } from './components/billetera/billetera.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent }, 
@@ -31,6 +33,8 @@ const routes: Routes = [
   { path: 'servicios/list', component: ServicioListComponent},
   { path: 'usuario', component: UsuarioComponent},
   { path: "resumen", component: ResumenComponent},
+  { path: "ahorro", component: AhorroComponent},
+  { path: "billetera", component: BilleteraComponent},
   { path: '**', redirectTo: '/' }
 ];
 

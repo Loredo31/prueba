@@ -19,6 +19,9 @@ import { ServicioFormComponent } from './components/servicio-form/servicio-form.
 import { ServicioListComponent } from './components/servicio-list/servicio-list.component';
 import { UsuarioComponent } from './components/usuario/usuario.component';
 import { ResumenComponent } from './components/resumen/resumen.component';
+import { AhorroComponent } from './components/ahorro/ahorro.component';
+import { BilleteraComponent } from './components/billetera/billetera.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -36,13 +39,16 @@ import { ResumenComponent } from './components/resumen/resumen.component';
     ServicioFormComponent,
     ServicioListComponent,
     UsuarioComponent,
-    ResumenComponent
+    ResumenComponent,
+    AhorroComponent,
+    BilleteraComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     provideHttpClient(withFetch())
