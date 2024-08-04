@@ -12,70 +12,102 @@
             <nav>
                 <ul>
                     <li class="left"><a href="/inicio-usuario">Control de Gastos</a></li>
-                    <li class="right"><a routerLink="/gastos/list">Regresar</a></li>
+                    <li class="right"><a routerLink="/gastos/list">Mis gastos</a></li>
                 </ul>
             </nav>
         </header>
         <main class="main-content">
             <h3></h3>
             <div class="container">
-                <form id="registroForm" class="form-grid" (ngSubmit)="saveNewGasto()">
-                    <div class="form-group">
-                        <label for="Descripción">Descripción
-                            <span class="info-icon">
-                                <i class="fas fa-info-circle"></i>
-                                <span class="tooltip">Detalles sobre qué compraste o pagaste.</span>
-                            </span>
-                        </label>
-                        <input type="text" id="Descripcion" name="Descripcion" [(ngModel)]="gasto.Descripcion" placeholder="Descripcion" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="Categoria">Categoría
-                            <span class="info-icon">
-                                <i class="fas fa-info-circle"></i>
-                                <span class="tooltip">Ingrese la categoría correspondiente al gasto.</span>
-                            </span>
-                        </label>
-                        <input type="text" id="Categoria" name="Categoria" [(ngModel)]="gasto.Categoria" placeholder="Categoría" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="Monto">Monto
-                            <span class="info-icon">
-                                <i class="fas fa-info-circle"></i>
-                                <span class="tooltip">La cantidad exacta gastada.</span>
-                            </span>
-                        </label>
-                        <input type="number" id="Monto" name="Monto" [(ngModel)]="gasto.Monto" placeholder="$ 00.0" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="FechaTransaccion">Fecha de transacción
-                            <span class="info-icon">
-                                <i class="fas fa-info-circle"></i>
-                                <span class="tooltip">Clasifica el tipo de gasto para entender mejor en qué áreas se gasta más.</span>
-                            </span>
-                        </label>
-                        <input type="date" id="FechaTransaccion" name="FechaTransaccion" [(ngModel)]="gasto.FechaTransaccion" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="MetodoPago">Método de pago
-                            <span class="info-icon">
-                                <i class="fas fa-info-circle"></i>
-                                <span class="tooltip">Registra cómo se realizó el pago.</span>
-                            </span>
-                        </label>
-                        <input type="text" id="MetodoPago" name="MetodoPago" [(ngModel)]="gasto.MetodoPago" placeholder="MetodoPago" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="foto">Comprobante de gasto
-                            <span class="info-icon">
-                                <i class="fas fa-info-circle"></i>
-                                <span class="tooltip">Adjunta una foto del recibo o del gasto.</span>
-                            </span>
-                        </label>
-                        <input type="file" id="foto" name="foto" class="file-input">
-                    </div>
-                    <button type="submit"><i class="fas fa-check"></i> Guardar</button>
-                </form>
+              <form id="registroForm" class="form-grid" (ngSubmit)="saveGasto()">
+                <div class="form-group">
+                  <label for="Descripcion">Descripción
+                    <span class="info-icon">
+                      <i class="fas fa-info-circle"></i>
+                      <span class="tooltip">Detalles sobre qué compraste o pagaste.</span>
+                    </span>
+                  </label>
+                  <input type="text" id="Descripcion" name="Descripcion" [(ngModel)]="gasto.Descripcion" placeholder="Descripción" required>
+                  <div class="error-message" *ngIf="errorMessages['Descripcion']">
+                    {{ errorMessages['Descripcion'] }}
+                  </div>
+                </div>             
+                <div class="form-group">
+                  <label for="Categoria">Categoría
+                    <span class="info-icon">
+                      <i class="fas fa-info-circle"></i>
+                      <span class="tooltip">Ingrese la categoría correspondiente al gasto.</span>
+                    </span>
+                  </label>
+                  <select id="Categoria" name="Categoria" [(ngModel)]="gasto.Categoria" required>
+                    <option value="">Seleccione una categoría</option>
+                    <option value="Servicio">Servicio</option>
+                    <option value="Subscripción">Subscripción</option>
+                    <option value="Inversión">Inversión</option>
+                    <option value="Gasto Personal">Gasto Personal</option>
+                    <option value="Otro">Otro</option>
+                  </select>
+                  <div class="error-message" *ngIf="errorMessages['Categoria']">
+                    {{ errorMessages['Categoria'] }}
+                  </div>
+                </div>             
+                <div class="form-group">
+                  <label for="Monto">Monto
+                    <span class="info-icon">
+                      <i class="fas fa-info-circle"></i>
+                      <span class="tooltip">La cantidad exacta gastada.</span>
+                    </span>
+                  </label>
+                  <input type="number" id="Monto" name="Monto" [(ngModel)]="gasto.Monto" placeholder="$ 00.0" required>
+                  <div class="error-message" *ngIf="errorMessages['Monto']">
+                    {{ errorMessages['Monto'] }}
+                  </div>
+                </div>              
+                <div class="form-group">
+                  <label for="FechaTransaccion">Fecha de transacción
+                    <span class="info-icon">
+                      <i class="fas fa-info-circle"></i>
+                      <span class="tooltip">Clasifica el tipo de gasto para entender mejor en qué áreas se gasta más.</span>
+                    </span>
+                  </label>
+                  <input type="date" id="FechaTransaccion" name="FechaTransaccion" [(ngModel)]="gasto.FechaTransaccion" required>
+                  <div class="error-message" *ngIf="errorMessages['FechaTransaccion']">
+                    {{ errorMessages['FechaTransaccion'] }}
+                  </div>
+                </div>              
+                <div class="form-group">
+                  <label for="MetodoPago">Método de pago
+                    <span class="info-icon">
+                      <i class="fas fa-info-circle"></i>
+                      <span class="tooltip">Registra cómo se realizó el pago.</span>
+                    </span>
+                  </label>
+                  <select id="MetodoPago" name="MetodoPago" [(ngModel)]="gasto.MetodoPago" required>
+                    <option value="">Seleccione un método</option>
+                    <option value="Tarjeta de Débito">Tarjeta de Débito</option>
+                    <option value="Tarjeta de Crédito">Tarjeta de Crédito</option>
+                    <option value="Efectivo">Efectivo</option>
+                    <option value="PayPal">PayPal</option>
+                    <option value="Otro">Otro</option>
+                  </select>
+                  <div class="error-message" *ngIf="errorMessages['MetodoPago']">
+                    {{ errorMessages['MetodoPago'] }}
+                  </div>
+                </div>              
+                <div class="form-group">
+                  <label for="foto">Comprobante gasto
+                    <span class="info-icon">
+                      <i class="fas fa-info-circle"></i>
+                      <span class="tooltip">Adjunta una foto del recibo o del gasto.</span>
+                    </span>
+                  </label>
+                  <input type="file" id="foto" name="foto" class="file-input">
+                </div>              
+                <div class="error-message" *ngIf="errorMessages['general']">
+                  {{ errorMessages['general'] }}
+                </div>              
+                <button type="submit"><i class="fas fa-check"></i> Guardar</button>
+              </form>                              
             </div>
         </main>   
     </div>

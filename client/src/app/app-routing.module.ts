@@ -27,6 +27,7 @@ const routes: Routes = [
   { path: 'inicio-usuario', component: InicioUsuarioComponent },
   { path: 'gastos/list', component: GastoListComponent},
   { path: 'gastos/add', component: GastoFormComponent},
+  { path: 'gastos/edit/:id', component: GastoFormComponent },
   { path: 'ingresos/list', component: IngresoListComponent},
   { path: 'ingresos/add', component: IngresoFormComponent},
   { path: 'servicios/add', component: ServicioFormComponent},

@@ -1,7 +1,7 @@
 export interface Gasto{
     Descripcion?: string;
     Categoria?: string,
-    Monto?: number,
+    Monto?: string,
     FechaTransaccion?: string;
     MetodoPago?: string
 }

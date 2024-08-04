@@ -189,3 +189,19 @@ button:hover {
     color: #545dd8;
     font-size: 1em;
 }
+
+select {
+    width: calc(100% - 12px); 
+    padding: 10px; 
+    border: 1px solid #ccc; 
+    border-radius: 4px; 
+    box-sizing: border-box; 
+    font-size: 12px; 
+    font-family: sans-serif;
+}
+
+.error-message {
+    color: red;
+    margin-top: 10px;
+    font-size: 14px;
+  }
