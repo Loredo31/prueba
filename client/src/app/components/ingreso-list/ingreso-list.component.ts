@@ -4,17 +4,17 @@ import { IngresosService } from '../../services/ingresos.service';
 @Component({
   selector: 'app-ingreso-list',
   templateUrl: './ingreso-list.component.html',
-  styleUrl: './ingreso-list.component.css'
+  styleUrls: ['./ingreso-list.component.css']
 })
-export class IngresoListComponent {
+export class IngresoListComponent implements OnInit {
   ingresos: any = [];
 
   constructor(private ingresosService: IngresosService) {}
 
   ngOnInit() {
     this.ingresosService.getIngresos().subscribe(
-      resp => {
-        this.ingresos = resp;
+      (resp: any) => {
+        this.ingresos = resp.ingresos;
       },
       err => console.log(err)
     );
