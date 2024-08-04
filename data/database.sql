@@ -4,9 +4,9 @@ USE ControlGasto;
 
 CREATE TABLE Usuario (
     IdUsuario INT PRIMARY KEY AUTO_INCREMENT,
-    NombreCompleto VARCHAR(50) NOT NULL,
-    ApPaternoUsuario VARCHAR(50) NOT NULL,
-    ApMaternoUsuario VARCHAR(50),
+    Nombre VARCHAR(50) NOT NULL,
+    ApPaterno VARCHAR(50) NOT NULL,
+    ApMaterno VARCHAR(50),
     NumTelefono CHAR(10),
     Correo VARCHAR(50) NOT NULL,
     FechaNacimiento DATETIME,
@@ -44,5 +44,12 @@ CREATE TABLE Gasto (
     Monto DECIMAL(10, 2),
     FechaTransaccion DATETIME,
     MetodoPago VARCHAR(50),
+    Comprobante VARCHAR(100),
+    FOREIGN KEY (IdUsuario) REFERENCES Usuario(IdUsuario)
+);
+
+CREATE TABLE Presupuesto (
+    PresupuestoTotal INT PRIMARY KEY,
+    PresupuestoActual INT,
     FOREIGN KEY (IdUsuario) REFERENCES Usuario(IdUsuario)
 );

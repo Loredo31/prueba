@@ -14,7 +14,7 @@ export class GastoListComponent implements OnInit {
   ngOnInit() {
     this.gastosService.getGastos().subscribe(
       (resp: any) => {
-        this.gastos = resp.gastos; // Asegúrate de acceder correctamente al arreglo de gastos.
+        this.gastos = resp.gastos;
       },
       err => console.log(err)
     );

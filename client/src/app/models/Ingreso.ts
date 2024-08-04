@@ -1,8 +1,7 @@
 export interface Ingreso {
-    id?: number;
-    tipoIngreso?: string;
-    origenIngreso?: string;
-    categoria?: string;
-    monto?: number;
-    fechaIngreso?: Date
+    TipoIngreso?: string;
+    OrigenIngreso?: string;
+    Categoria?: string;
+    Monto?: number;
+    FechaIngreso?: string;
 }

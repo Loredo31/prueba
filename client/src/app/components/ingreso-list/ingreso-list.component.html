@@ -11,7 +11,7 @@
                     <ul>
                         <li class="left"><a routerLink="/inicio-usuario">Control de Gastos</a></li>
                         <li class="right"><a routerLink="/inicio-usuario" >Regresar</a></li>
-                        <li class="right"><a routerLink="/ingreso/add" routerLinkActive="active"><i class="fas fa-plus"></i> Crear Ingreso</a></li>
+                        <li class="right"><a routerLink="/ingresos/add" routerLinkActive="active"><i class="fas fa-plus"></i> Crear Ingreso</a></li>
                     </ul>
                 </nav>
             </header>
@@ -31,11 +31,11 @@
                         </thead>
                         <tbody>
                             <tr *ngFor="let ingreso of ingresos">
-                                <td>{{ ingreso.tipoIngreso }}</td>
-                                <td>{{ ingreso.origenIngreso }}</td>
-                                <td>{{ ingreso.categoria }}</td>
-                                <td>$ {{ ingreso.monto }}</td>
-                                <td>{{ ingreso.fechaIngreso }}</td>
+                                <td>{{ ingreso.TipoIngreso }}</td>
+                                <td>{{ ingreso.OrigenIngreso }}</td>
+                                <td>{{ ingreso.Categoria }}</td>
+                                <td>$ {{ ingreso.Monto }}</td>
+                                <td>{{ ingreso.FechaIngreso | date}}</td>
                                 <td>
                                     <button class="edit-button"><i class="fas fa-edit"></i></button>
                                     <button class="delete-button"><i class="fas fa-trash-alt"></i></button>

@@ -1,5 +1,4 @@
 export interface Usuario{
-    IdUsuario?: string;
     Nombre?: string;
     ApPaterno?: string;
     ApMaterno?: string;
