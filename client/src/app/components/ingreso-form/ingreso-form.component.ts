@@ -74,7 +74,7 @@ export class IngresoFormComponent implements OnInit {
         this.ingresosService.saveIngresos(this.ingreso).subscribe(
           res => {
             console.log(res);
-            this.router.navigate(['/ingreso/list']);
+            this.router.navigate(['/ingresos/list']);
           },
           err => console.log(err)
         );

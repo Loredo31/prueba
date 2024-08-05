@@ -25,7 +25,26 @@
                                 <span class="tooltip">Puede ser "Recurrente" (si es una venta diaria) o "Extraordinario" (si es una venta especial).</span>
                             </span>
                         </label>
-                        <input type="text" id="tipoIngreso" name="tipoIngreso" [(ngModel)]="ingreso.TipoIngreso" placeholder="Tipo ingreso" required>
+                        <select id="tipoIngreso" name="tipoIngreso" [(ngModel)]="ingreso.TipoIngreso" required>
+                            <option value="" disabled selected>Selecciona tipo de ingreso</option>
+                            <option value="Salarios">Salarios</option>
+                            <option value="Pensiones">Pensiones</option>
+                            <option value="Intereses">Intereses</option>
+                            <option value="Dividendos">Dividendos</option>
+                            <option value="Alquileres">Alquileres</option>
+                            <option value="Comisiones">Comisiones</option>
+                            <option value="Subsidios">Subsidios</option>
+                            <option value="Ventas">Ventas</option>
+                            <option value="Beneficios">Beneficios</option>
+                            <option value="Regalías">Regalías</option>
+                            <option value="Subvenciones">Subvenciones</option>
+                            <option value="Donaciones">Donaciones</option>
+                            <option value="Cuotas">Cuotas</option>
+                            <option value="Matrículas">Matrículas</option>
+                            <option value="Investigación">Investigación</option>
+                            <option value="Publicidad">Publicidad</option>
+                            <option value="Patrocinios">Patrocinios</option>
+                        </select>
                         <div class="error-message" *ngIf="errorMessages['TipoIngreso']">
                             {{ errorMessages['TipoIngreso'] }}
                         </div>
@@ -49,7 +68,14 @@
                                 <span class="tooltip">Puedes categorizar tus ingresos si tienes varias fuentes.</span>
                             </span>
                         </label>
-                        <input type="text" id="categoria" name="categoria" [(ngModel)]="ingreso.Categoria" placeholder="categoría" required>
+                        <select id="categoria" name="categoria" [(ngModel)]="ingreso.Categoria" required>
+                            <option value="" disabled selected>Selecciona categoría</option>
+                            <option value="Laboral">Laboral</option>
+                            <option value="Pasivo">Pasivo</option>
+                            <option value="No Laboral">No Laboral</option>
+                            <option value="Comercial">Comercial</option>
+                            <option value="Institucional">Institucional</option>
+                        </select>
                         <div class="error-message" *ngIf="errorMessages['Categoria']">
                             {{ errorMessages['Categoria'] }}
                         </div>
