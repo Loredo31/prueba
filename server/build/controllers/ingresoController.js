@@ -41,7 +41,7 @@ class IngresoController {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
             try {
-                yield database_1.default.query('DELETE FROM Ingreso WHERE id = ?', [id]);
+                yield database_1.default.query('DELETE FROM Ingreso WHERE IdIngreso = ?', [id]);
                 res.json({ message: 'El ingreso fue eliminado' });
             }
             catch (err) {
@@ -53,7 +53,7 @@ class IngresoController {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
             try {
-                yield database_1.default.query('UPDATE Ingreso SET ? WHERE id = ?', [req.body, id]);
+                yield database_1.default.query('UPDATE Ingreso SET ? WHERE IdIngreso = ?', [req.body, id]);
                 res.json({ message: 'El ingreso fue actualizado' });
             }
             catch (err) {

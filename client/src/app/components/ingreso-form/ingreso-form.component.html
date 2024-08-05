@@ -17,7 +17,7 @@
         <main class="main-content">
             <div class="container">
                 <h1></h1>
-                <form id="registroForm" class="form-grid" (ngSubmit)="saveNewIngreso()">
+                <form id="registroForm" class="form-grid" (ngSubmit)="saveIngreso()">
                     <div class="form-group">
                         <label for="tipoIngreso">Tipo de ingreso
                             <span class="info-icon">
@@ -26,6 +26,9 @@
                             </span>
                         </label>
                         <input type="text" id="tipoIngreso" name="tipoIngreso" [(ngModel)]="ingreso.TipoIngreso" placeholder="Tipo ingreso" required>
+                        <div class="error-message" *ngIf="errorMessages['TipoIngreso']">
+                            {{ errorMessages['TipoIngreso'] }}
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="origenIngreso">Origen del ingreso
@@ -35,6 +38,9 @@
                             </span>
                         </label>
                         <input type="text" id="origenIngreso" name="origenIngreso" [(ngModel)]="ingreso.OrigenIngreso" placeholder="Origen ingreso" required>
+                        <div class="error-message" *ngIf="errorMessages['OrigenIngreso']">
+                            {{ errorMessages['OrigenIngreso'] }}
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="categoria">Categoría
@@ -44,6 +50,9 @@
                             </span>
                         </label>
                         <input type="text" id="categoria" name="categoria" [(ngModel)]="ingreso.Categoria" placeholder="categoría" required>
+                        <div class="error-message" *ngIf="errorMessages['Categoria']">
+                            {{ errorMessages['Categoria'] }}
+                        </div>
                     </div>                  
                     <div class="form-group">
                         <label for="monto">Monto
@@ -53,6 +62,9 @@
                             </span>
                         </label>
                         <input type="number" id="monto" name="monto" [(ngModel)]="ingreso.Monto" placeholder="$ 00.0" required>
+                        <div class="error-message" *ngIf="errorMessages['Monto']">
+                            {{ errorMessages['Monto'] }}
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="fechaIngreso">Fecha de ingreso
@@ -62,6 +74,9 @@
                             </span>
                         </label>
                         <input type="date" id="fechaIngreso" name="fechaIngreso" [(ngModel)]="ingreso.FechaIngreso" required>
+                        <div class="error-message" *ngIf="errorMessages['FechaIngreso']">
+                            {{ errorMessages['FechaIngreso'] }}
+                        </div>
                     </div>
                     <button type="submit"><i class="fas fa-check"></i></button>
                 </form>

@@ -23,7 +23,7 @@ class IngresoController {
   public async delete(req: Request, res: Response): Promise<void> {
     const { id } = req.params;
     try {
-      await pool.query('DELETE FROM Ingreso WHERE id = ?', [id]);
+      await pool.query('DELETE FROM Ingreso WHERE IdIngreso = ?', [id]);
       res.json({ message: 'El ingreso fue eliminado' });
     } catch (err) {
       res.status(500).json({ error: 'Error al eliminar el ingreso' });
@@ -33,7 +33,7 @@ class IngresoController {
   public async update(req: Request, res: Response): Promise<void> {
     const { id } = req.params;
     try {
-      await pool.query('UPDATE Ingreso SET ? WHERE id = ?', [req.body, id]);
+      await pool.query('UPDATE Ingreso SET ? WHERE IdIngreso = ?', [req.body, id]);
       res.json({ message: 'El ingreso fue actualizado' });
     } catch (err) {
       res.status(500).json({ error: 'Error al actualizar el ingreso' });

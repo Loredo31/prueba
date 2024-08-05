@@ -71,6 +71,7 @@ body {
     font-family: sans-serif;
     font-weight: 600;
 }
+
 .main-content {
     background-color: #f1edec;
     background-image: url('/assets/FondoFL.jpg');
@@ -111,7 +112,7 @@ label {
     font-weight: bold;
 }
 
-input {
+input, select {
     width: calc(100% - 12px); 
     padding: 10px; 
     border: 1px solid #ccc; 
@@ -188,4 +189,10 @@ button:hover {
 .info-icon i {
     color: #545dd8;
     font-size: 1em;
+}
+
+.error-message {
+    color: red;
+    margin-top: 10px;
+    font-size: 14px;
 }
