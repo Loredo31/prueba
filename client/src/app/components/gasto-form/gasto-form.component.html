@@ -29,7 +29,7 @@
                   </label>
                   <input type="text" id="Descripcion" name="Descripcion" [(ngModel)]="gasto.Descripcion" placeholder="Descripción" required>
                   <div class="error-message" *ngIf="errorMessages['Descripcion']">
-                    {{ errorMessages['Descripcion'] }}
+                    <i class="fas fa-exclamation-circle"></i> {{ errorMessages['Descripcion'] }}
                   </div>
                 </div>             
                 <div class="form-group">
@@ -48,7 +48,7 @@
                     <option value="Otro">Otro</option>
                   </select>
                   <div class="error-message" *ngIf="errorMessages['Categoria']">
-                    {{ errorMessages['Categoria'] }}
+                    <i class="fas fa-exclamation-circle"></i> {{ errorMessages['Categoria'] }}
                   </div>
                 </div>             
                 <div class="form-group">
@@ -60,7 +60,7 @@
                   </label>
                   <input type="number" id="Monto" name="Monto" [(ngModel)]="gasto.Monto" placeholder="$ 00.0" required>
                   <div class="error-message" *ngIf="errorMessages['Monto']">
-                    {{ errorMessages['Monto'] }}
+                    <i class="fas fa-exclamation-circle"></i> {{ errorMessages['Monto'] }}
                   </div>
                 </div>              
                 <div class="form-group">
@@ -72,7 +72,7 @@
                   </label>
                   <input type="date" id="FechaTransaccion" name="FechaTransaccion" [(ngModel)]="gasto.FechaTransaccion" required>
                   <div class="error-message" *ngIf="errorMessages['FechaTransaccion']">
-                    {{ errorMessages['FechaTransaccion'] }}
+                    <i class="fas fa-exclamation-circle"></i> {{ errorMessages['FechaTransaccion'] }}
                   </div>
                 </div>              
                 <div class="form-group">
@@ -91,7 +91,7 @@
                     <option value="Otro">Otro</option>
                   </select>
                   <div class="error-message" *ngIf="errorMessages['MetodoPago']">
-                    {{ errorMessages['MetodoPago'] }}
+                    <i class="fas fa-exclamation-circle"></i> {{ errorMessages['MetodoPago'] }}
                   </div>
                 </div>              
                 <div class="form-group">
@@ -104,7 +104,7 @@
                   <input type="file" id="foto" name="foto" class="file-input">
                 </div>              
                 <div class="error-message" *ngIf="errorMessages['general']">
-                  {{ errorMessages['general'] }}
+                  <i class="fas fa-exclamation-circle"></i> {{ errorMessages['general'] }}
                 </div>              
                 <button type="submit"><i class="fas fa-check"></i> Guardar</button>
               </form>                              

@@ -50,7 +50,7 @@ export class IngresoFormComponent implements OnInit {
     if (!this.ingreso.Categoria) {
       this.errorMessages['Categoria'] = 'Seleccione una categoria*';
     }
-    if (!this.ingreso.Monto) {
+    if (!this.ingreso.Monto || isNaN(+this.ingreso.Monto) || +this.ingreso.Monto <= 0) {
       this.errorMessages['Monto'] = 'Ingreso el monto total*';
     }
     if (!this.ingreso.FechaIngreso) {

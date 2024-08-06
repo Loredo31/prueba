@@ -46,7 +46,7 @@
                             <option value="Patrocinios">Patrocinios</option>
                         </select>
                         <div class="error-message" *ngIf="errorMessages['TipoIngreso']">
-                            {{ errorMessages['TipoIngreso'] }}
+                            <i class="fas fa-exclamation-circle"></i> {{ errorMessages['TipoIngreso'] }}
                         </div>
                     </div>
                     <div class="form-group">
@@ -58,7 +58,7 @@
                         </label>
                         <input type="text" id="origenIngreso" name="origenIngreso" [(ngModel)]="ingreso.OrigenIngreso" placeholder="Origen ingreso" required>
                         <div class="error-message" *ngIf="errorMessages['OrigenIngreso']">
-                            {{ errorMessages['OrigenIngreso'] }}
+                            <i class="fas fa-exclamation-circle"></i> {{ errorMessages['OrigenIngreso'] }}
                         </div>
                     </div>
                     <div class="form-group">
@@ -77,7 +77,7 @@
                             <option value="Institucional">Institucional</option>
                         </select>
                         <div class="error-message" *ngIf="errorMessages['Categoria']">
-                            {{ errorMessages['Categoria'] }}
+                            <i class="fas fa-exclamation-circle"></i> {{ errorMessages['Categoria'] }}
                         </div>
                     </div>                  
                     <div class="form-group">
@@ -89,7 +89,7 @@
                         </label>
                         <input type="number" id="monto" name="monto" [(ngModel)]="ingreso.Monto" placeholder="$ 00.0" required>
                         <div class="error-message" *ngIf="errorMessages['Monto']">
-                            {{ errorMessages['Monto'] }}
+                            <i class="fas fa-exclamation-circle"></i> {{ errorMessages['Monto'] }}
                         </div>
                     </div>
                     <div class="form-group">
@@ -101,7 +101,7 @@
                         </label>
                         <input type="date" id="fechaIngreso" name="fechaIngreso" [(ngModel)]="ingreso.FechaIngreso" required>
                         <div class="error-message" *ngIf="errorMessages['FechaIngreso']">
-                            {{ errorMessages['FechaIngreso'] }}
+                            <i class="fas fa-exclamation-circle"></i> {{ errorMessages['FechaIngreso'] }}
                         </div>
                     </div>
                     <button type="submit"><i class="fas fa-check"></i></button>

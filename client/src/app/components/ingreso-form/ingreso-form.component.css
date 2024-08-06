@@ -192,7 +192,18 @@ button:hover {
 }
 
 .error-message {
-    color: red;
-    margin-top: 10px;
+    color: #af1919;
     font-size: 14px;
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+}
+
+.error-message i {
+    margin-right: 5px;
+}
+
+.form-group.error input,
+.form-group.error select {
+    border-color: #af1919;
 }

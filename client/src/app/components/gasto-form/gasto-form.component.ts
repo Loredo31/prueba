@@ -46,9 +46,9 @@ export class GastoFormComponent implements OnInit {
     if (!this.gasto.Categoria) {
       this.errorMessages['Categoria'] = 'Seleccione una categoría*';
     }
-    if (!this.gasto.Monto) {
+    if (!this.gasto.Monto || isNaN(+this.gasto.Monto) || +this.gasto.Monto <= 0) {
       this.errorMessages['Monto'] = 'Ingrese un monto válido*';
-    }
+    }    
     if (!this.gasto.FechaTransaccion) {
       this.errorMessages['FechaTransaccion'] = 'Seleccione una fecha de transacción*';
     }
