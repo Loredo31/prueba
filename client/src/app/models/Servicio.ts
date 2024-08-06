@@ -1,8 +1,8 @@
 export interface Servicio {
-    id?: number;
-    descripcion?: string;
-    cliente?: string;
-    estado?: string,
-    monto?: number;
-    fechaServicio?: Date
+
+    Descripcion?: string;
+    Cliente?: string;
+    Estado?: string,
+    Monto?: string;
+    FechaServicio?: string;
 }
