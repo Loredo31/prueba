@@ -33,6 +33,7 @@ const routes: Routes = [
   { path: 'ingresos/edit/:id', component: IngresoFormComponent },
   { path: 'servicios/add', component: ServicioFormComponent},
   { path: 'servicios/list', component: ServicioListComponent},
+  { path: 'servicios/edit/:id', component: ServicioFormComponent },
   { path: 'usuario', component: UsuarioComponent},
   { path: "resumen", component: ResumenComponent},
   { path: "ahorro", component: AhorroComponent},

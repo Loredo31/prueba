@@ -7,7 +7,7 @@ import { Servicio } from '../models/Servicio';
   providedIn: 'root'
 })
 export class ServiciosService {
-  private API_URI = 'http://localhost:3002/servicios'
+  private API_URI = 'http://localhost:3000/api/servicio';
 
   constructor(private http: HttpClient) { }
 
@@ -15,11 +15,19 @@ export class ServiciosService {
     return this.http.get<Servicio[]>(this.API_URI);
   }
 
-  getServicio(id:string){
-    return this.http.get('${this.API_URL}/${id}');
+  getServicio(id: string): Observable<Servicio> {
+    return this.http.get<Servicio>(`${this.API_URI}/${id}`);
   }
 
   saveServicios(servicio: Servicio): Observable<any> {
     return this.http.post<any>(this.API_URI, servicio);
+  }
+
+  deleteServicio(id: string): Observable<any> {
+    return this.http.delete<any>(`${this.API_URI}/${id}`);
+  }
+
+  updateServicio(id: string, servicio: Servicio): Observable<any> {
+    return this.http.put<any>(`${this.API_URI}/${id}`, servicio);
   }
 }

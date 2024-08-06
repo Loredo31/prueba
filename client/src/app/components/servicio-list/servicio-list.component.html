@@ -10,8 +10,7 @@
                 <nav>
                     <ul>
                         <li class="left"><a routerLink="/inicio-usuario">Control de Gastos</a></li>
-                        <li class="right"><a routerLink="/inicio-usuario" >Regresar</a></li>
-                        <li class="right"><a routerLink="/servicio/add" routerLinkActive="active"><i class="fas fa-plus"></i> Crear Servicio</a></li>
+                        <li class="right"><a routerLink="/servicios/add" routerLinkActive="active"><i class="fas fa-plus"></i> Crear Servicio</a></li>
                     </ul>
                 </nav>
             </header>
@@ -31,14 +30,14 @@
                         </thead>
                         <tbody>
                             <tr *ngFor="let servicio of servicios">
-                                <td>{{ servicio.descripcion }}</td>
-                                <td>{{ servicio.cliente }}</td>
-                                <td>{{ servicio.estado }}</td>
-                                <td>$ {{ servicio.monto }}</td>
-                                <td>{{ servicio.fechaServicio }}</td>
+                                <td>{{ servicio.Descripcion }}</td>
+                                <td>{{ servicio.Cliente }}</td>
+                                <td>{{ servicio.Estado }}</td>
+                                <td>$ {{ servicio.Monto }}</td>
+                                <td>{{ servicio.FechaServicio | date }}</td>
                                 <td>
-                                    <button class="edit-button"><i class="fas fa-edit"></i></button>
-                                    <button class="delete-button"><i class="fas fa-trash-alt"></i></button>
+                                    <button class="edit-button" (click)="editServicio(servicio.IdServicio)"><i class="fas fa-edit"></i></button>
+                                    <button class="delete-button" (click)="deleteServicio(servicio.IdServicio)" ><i class="fas fa-trash-alt"></i></button>
                                 </td>                            
                             </tr>
                         </tbody>
