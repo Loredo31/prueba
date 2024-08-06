@@ -10,7 +10,7 @@
             <nav>
                 <ul>
                     <li class="left"><a routerLink="/inicio-usuario">Control de Gastos</a></li>
-                    <li class="right"><a routerLink="/servicio/list">Regresar</a></li>
+                    <li class="right"><a routerLink="/servicios/list">Regresar</a></li>
                 </ul>
             </nav>
         </header>
@@ -26,6 +26,9 @@
                             </span>
                         </label>
                         <input type="text" id="descripcion" name="descripcion" [(ngModel)]="servicio.Descripcion" placeholder="Descripción" required>
+                        <div class="error-message" *ngIf="errorMessages['Descripcion']">
+                            <i class="fas fa-exclamation-circle"></i> {{ errorMessages['Descripcion'] }}
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="cliente">Cliente
@@ -35,6 +38,9 @@
                             </span>
                         </label>
                         <input type="text" id="cliente" name="cliente" [(ngModel)]="servicio.Cliente" placeholder="Cliente" required>
+                        <div class="error-message" *ngIf="errorMessages['Cliente']">
+                            <i class="fas fa-exclamation-circle"></i> {{ errorMessages['Cliente'] }}
+                        </div>
                     </div>    
                     <div class="form-group">
                         <label for="estado">Estado
@@ -44,6 +50,9 @@
                             </span>
                         </label>
                         <input type="text" id="estado" name="estado" [(ngModel)]="servicio.Estado" placeholder="Estado" required>
+                        <div class="error-message" *ngIf="errorMessages['Estado']">
+                            <i class="fas fa-exclamation-circle"></i> {{ errorMessages['Estado'] }}
+                        </div>
                     </div>               
                     <div class="form-group">
                         <label for="monto">Monto
@@ -53,6 +62,9 @@
                             </span>
                         </label>
                         <input type="number" id="monto" name="monto" [(ngModel)]="servicio.Monto" placeholder="$ 00.0" required>
+                        <div class="error-message" *ngIf="errorMessages['Monto']">
+                            <i class="fas fa-exclamation-circle"></i> {{ errorMessages['Monto'] }}
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="fechaServicio">Fecha de servicio
@@ -62,6 +74,9 @@
                             </span>
                         </label>
                         <input type="date" id="fechaServicio" name="fechaServicio" [(ngModel)]="servicio.FechaServicio" required>
+                        <div class="error-message" *ngIf="errorMessages['FechaServicio']">
+                            <i class="fas fa-exclamation-circle"></i> {{ errorMessages['FechaServicio'] }}
+                        </div>
                     </div>
                     <button type="submit"><i class="fas fa-check"></i></button>
                 </form>
