@@ -3,9 +3,8 @@ import pool from '../database';
 
 class ServicioController {
   public async list(req: Request, res: Response): Promise<void> {
-    const { userId } = req.params;
     try {
-      const servicios = await pool.query('SELECT * FROM Servicio WHERE IdUsuario = ?', [userId]);
+      const servicios = await pool.query('SELECT * FROM Servicio');
       res.json({ servicios });
     } catch (err) {
       res.status(500).json({ error: 'Error al obtener los servicios' });
@@ -14,8 +13,7 @@ class ServicioController {
 
   public async create(req: Request, res: Response): Promise<void> {
     try {
-      const { userId, ...gastoData } = req.body;
-      await pool.query('INSERT INTO Servicio SET ?', [{ ...gastoData, IdUsuario: userId }]);
+      await pool.query('INSERT INTO Servicio SET ?', [req.body]);
       res.json({ message: 'Servicio guardado' });
     } catch (err) {
       res.status(500).json({ error: 'Error al crear el servicio' });
@@ -24,9 +22,8 @@ class ServicioController {
 
   public async delete(req: Request, res: Response): Promise<void> {
     const { id } = req.params;
-    const { userId } = req.body;
     try {
-      await pool.query('DELETE FROM Servicio WHERE IdServicio = ? AND IdUsuario = ?', [id, userId]);
+      await pool.query('DELETE FROM Servicio WHERE IdServicio = ?', [id]);
       res.json({ message: 'El servicio fue eliminado' });
     } catch (err) {
       res.status(500).json({ error: 'Error al eliminar el servicio' });
@@ -35,9 +32,8 @@ class ServicioController {
 
   public async update(req: Request, res: Response): Promise<void> {
     const { id } = req.params;
-    const { userId } = req.body;
     try {
-      await pool.query('UPDATE Servicio SET ? WHERE IdServicio = ? AND IdUsuario = ?', [id, userId]);
+      await pool.query('UPDATE Servicio SET ? WHERE IdServicio = ?', [id]);
       res.json({ message: 'El servicio fue actualizado' });
     } catch (err) {
       res.status(500).json({ error: 'Error al actualizar el servicio' });
@@ -46,9 +42,8 @@ class ServicioController {
 
   public async getOne(req: Request, res: Response): Promise<void> {
     const { id } = req.params;
-    const { userId } = req.body; 
     try {
-      const servicio = await pool.query('SELECT * FROM Servicio WHERE id = ? AND IdUsuario = ?', [id, userId]);
+      const servicio = await pool.query('SELECT * FROM Servicio WHERE id = ?', [id]);
       if (servicio.length > 0) {
         res.json(servicio[0]);
       } else {

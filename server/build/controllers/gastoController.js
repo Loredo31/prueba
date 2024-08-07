@@ -8,17 +8,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __rest = (this && this.__rest) || function (s, e) {
-    var t = {};
-    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
-        t[p] = s[p];
-    if (s != null && typeof Object.getOwnPropertySymbols === "function")
-        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
-            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
-                t[p[i]] = s[p[i]];
-        }
-    return t;
-};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -28,9 +17,8 @@ const database_1 = __importDefault(require("../database"));
 class GastoController {
     list(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { userId } = req.params;
             try {
-                const gastos = yield database_1.default.query('SELECT * FROM Gasto WHERE IdUsuario = ?', [userId]);
+                const gastos = yield database_1.default.query('SELECT * FROM Gasto');
                 res.json({ gastos });
             }
             catch (err) {
@@ -41,8 +29,7 @@ class GastoController {
     create(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const _a = req.body, { userId } = _a, gastoData = __rest(_a, ["userId"]);
-                yield database_1.default.query('INSERT INTO Gasto SET ?', [Object.assign(Object.assign({}, gastoData), { IdUsuario: userId })]);
+                yield database_1.default.query('INSERT INTO Gasto SET ?', [req.body]);
                 res.json({ message: 'Gasto guardado' });
             }
             catch (err) {
@@ -53,9 +40,8 @@ class GastoController {
     delete(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
-            const { userId } = req.body;
             try {
-                yield database_1.default.query('DELETE FROM Gasto WHERE IdGasto = ? AND IdUsuario = ?', [id, userId]);
+                yield database_1.default.query('DELETE FROM Gasto WHERE IdGasto = ?', [id]);
                 res.json({ message: 'El gasto fue eliminado' });
             }
             catch (err) {
@@ -66,9 +52,8 @@ class GastoController {
     update(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
-            const _a = req.body, { userId } = _a, gastoData = __rest(_a, ["userId"]);
             try {
-                yield database_1.default.query('UPDATE Gasto SET ? WHERE IdGasto = ? AND IdUsuario = ?', [gastoData, id, userId]);
+                yield database_1.default.query('UPDATE Gasto SET ? WHERE IdGasto = ?', [req.body, id]);
                 res.json({ message: 'El gasto fue actualizado' });
             }
             catch (err) {
@@ -79,14 +64,13 @@ class GastoController {
     getOne(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
-            const { userId } = req.body;
             try {
-                const gasto = yield database_1.default.query('SELECT * FROM Gasto WHERE IdGasto = ? AND IdUsuario = ?', [id, userId]);
+                const gasto = yield database_1.default.query('SELECT * FROM Gasto WHERE id = ?', [id]);
                 if (gasto.length > 0) {
                     res.json(gasto[0]);
                 }
                 else {
-                    res.status(404).json({ text: 'El gasto no existe o no pertenece al usuario' });
+                    res.status(404).json({ text: 'El gasto no existe' });
                 }
             }
             catch (err) {
