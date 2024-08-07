@@ -9,11 +9,11 @@ class ServicioRoutes {
   }
 
   config(): void {
-    this.router.get('/:userId', servicioController.list);
-    this.router.post('/:userId', servicioController.create);
-    this.router.delete('/:userId/:id', servicioController.delete);
-    this.router.put('/:userId/:id', servicioController.update);
-    this.router.get('/:userId/:id', servicioController.getOne);
+    this.router.get('/', servicioController.list);
+    this.router.post('/', servicioController.create);
+    this.router.delete('/:id', servicioController.delete);
+    this.router.put('/:id', servicioController.update);
+    this.router.get('/:id', servicioController.getOne);
   }
 }
 
