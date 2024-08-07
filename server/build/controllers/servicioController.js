@@ -8,6 +8,17 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __rest = (this && this.__rest) || function (s, e) {
+    var t = {};
+    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+        t[p] = s[p];
+    if (s != null && typeof Object.getOwnPropertySymbols === "function")
+        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
+                t[p[i]] = s[p[i]];
+        }
+    return t;
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -17,8 +28,9 @@ const database_1 = __importDefault(require("../database"));
 class ServicioController {
     list(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
+            const { userId } = req.params;
             try {
-                const servicios = yield database_1.default.query('SELECT * FROM Servicio');
+                const servicios = yield database_1.default.query('SELECT * FROM Servicio WHERE IdUsuario = ?', [userId]);
                 res.json({ servicios });
             }
             catch (err) {
@@ -29,7 +41,8 @@ class ServicioController {
     create(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                yield database_1.default.query('INSERT INTO Servicio SET ?', [req.body]);
+                const _a = req.body, { userId } = _a, gastoData = __rest(_a, ["userId"]);
+                yield database_1.default.query('INSERT INTO Servicio SET ?', [Object.assign(Object.assign({}, gastoData), { IdUsuario: userId })]);
                 res.json({ message: 'Servicio guardado' });
             }
             catch (err) {
@@ -40,8 +53,9 @@ class ServicioController {
     delete(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
+            const { userId } = req.body;
             try {
-                yield database_1.default.query('DELETE FROM Servicio WHERE IdServicio = ?', [id]);
+                yield database_1.default.query('DELETE FROM Servicio WHERE IdServicio = ? AND IdUsuario = ?', [id, userId]);
                 res.json({ message: 'El servicio fue eliminado' });
             }
             catch (err) {
@@ -52,8 +66,9 @@ class ServicioController {
     update(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
+            const { userId } = req.body;
             try {
-                yield database_1.default.query('UPDATE Servicio SET ? WHERE IdServicio = ?', [req.body, id]);
+                yield database_1.default.query('UPDATE Servicio SET ? WHERE IdServicio = ? AND IdUsuario = ?', [id, userId]);
                 res.json({ message: 'El servicio fue actualizado' });
             }
             catch (err) {
@@ -64,8 +79,9 @@ class ServicioController {
     getOne(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
+            const { userId } = req.body;
             try {
-                const servicio = yield database_1.default.query('SELECT * FROM Servicio WHERE id = ?', [id]);
+                const servicio = yield database_1.default.query('SELECT * FROM Servicio WHERE id = ? AND IdUsuario = ?', [id, userId]);
                 if (servicio.length > 0) {
                     res.json(servicio[0]);
                 }
