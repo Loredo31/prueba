@@ -3,9 +3,8 @@ import pool from '../database';
 
 class IngresoController {
   public async list(req: Request, res: Response): Promise<void> {
-    const { userId } = req.params;
     try {
-      const ingresos = await pool.query('SELECT * FROM Ingreso WHERE IdUsuario = ?', [userId]);
+      const ingresos = await pool.query('SELECT * FROM Ingreso');
       res.json({ ingresos });
     } catch (err) {
       res.status(500).json({ error: 'Error al obtener los ingresos' });
@@ -14,8 +13,7 @@ class IngresoController {
 
   public async create(req: Request, res: Response): Promise<void> {
     try {
-      const { userId, ...gastoData } = req.body; 
-      await pool.query('INSERT INTO Ingreso SET ?', [{ ...gastoData, IdUsuario: userId }]);
+      await pool.query('INSERT INTO Ingreso SET ?', [req.body]);
       res.json({ message: 'Ingreso guardado' });
     } catch (err) {
       res.status(500).json({ error: 'Error al crear el ingreso' });
@@ -24,9 +22,8 @@ class IngresoController {
 
   public async delete(req: Request, res: Response): Promise<void> {
     const { id } = req.params;
-    const { userId } = req.body;
     try {
-      await pool.query('DELETE FROM Ingreso WHERE IdIngreso = ? AND IdUsuario = ?', [id, userId]);
+      await pool.query('DELETE FROM Ingreso WHERE IdIngreso = ?', [id]);
       res.json({ message: 'El ingreso fue eliminado' });
     } catch (err) {
       res.status(500).json({ error: 'Error al eliminar el ingreso' });
@@ -46,9 +43,8 @@ class IngresoController {
 
   public async getOne(req: Request, res: Response): Promise<void> {
     const { id } = req.params;
-    const { userId } = req.body; 
     try {
-      const ingreso = await pool.query('SELECT * FROM Ingreso WHERE id = ? AND IdUsuario = ?', [id, userId]);
+      const ingreso = await pool.query('SELECT * FROM Ingreso WHERE id = ?', [id]);
       if (ingreso.length > 0) {
         res.json(ingreso[0]);
       } else {
