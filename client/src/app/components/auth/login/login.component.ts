@@ -25,7 +25,8 @@ export class LoginComponent {
         const usuario = usuarios.find(u => u.Usuario === username && u.Contrasena === password);
 
         if (usuario) {
-          this.router.navigate(['/inicio-usuario']);
+          localStorage.setItem('userId', usuario.IdUsuario);
+          this.router.navigate([`/inicio-usuario/${usuario.IdUsuario}`]);
         } else {
           this.errorMessage = 'Usuario o contraseña incorrectos';
         }
