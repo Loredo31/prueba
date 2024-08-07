@@ -27,8 +27,7 @@ export class ServicioListComponent implements OnInit {
 
   deleteServicio(id: number) {
     if (confirm('¿Estás seguro de que deseas eliminar este servicios?')) {
-      this.serviciosService.deleteServicio(id.toString()).subscribe(
-        () => {
+      this.serviciosService.deleteServicio(id.toString()).subscribe(() => {
           this.servicios = this.servicios.filter((servicio: any) => servicio.IdServicio !== id);
         },
         err => console.log(err)
@@ -39,4 +38,5 @@ export class ServicioListComponent implements OnInit {
   editServicio(id: number) {
     this.router.navigate(['/servicios/edit', id]);
   }
+
 }

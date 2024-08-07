@@ -1,6 +1,7 @@
 export interface Servicio {
 
-    Descripcion?: string;
+    Producto?: string;
+    Cantidad?: string;
     Cliente?: string;
     Estado?: string,
     Monto?: string;

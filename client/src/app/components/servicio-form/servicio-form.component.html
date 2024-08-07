@@ -19,15 +19,39 @@
                 <h1></h1>
                 <form id="registroForm" class="form-grid" (ngSubmit)="saveServicio()">
                 <div class="form-group">
-                        <label for="descripcion">Descripción
+                        <label for="producto">Producto
                             <span class="info-icon">
                                 <i class="fas fa-info-circle"></i>
-                                <span class="tooltip">Descripción del servicio.</span>
+                                <span class="tooltip">Selecciona el producto.</span>
                             </span>
                         </label>
-                        <input type="text" id="descripcion" name="descripcion" [(ngModel)]="servicio.Descripcion" placeholder="Descripción" required>
-                        <div class="error-message" *ngIf="errorMessages['Descripcion']">
-                            <i class="fas fa-exclamation-circle"></i> {{ errorMessages['Descripcion'] }}
+                        <select id="producto" name="producto" [(ngModel)]="servicio.Producto" required>
+                            <option value="" disabled selected>Selecciona categoría</option>
+                            <option value="Vaso(s)">Vaso(s)</option>
+                            <option value="Taza(s)">Taza(s)</option>
+                            <option value="Termo(s)">Termo(s)</option>
+                            <option value="Tarro(s)">Tarro(s)</option>
+                            <option value="Estampa(s)">Estampa(s)</option>
+                            <option value="Caja(s)">Caja(s)</option>
+                            <option value="Etiqueta(s)">Etiqueta(s)</option>
+                            <option value="Botella(s) decorada">Botella(s) decorada</option>
+                            <option value="Lona(s)">Lona(s)</option>
+                            <option value="Letra(s)">Letra(s)</option>
+                        </select>
+                        <div class="error-message" *ngIf="errorMessages['Producto']">
+                            <i class="fas fa-exclamation-circle"></i> {{ errorMessages['Producto'] }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="cantidad">Cantidad
+                            <span class="info-icon">
+                                <i class="fas fa-info-circle"></i>
+                                <span class="tooltip">Cantidad de productos.</span>
+                            </span>
+                        </label>
+                        <input type="number" id="cantidad" name="cantidad" [(ngModel)]="servicio.Cantidad" placeholder="00" required>
+                        <div class="error-message" *ngIf="errorMessages['Cantidad']">
+                            <i class="fas fa-exclamation-circle"></i> {{ errorMessages['Cantidad'] }}
                         </div>
                     </div>
                     <div class="form-group">
@@ -49,7 +73,12 @@
                                 <span class="tooltip">Estado actual del servicio.</span>
                             </span>
                         </label>
-                        <input type="text" id="estado" name="estado" [(ngModel)]="servicio.Estado" placeholder="Estado" required>
+                        <select id="estado" name="estado" [(ngModel)]="servicio.Estado" required>
+                            <option value="" disabled selected>Selecciona categoría</option>
+                            <option value="Liquidado">Liquidado</option>
+                            <option value="Saldo pendiente">Saldo pendiente</option>
+                            <option value="Deuda">Deuda</option>
+                        </select>
                         <div class="error-message" *ngIf="errorMessages['Estado']">
                             <i class="fas fa-exclamation-circle"></i> {{ errorMessages['Estado'] }}
                         </div>

@@ -20,7 +20,8 @@
                     <table class="expenses-table">
                         <thead>
                             <tr>
-                                <th>Descripcion</th>
+                                <th>Producto</th>
+                                <th>Cantidad</th>
                                 <th>Cliente</th>
                                 <th>Estado</th>
                                 <th>Monto</th>
@@ -30,13 +31,14 @@
                         </thead>
                         <tbody>
                             <tr *ngFor="let servicio of servicios">
-                                <td>{{ servicio.Descripcion }}</td>
+                                <td>{{ servicio.Producto }}</td>
+                                <td>{{ servicio.Cantidad }}</td>
                                 <td>{{ servicio.Cliente }}</td>
                                 <td>{{ servicio.Estado }}</td>
                                 <td>$ {{ servicio.Monto }}</td>
                                 <td>{{ servicio.FechaServicio | date }}</td>
                                 <td>
-                                    <button class="edit-button" (click)="editServicio(servicio.IdServicio)"><i class="fas fa-edit"></i></button>
+                                    <button class="edit-button" (click)="editServicio(servicio.IdServicio)"><i class="fas fa-edit"></i></button> 
                                     <button class="delete-button" (click)="deleteServicio(servicio.IdServicio)" ><i class="fas fa-trash-alt"></i></button>
                                 </td>                            
                             </tr>
