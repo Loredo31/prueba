@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Gasto } from '../../models/Gasto';
 import { GastosService } from '../../services/gastos.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-gasto-form',
@@ -22,7 +23,12 @@ export class GastoFormComponent implements OnInit {
   gastoId: string | null = '';
   errorMessages: { [key: string]: string } = {};
 
-  constructor(private gastosService: GastosService, private router: Router, private route: ActivatedRoute) {}
+  constructor(
+    private gastosService: GastosService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private notificationService: NotificationService
+  ) {}
 
   ngOnInit() {
     this.gastoId = this.route.snapshot.paramMap.get('id');
@@ -46,9 +52,9 @@ export class GastoFormComponent implements OnInit {
     if (!this.gasto.Categoria) {
       this.errorMessages['Categoria'] = 'Seleccione una categoría*';
     }
-    if (!this.gasto.Monto || isNaN(+this.gasto.Monto) || +this.gasto.Monto <= 0) {
+    if (!this.gasto.Monto) {
       this.errorMessages['Monto'] = 'Ingrese un monto válido*';
-    }    
+    }
     if (!this.gasto.FechaTransaccion) {
       this.errorMessages['FechaTransaccion'] = 'Seleccione una fecha de transacción*';
     }
@@ -65,6 +71,7 @@ export class GastoFormComponent implements OnInit {
         this.gastosService.updateGasto(this.gastoId, this.gasto).subscribe(
           res => {
             console.log(res);
+            this.notificationService.showNotification('Gasto actualizado correctamente');
             this.router.navigate(['/gastos/list']);
           },
           err => console.log(err)
@@ -73,6 +80,7 @@ export class GastoFormComponent implements OnInit {
         this.gastosService.saveGastos(this.gasto).subscribe(
           res => {
             console.log(res);
+            this.notificationService.showNotification('Gasto guardado correctamente');
             this.router.navigate(['/gastos/list']);
           },
           err => console.log(err)

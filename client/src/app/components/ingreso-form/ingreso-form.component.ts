@@ -2,6 +2,7 @@ import { Component, OnInit, HostBinding } from '@angular/core';
 import { Ingreso } from '../../models/Ingreso';
 import { IngresosService } from '../../services/ingresos.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-ingreso-form',
@@ -23,7 +24,11 @@ export class IngresoFormComponent implements OnInit {
   ingresoId: string | null = '';
   errorMessages: { [key: string]: string } = {};
 
-  constructor(private ingresosService: IngresosService, private router: Router, private route: ActivatedRoute) {}
+  constructor(private ingresosService: IngresosService, 
+              private router: Router, 
+              private route: ActivatedRoute,
+              private notificationService: NotificationService
+  ) {}
 
   ngOnInit() {
     this.ingresoId = this.route.snapshot.paramMap.get('id');
@@ -66,6 +71,7 @@ export class IngresoFormComponent implements OnInit {
         this.ingresosService.updateIngreso(this.ingresoId, this.ingreso).subscribe(
           res => {
             console.log(res);
+            this.notificationService.showNotification('Ingreso actualizado correctamente');
             this.router.navigate(['/ingresos/list']);
           },
           err => console.log(err)
@@ -74,6 +80,7 @@ export class IngresoFormComponent implements OnInit {
         this.ingresosService.saveIngresos(this.ingreso).subscribe(
           res => {
             console.log(res);
+            this.notificationService.showNotification('Ingreso guardado correctamente');
             this.router.navigate(['/ingresos/list']);
           },
           err => console.log(err)

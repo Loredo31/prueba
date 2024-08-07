@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GastosService } from '../../services/gastos.service';
 import { Router } from '@angular/router';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-gasto-list',
@@ -9,11 +10,19 @@ import { Router } from '@angular/router';
 })
 export class GastoListComponent implements OnInit {
   gastos: any = [];
+  notificationMessage: string | null = null;
 
-  constructor(private gastosService: GastosService, private router: Router) {}
+  constructor(
+    private gastosService: GastosService,
+    private router: Router,
+    private notificationService: NotificationService
+  ) {}
 
   ngOnInit() {
     this.loadGastos();
+    this.notificationService.notification$.subscribe(message => {
+      this.notificationMessage = message;
+    });
   }
 
   loadGastos() {

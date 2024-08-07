@@ -23,38 +23,65 @@
                     <div class="form-group">
                         <label for="nombre">Nombre(s)</label>
                         <input type="text" id="nombre" name="nombre" placeholder="Nombre" required [(ngModel)]="usuario.Nombre">
+                        <div class="error-message" *ngIf="errorMessages['Nombre']">
+                            <i class="fas fa-exclamation-circle"></i> {{ errorMessages['Nombre'] }}
+                          </div>
                     </div>
                     <div class="form-group">
                         <label for="apellidoPaterno">Apellido Paterno</label>
                         <input type="text" id="apellidoPaterno" name="apellidoPaterno" placeholder="Apellido Paterno" required [(ngModel)]="usuario.ApPaterno">
+                        <div class="error-message" *ngIf="errorMessages['ApPaterno']">
+                            <i class="fas fa-exclamation-circle"></i> {{ errorMessages['ApPaterno'] }}
+                          </div>
                     </div>
                     <div class="form-group">
                         <label for="apellidoMaterno">Apellido Materno</label>
                         <input type="text" id="apellidoMaterno" name="apellidoMaterno" placeholder="Apellido Materno" required [(ngModel)]="usuario.ApMaterno">
+                        <div class="error-message" *ngIf="errorMessages['ApMaterno']">
+                            <i class="fas fa-exclamation-circle"></i> {{ errorMessages['ApMaterno'] }}
+                          </div>
                     </div>
                     <div class="form-group">
                         <label for="telefono">Num. Teléfono</label>
                         <input type="text" id="telefono" name="telefono" pattern="[0-9]{1,}" title="Ingresa solo números" placeholder="1234567890" required [(ngModel)]="usuario.NumTelefono">
+                        <div class="error-message" *ngIf="errorMessages['NumTelefono']">
+                            <i class="fas fa-exclamation-circle"></i> {{ errorMessages['NumTelefono'] }}
+                          </div>
                     </div>
                     <div class="form-group">
                         <label for="correo">Correo Electrónico</label>
                         <input type="email" id="correo" name="correo" placeholder="ejemplo@dominio.com" required [(ngModel)]="usuario.Correo">
+                        <div class="error-message" *ngIf="errorMessages['Correo']">
+                            <i class="fas fa-exclamation-circle"></i> {{ errorMessages['Correo'] }}
+                          </div>
                     </div>
                     <div class="form-group">
                         <label for="fechaNacimiento">Fecha de Nacimiento</label>
                         <input type="date" id="fechaNacimiento" name="fechaNacimiento" required [(ngModel)]="usuario.FechaNacimiento">
+                        <div class="error-message" *ngIf="errorMessages['FechaNacimiento']">
+                            <i class="fas fa-exclamation-circle"></i> {{ errorMessages['FechaNacimiento'] }}
+                          </div>
                     </div>
                     <div class="form-group">
                         <label for="usuario">Crear Usuario</label>
                         <input type="text" id="usuario" name="usuario" placeholder="usuario123" required [(ngModel)]="usuario.Usuario">
+                        <div class="error-message" *ngIf="errorMessages['Usuario']">
+                            <i class="fas fa-exclamation-circle"></i> {{ errorMessages['Usuario'] }}
+                          </div>
                     </div>
                     <div class="form-group">
                         <label for="contrasena">Crear Contraseña</label>
                         <input type="password" id="contrasena" name="contrasena" placeholder="********" required [(ngModel)]="usuario.Contrasena">
+                        <div class="error-message" *ngIf="errorMessages['Contrasena']">
+                            <i class="fas fa-exclamation-circle"></i> {{ errorMessages['Contrasena'] }}
+                          </div>
                     </div>
                     <div class="form-group">
                         <label for="confirmarContrasena">Confirma Contraseña</label>
                         <input type="password" id="confirmarContrasena" name="confirmarContrasena" placeholder="********" required [(ngModel)]="usuario.Contrasena">
+                        <div class="error-message" *ngIf="errorMessages['Contrasena']">
+                            <i class="fas fa-exclamation-circle"></i> {{ errorMessages['Contrasena'] }}
+                          </div>
                     </div>
                     <button type="submit" class="btn btn-primary"><i class="fas fa-check"></i></button>
                 </form>
