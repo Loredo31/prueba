@@ -1,5 +1,4 @@
 export interface Servicio {
-
     Descripcion?: string;
     Cliente?: string;
     Estado?: string,

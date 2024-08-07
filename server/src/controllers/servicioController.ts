@@ -33,17 +33,18 @@ class ServicioController {
   public async update(req: Request, res: Response): Promise<void> {
     const { id } = req.params;
     try {
-      await pool.query('UPDATE Servicio SET ? WHERE IdServicio = ?', [id]);
+      await pool.query('UPDATE Servicio SET ? WHERE IdServicio = ?', [req.body, id]);
       res.json({ message: 'El servicio fue actualizado' });
     } catch (err) {
       res.status(500).json({ error: 'Error al actualizar el servicio' });
     }
   }
+  
 
   public async getOne(req: Request, res: Response): Promise<void> {
     const { id } = req.params;
     try {
-      const servicio = await pool.query('SELECT * FROM Servicio WHERE id = ?', [id]);
+      const servicio = await pool.query('SELECT * FROM Servicio WHERE IdGasto = ?', [id]);
       if (servicio.length > 0) {
         res.json(servicio[0]);
       } else {

@@ -53,7 +53,7 @@ class ServicioController {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
             try {
-                yield database_1.default.query('UPDATE Servicio SET ? WHERE IdServicio = ?', [id]);
+                yield database_1.default.query('UPDATE Servicio SET ? WHERE IdServicio = ?', [req.body, id]);
                 res.json({ message: 'El servicio fue actualizado' });
             }
             catch (err) {
@@ -65,7 +65,7 @@ class ServicioController {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
             try {
-                const servicio = yield database_1.default.query('SELECT * FROM Servicio WHERE id = ?', [id]);
+                const servicio = yield database_1.default.query('SELECT * FROM Servicio WHERE IdGasto = ?', [id]);
                 if (servicio.length > 0) {
                     res.json(servicio[0]);
                 }
