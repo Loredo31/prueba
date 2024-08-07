@@ -15,6 +15,9 @@
                 </nav>
             </header>
             <main class="main-content">
+                <div *ngIf="notificationMessage" class="notification">
+                    {{ notificationMessage }} <i class="fas fa-check"></i>
+                </div>
                 <h1>Lista de servicios</h1>
                 <div class="white-container">
                     <table class="expenses-table">

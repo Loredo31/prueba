@@ -18,6 +18,9 @@
         </nav>
       </header>
       <main class="main-content">
+        <div *ngIf="notificationMessage" class="notification">
+          {{ notificationMessage }} <i class="fas fa-check"></i>
+        </div>
         <h1>Lista de Gastos</h1>
         <div class="white-container">
           <table class="expenses-table">
@@ -40,7 +43,7 @@
                 <td>{{ gasto.MetodoPago }}</td>
                 <td>
                   <button class="edit-button" (click)="editGasto(gasto.IdGasto)"><i class="fas fa-edit"></i></button>
-                  <button class="delete-button" (click)="deleteGasto(gasto.IdGasto)" ><i class="fas fa-trash-alt"></i></button>
+                  <button class="delete-button" (click)="deleteGasto(gasto.IdGasto)"><i class="fas fa-trash-alt"></i></button>
                 </td>
               </tr>
             </tbody>

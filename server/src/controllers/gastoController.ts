@@ -43,7 +43,7 @@ class GastoController {
   public async getOne(req: Request, res: Response): Promise<void> {
     const { id } = req.params;
     try {
-      const gasto = await pool.query('SELECT * FROM Gasto WHERE id = ?', [id]);
+      const gasto = await pool.query('SELECT * FROM Gasto WHERE IdGasto = ?', [id]);
       if (gasto.length > 0) {
         res.json(gasto[0]);
       } else {

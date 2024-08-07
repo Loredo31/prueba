@@ -65,7 +65,7 @@ class GastoController {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
             try {
-                const gasto = yield database_1.default.query('SELECT * FROM Gasto WHERE id = ?', [id]);
+                const gasto = yield database_1.default.query('SELECT * FROM Gasto WHERE IdGasto = ?', [id]);
                 if (gasto.length > 0) {
                     res.json(gasto[0]);
                 }

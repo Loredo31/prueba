@@ -2,6 +2,7 @@ import { Component, OnInit, HostBinding } from '@angular/core';
 import { ServiciosService } from '../../services/servicios.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Servicio } from '../../models/Servicio';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-servicio-form',
@@ -25,7 +26,11 @@ export class ServicioFormComponent implements OnInit {
   servicioId: string | null = '';
   errorMessages: { [key: string]: string } = {};
 
-  constructor(private serviciosService: ServiciosService, private router: Router, private route: ActivatedRoute) {}
+  constructor(private serviciosService: ServiciosService, 
+              private router: Router, 
+              private route: ActivatedRoute,
+              private notificationService: NotificationService
+  ) {}
 
   ngOnInit() {
     this.servicioId = this.route.snapshot.paramMap.get('id');
@@ -71,6 +76,7 @@ export class ServicioFormComponent implements OnInit {
         this.serviciosService.updateServicio(this.servicioId, this.servicio).subscribe(
           res => {
             console.log(res);
+            this.notificationService.showNotification('Servicio actualizado correctamente');
             this.router.navigate(['/servicios/list']);
           },
           err => console.log(err)
@@ -79,6 +85,7 @@ export class ServicioFormComponent implements OnInit {
         this.serviciosService.saveServicios(this.servicio).subscribe(
           res => {
             console.log(res);
+            this.notificationService.showNotification('Servicio guardado correctamente');
             this.router.navigate(['/servicios/list']);
           },
           err => console.log(err)

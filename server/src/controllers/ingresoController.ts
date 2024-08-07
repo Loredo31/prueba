@@ -32,8 +32,9 @@ class IngresoController {
 
   public async update(req: Request, res: Response): Promise<void> {
     const { id } = req.params;
+    const { userId, ...gastoData } = req.body; 
     try {
-      await pool.query('UPDATE Ingreso SET ? WHERE IdIngreso = ?', [req.body, id]);
+      await pool.query('UPDATE Ingreso SET ? WHERE IdIngreso = ? AND IdUsuario = ?', [gastoData, id, userId]);
       res.json({ message: 'El ingreso fue actualizado' });
     } catch (err) {
       res.status(500).json({ error: 'Error al actualizar el ingreso' });

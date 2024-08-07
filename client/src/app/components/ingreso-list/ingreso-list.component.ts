@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IngresosService } from '../../services/ingresos.service';
 import { Router } from '@angular/router';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-ingreso-list',
@@ -9,11 +10,18 @@ import { Router } from '@angular/router';
 })
 export class IngresoListComponent implements OnInit {
   ingresos: any = [];
+  notificationMessage: string | null = null;
 
-  constructor(private ingresosService: IngresosService, private router: Router) {}
+  constructor(private ingresosService: IngresosService, 
+              private router: Router,
+              private notificationService: NotificationService
+  ) {}
 
   ngOnInit() {
     this.loadIngresos();
+    this.notificationService.notification$.subscribe(message => {
+      this.notificationMessage = message;
+    });
   }
 
   loadIngresos() {
