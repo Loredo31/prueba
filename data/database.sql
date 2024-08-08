@@ -17,7 +17,8 @@ CREATE TABLE Usuario (
 CREATE TABLE Servicio (
     IdServicio INT PRIMARY KEY AUTO_INCREMENT,
     IdUsuario INT,
-    Descripcion VARCHAR(100),
+    Producto VARCHAR(100),
+    Cantidad INT,
     Cliente VARCHAR(50),
     Estado VARCHAR(20),
     Monto DECIMAL(10, 2),

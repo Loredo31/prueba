@@ -11,9 +11,11 @@ import { NotificationService } from '../../services/notification.service';
 })
 export class ServicioFormComponent implements OnInit {
   @HostBinding('class') classes = 'row';
+  mostrarOtros: boolean = false;
 
   servicio: Servicio = {
-    Descripcion: '',
+    Producto: '',
+    Cantidad: '',
     Cliente: '',
     Estado: '',
     Monto: '',
@@ -46,14 +48,17 @@ export class ServicioFormComponent implements OnInit {
   validateForm(): boolean {
     this.errorMessages = {}; // Reset error messages
 
-    if (!this.servicio.Descripcion) {
-      this.errorMessages['Descripcion'] = 'Seleccione un tipo de descripcion*';
+    if (!this.servicio.Producto) {
+      this.errorMessages['Producto'] = 'Seleccione el producto*';
+    }
+    if (!this.servicio.Cantidad) {
+      this.errorMessages['Cantidad'] = 'Escriba la cantidad de producto(s)*';
     }
     if (!this.servicio.Cliente) {
-      this.errorMessages['Cliente'] = 'Ingreso el origen del Cliente*';
+      this.errorMessages['Cliente'] = 'Escriba el nombre del cliente*';
     }
     if (!this.servicio.Estado) {
-      this.errorMessages['Estado'] = 'Seleccione una categoria*';
+      this.errorMessages['Estado'] = 'Seleccione el estado actual*';
     }
     if (!this.servicio.Monto || isNaN(+this.servicio.Monto) || +this.servicio.Monto <= 0) {
       this.errorMessages['Monto'] = 'Ingreso el monto total*';
@@ -88,4 +93,5 @@ export class ServicioFormComponent implements OnInit {
       }
     }
   }
+
 }

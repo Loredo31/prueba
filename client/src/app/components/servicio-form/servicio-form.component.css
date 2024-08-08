@@ -206,3 +206,17 @@ button:hover {
 .form-group.error select {
     border-color: #af1919;
 }
+
+input, select {
+    width: calc(100% - 12px); 
+    padding: 10px; 
+    border: 1px solid #ccc; 
+    border-radius: 4px; 
+    box-sizing: border-box; 
+    font-size: 12px; 
+    font-family: sans-serif;
+}
+
+#otrosInput {
+    display: none;
+  }
