@@ -5,6 +5,9 @@ import { ServiciosService } from '../../services/servicios.service';
 import { Gasto } from '../../models/Gasto';
 import { Ingreso } from '../../models/Ingreso';
 import { Servicio } from '../../models/Servicio';
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
   selector: 'app-resumen',
@@ -25,6 +28,75 @@ export class ResumenComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllData();
+  }
+
+  createPdf() {
+    const tableBody = [
+      [{ text: 'Tipo', style: 'tableHeader' }, { text: 'Información', style: 'tableHeader' }, { text: 'Monto', style: 'tableHeader' }, { text: 'Fecha', style: 'tableHeader' }]
+    ];
+
+    this.resumen.forEach(item => {
+      tableBody.push([
+        item.type,
+        item.Descripcion || item.TipoIngreso || item.Cliente,
+        `$${item.Monto}`,
+        new Date(item.FechaTransaccion || item.FechaIngreso || item.FechaServicio).toLocaleDateString()
+      ]);
+    });
+
+    const pdfDefinition: any = {
+      pageMargins: [40, 60, 40, 60], // Márgenes de la página
+      pageSize: 'A4',
+      background: function(currentPage, pageSize) {
+        return {
+          canvas: [
+            {
+              type: 'rect',
+              x: 10,
+              y: 10,
+              w: pageSize.width - 20,
+              h: pageSize.height - 20,
+              r: 1,
+              lineWidth: 1,
+              lineColor: '#000000'
+            }
+          ]
+        };
+      },
+      content: [
+        { text: 'Resumen Gastos', style: 'header' },
+        {
+          style: 'tableExample',
+          table: {
+            body: tableBody,
+            widths: ['25%', '25%', '25%', '25%'], // Anchos iguales para ocupar toda la hoja
+          },
+          layout: {
+            fillColor: function (rowIndex) {
+              return (rowIndex === 0) ? '#CCCCCC' : null; // Color de los encabezados
+            }
+          }
+        }
+      ],
+      styles: {
+        header: {
+          fontSize: 18,
+          bold: true,
+          margin: [0, 0, 0, 10],
+          alignment: 'center'
+        },
+        tableExample: {
+          margin: [0, 5, 0, 15]
+        },
+        tableHeader: {
+          bold: true,
+          fontSize: 13,
+          color: 'black'
+        },
+      }
+    };
+
+    pdfMake.createPdf(pdfDefinition).download('ResumenGastos.pdf');
   }
 
   getAllData() {
