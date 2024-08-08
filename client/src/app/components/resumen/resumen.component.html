@@ -1,57 +1,49 @@
 <!DOCTYPE html>
 <html lang="es">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-<body>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <body>
     <div class="container">
-        <header class="header">
-            <div class="title">
-                <h1>Resumen</h1>
-            </div>
-            <nav>
-                <ul>
-                    <li class="left"><a routerLink="/inicio-usuario">Control de Gastos</a></li>
-                    <li class="right"><a routerLink="/inicio-usuario">Regresar</a></li>
-                </ul>
-            </nav>
-        </header>
-        <main class="main-content">
-            <h1>Resumen Gastos</h1>
-            <div class="dropdown">
-              <button class="button_descargar">Descargar</button>
-              <div class="dropdown-content">
-                  <a routerLink="/resumen">Descargar como Excel</a>
-                  <a routerLink="/resumen">Descargar como PDF</a>
-              </div>
+      <header class="header">
+        <div class="title">
+          <h1>Resumen</h1>
+        </div>
+        <nav>
+          <ul>
+            <li class="left"><a routerLink="/inicio-usuario">Control de Gastos</a></li>
+            <li class="right"><a routerLink="/inicio-usuario">Regresar</a></li>
+          </ul>
+        </nav>
+      </header>
+      <main class="main-content">
+        <h1>Resumen Gastos</h1>
+        <div class="dropdown">
+          <button class="button_descargar">Descargar</button>
+          <div class="dropdown-content">
+            <a routerLink="/resumen">Descargar como Excel</a>
+            <a routerLink="/resumen">Descargar como PDF</a>
           </div>
-            <div class="white-container">
-                <table class="expenses-table">
-                    <thead>
-                        <tr>
-                            <th>Tipo</th>
-                            <th>Información</th>
-                            <th>Monto</th>
-                            <th>Fecha</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    </tbody>
-                    <tbody>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </main> 
+        </div>
+        <div class="white-container">
+          <table class="expenses-table">
+            <thead>
+              <tr>
+                <th>Tipo</th>
+                <th>Información</th>
+                <th>Monto</th>
+                <th>Fecha</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of resumen">
+                <td>{{ item.type }}</td>
+                <td>{{ item.Descripcion || item.TipoIngreso || item.Producto }}</td>
+                <td>$ {{ item.Monto }}</td>
+                <td>{{ item.FechaTransaccion || item.FechaIngreso || item.FechaServicio | date }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </main>
     </div>
-</body>
+  </body>
 </html>

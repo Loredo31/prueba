@@ -52,5 +52,6 @@ CREATE TABLE Gasto (
 CREATE TABLE Presupuesto (
     PresupuestoTotal INT PRIMARY KEY,
     PresupuestoActual INT,
+    IdUsuario INT, -- Agregar esta columna
     FOREIGN KEY (IdUsuario) REFERENCES Usuario(IdUsuario)
 );
