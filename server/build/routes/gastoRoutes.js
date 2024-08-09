@@ -11,11 +11,11 @@ class GastoRoutes {
         this.config();
     }
     config() {
-        this.router.get('/', gastoController_1.default.list);
-        this.router.post('/', gastoController_1.default.create);
-        this.router.delete('/:id', gastoController_1.default.delete);
-        this.router.put('/:id', gastoController_1.default.update);
-        this.router.get('/:id', gastoController_1.default.getOne);
+        this.router.get('/:idUser', gastoController_1.default.list);
+        this.router.post('/:idUser', gastoController_1.default.create);
+        this.router.delete('/:idUser/:id', gastoController_1.default.delete);
+        this.router.put('/:idUser/:id', gastoController_1.default.update);
+        this.router.get('/:idUser/:id', gastoController_1.default.getOne);
     }
 }
 const gastoRoutes = new GastoRoutes();

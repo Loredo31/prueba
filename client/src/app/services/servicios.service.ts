@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Servicio } from '../models/Servicio';
 
 @Injectable({
@@ -11,23 +12,27 @@ export class ServiciosService {
 
   constructor(private http: HttpClient) { }
 
-  getServicios(): Observable<Servicio[]> {
-    return this.http.get<Servicio[]>(this.API_URI);
+  getServicios(idUser: string): Observable<Servicio[]> {
+    return this.http.get<{ servicios: Servicio[] }>(`${this.API_URI}/${idUser}`).pipe(
+      map(response => response.servicios)
+    );
+  }
+    
+
+  getServicio(id: string, idUser: string): Observable<Servicio> {
+    return this.http.get<Servicio>(`${this.API_URI}/${idUser}/${id}`);
   }
 
-  getServicio(id: string): Observable<Servicio> {
-    return this.http.get<Servicio>(`${this.API_URI}/${id}`);
+  saveServicios(idUser: string, servicio: Servicio): Observable<any> {
+    return this.http.post<any>(`${this.API_URI}/${idUser}`, servicio);
+  } 
+
+  deleteServicio(id: string, idUser: string): Observable<any> {
+    return this.http.delete<any>(`${this.API_URI}/${idUser}/${id}`);
   }
 
-  saveServicios(servicio: Servicio): Observable<any> {
-    return this.http.post<any>(this.API_URI, servicio);
+  updateServicio(id: string, idUser: string, servicio: Servicio): Observable<any> {
+    return this.http.put<any>(`${this.API_URI}/${idUser}/${id}`, servicio);
   }
-
-  deleteServicio(id: string): Observable<any> {
-    return this.http.delete<any>(`${this.API_URI}/${id}`);
-  }
-
-  updateServicio(id: string, servicio: Servicio): Observable<any> {
-    return this.http.put<any>(`${this.API_URI}/${id}`, servicio);
-  }
+  
 }

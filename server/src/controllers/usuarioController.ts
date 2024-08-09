@@ -18,20 +18,20 @@ class UsuarioController {
     }
 
     public async delete(req: Request, res: Response): Promise<void> {
-        const { id } = req.params;
-        await pool.query('DELETE FROM Usuario WHERE id = ?', [id]);
+        const { idUser } = req.params;
+        await pool.query('DELETE FROM Usuario WHERE IdUsuario = ?', [idUser]);
         res.json({ message: 'The user was deleted' });
     }
 
     public async update(req: Request, res: Response): Promise<void> {
-        const { id } = req.params;
-        await pool.query('UPDATE Usuario set ? WHERE id = ?', [req.body, id]);
+        const { idUser } = req.params;
+        await pool.query('UPDATE Usuario set ? WHERE IdUsuario = ?', [req.body, idUser]);
         res.json({ message: 'The user was updated' });
     }
 
     public async getOne(req: Request, res: Response): Promise<void> {
-        const { id } = req.params;
-        const usuario = await pool.query('SELECT * FROM Usuario WHERE id = ?', [id]);
+        const { idUser } = req.params;
+        const usuario = await pool.query('SELECT * FROM Usuario WHERE IdUsuario = ?', [idUser]);
         if (usuario.length > 0) {
             res.json(usuario[0]);
         } else {

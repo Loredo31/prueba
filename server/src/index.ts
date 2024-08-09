@@ -6,6 +6,7 @@ import cors from 'cors';
 import gastoRoutes from './routes/gastoRoutes';
 import ingresoRoutes from './routes/ingresoRoutes';
 import servicioRoutes from './routes/servicioRoutes';
+import presupuestoRoutes from './routes/presupuestoRoutes';
 
 class Server {
     public app: Application;
@@ -30,6 +31,7 @@ class Server {
         this.app.use('/api/gasto', gastoRoutes);
         this.app.use('/api/ingreso', ingresoRoutes);
         this.app.use('/api/servicio', servicioRoutes);
+        this.app.use('/api/presupuesto', presupuestoRoutes);
     }
 
     start(): void {

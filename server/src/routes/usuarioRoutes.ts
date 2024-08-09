@@ -11,9 +11,9 @@ class UsuarioRoutes {
     config(): void {
         this.router.get('/',usuarioController.list);
         this.router.post('/',usuarioController.create);
-        this.router.delete('/:id',usuarioController.delete);
-        this.router.put('/:id',usuarioController.update);
-        this.router.get('/:id', usuarioController.getOne);
+        this.router.delete('/:idUser',usuarioController.delete);
+        this.router.put('/:idUser',usuarioController.update);
+        this.router.get('/:idUser', usuarioController.getOne);
     }
 }
 

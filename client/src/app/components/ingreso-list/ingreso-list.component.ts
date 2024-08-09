@@ -11,31 +11,43 @@ import { NotificationService } from '../../services/notification.service';
 export class IngresoListComponent implements OnInit {
   ingresos: any = [];
   notificationMessage: string | null = null;
+  idUsuario: string | null = null;
 
-  constructor(private ingresosService: IngresosService, 
-              private router: Router,
-              private notificationService: NotificationService
+  constructor(
+    private ingresosService: IngresosService,
+    private router: Router,
+    private notificationService: NotificationService
   ) {}
 
   ngOnInit() {
-    this.loadIngresos();
+    this.idUsuario = localStorage.getItem('IdUsuario');
+    if (this.idUsuario) {
+      this.loadIngresos();
+    } else {
+      console.error('Usuario no autenticado');
+      this.router.navigate(['/login']);
+    }
+
     this.notificationService.notification$.subscribe(message => {
       this.notificationMessage = message;
     });
   }
 
   loadIngresos() {
-    this.ingresosService.getIngresos().subscribe(
-      (resp: any) => {
-        this.ingresos = resp.ingresos;
-      },
-      err => console.log(err)
-    );
+    if (this.idUsuario) {
+      this.ingresosService.getIngresos(this.idUsuario).subscribe(
+        (resp: any) => {
+          this.ingresos = resp;
+        },
+        err => console.log(err)
+      );
+    }
   }
+  
 
   deleteIngreso(id: number) {
-    if (confirm('¿Estás seguro de que deseas eliminar este ingreso?')) {
-      this.ingresosService.deleteIngreso(id.toString()).subscribe(
+    if (this.idUsuario && confirm('¿Estás seguro de que deseas eliminar este ingreso?')) {
+      this.ingresosService.deleteIngreso(id.toString(), this.idUsuario).subscribe(
         () => {
           this.ingresos = this.ingresos.filter((ingreso: any) => ingreso.IdIngreso !== id);
         },

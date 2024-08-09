@@ -8,11 +8,11 @@ class ServicioRoutes {
         this.config();
     }
     config() {
-        this.router.get('/', servicioController_1.servicioController.list);
-        this.router.post('/', servicioController_1.servicioController.create);
-        this.router.delete('/:id', servicioController_1.servicioController.delete);
-        this.router.put('/:id', servicioController_1.servicioController.update);
-        this.router.get('/:id', servicioController_1.servicioController.getOne);
+        this.router.get('/:idUser', servicioController_1.servicioController.list);
+        this.router.post('/:idUser', servicioController_1.servicioController.create);
+        this.router.delete('/:idUser/:id', servicioController_1.servicioController.delete);
+        this.router.put('/:idUser/:id', servicioController_1.servicioController.update);
+        this.router.get('/:idUser/:id', servicioController_1.servicioController.getOne);
     }
 }
 const servicioRoutes = new ServicioRoutes();

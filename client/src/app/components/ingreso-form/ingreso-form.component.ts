@@ -1,7 +1,7 @@
-import { Component, OnInit, HostBinding } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Ingreso } from '../../models/Ingreso';
 import { IngresosService } from '../../services/ingresos.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { NotificationService } from '../../services/notification.service';
 
 @Component({
@@ -10,31 +10,33 @@ import { NotificationService } from '../../services/notification.service';
   styleUrls: ['./ingreso-form.component.css']
 })
 export class IngresoFormComponent implements OnInit {
-  @HostBinding('class') classes = 'row';
 
   ingreso: Ingreso = {
     TipoIngreso: '',
     OrigenIngreso: '',
     Categoria: '',
-    Monto: 0,
+    Monto: '',
     FechaIngreso: ''
   };
 
   isEditMode = false;
   ingresoId: string | null = '';
   errorMessages: { [key: string]: string } = {};
+  idUsuario: string | null = null;
 
-  constructor(private ingresosService: IngresosService, 
-              private router: Router, 
-              private route: ActivatedRoute,
-              private notificationService: NotificationService
+  constructor(
+    private ingresosService: IngresosService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private notificationService: NotificationService
   ) {}
 
   ngOnInit() {
+    this.idUsuario = localStorage.getItem('IdUsuario'); 
     this.ingresoId = this.route.snapshot.paramMap.get('id');
     if (this.ingresoId) {
       this.isEditMode = true;
-      this.ingresosService.getIngreso(this.ingresoId).subscribe(
+      this.ingresosService.getIngreso(this.ingresoId, this.idUsuario).subscribe(
         (ingreso: Ingreso) => {
           this.ingreso = ingreso;
         },
@@ -44,7 +46,7 @@ export class IngresoFormComponent implements OnInit {
   }
 
   validateForm(): boolean {
-    this.errorMessages = {}; // Reset error messages
+    this.errorMessages = {};
 
     if (!this.ingreso.TipoIngreso) {
       this.errorMessages['TipoIngreso'] = 'Seleccione un tipo de ingreso*';
@@ -67,23 +69,32 @@ export class IngresoFormComponent implements OnInit {
 
   saveIngreso() {
     if (this.validateForm()) {
+      console.log('IdUsuario:', this.idUsuario);
+      console.log('Ingreso:', this.ingreso);
+    
       if (this.isEditMode && this.ingresoId) {
-        this.ingresosService.updateIngreso(this.ingresoId, this.ingreso).subscribe(
+        this.ingresosService.updateIngreso(this.ingresoId, this.idUsuario, this.ingreso).subscribe(
           res => {
             console.log(res);
             this.notificationService.showNotification('Ingreso actualizado correctamente');
             this.router.navigate(['/ingresos/list']);
           },
-          err => console.log(err)
+          err => {
+            console.log(err);
+            this.notificationService.showNotification('Error al actualizar el ingreso');
+          }
         );
       } else {
-        this.ingresosService.saveIngresos(this.ingreso).subscribe(
+        this.ingresosService.saveIngresos(this.idUsuario, this.ingreso).subscribe(
           res => {
             console.log(res);
             this.notificationService.showNotification('Ingreso guardado correctamente');
             this.router.navigate(['/ingresos/list']);
           },
-          err => console.log(err)
+          err => {
+            console.log(err);
+            this.notificationService.showNotification('Error al guardar el ingreso');
+          }
         );
       }
     }

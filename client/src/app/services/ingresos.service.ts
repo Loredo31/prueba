@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Ingreso } from '../models/Ingreso';
 
 @Injectable({
@@ -11,23 +12,26 @@ export class IngresosService {
 
   constructor(private http: HttpClient) { }
 
-  getIngresos(): Observable<Ingreso[]> {
-    return this.http.get<Ingreso[]>(this.API_URI);
+  getIngresos(idUser: string): Observable<Ingreso[]> {
+    return this.http.get<{ ingresos: Ingreso[] }>(`${this.API_URI}/${idUser}`).pipe(
+      map(response => response.ingresos)
+    );
+  }  
+
+  getIngreso(id: string, idUser: string): Observable<Ingreso> {
+    return this.http.get<Ingreso>(`${this.API_URI}/${idUser}/${id}`);
   }
 
-  getIngreso(id: string): Observable<Ingreso> {
-    return this.http.get<Ingreso>(`${this.API_URI}/${id}`);
+  saveIngresos(idUser: string, ingreso: Ingreso): Observable<any> {
+    return this.http.post<any>(`${this.API_URI}/${idUser}`, ingreso);
+  } 
+
+  deleteIngreso(id: string, idUser: string): Observable<any> {
+    return this.http.delete<any>(`${this.API_URI}/${idUser}/${id}`);
   }
 
-  saveIngresos(ingreso: Ingreso): Observable<any> {
-    return this.http.post<any>(this.API_URI, ingreso);
+  updateIngreso(id: string, idUser: string, ingreso: Ingreso): Observable<any> {
+    return this.http.put<any>(`${this.API_URI}/${idUser}/${id}`, ingreso);
   }
-
-  deleteIngreso(id: string): Observable<any> {
-    return this.http.delete<any>(`${this.API_URI}/${id}`);
-  }
-
-  updateIngreso(id: string, ingreso: Ingreso): Observable<any> {
-    return this.http.put<any>(`${this.API_URI}/${id}`, ingreso);
-  }
+  
 }

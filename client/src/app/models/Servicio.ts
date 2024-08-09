@@ -1,4 +1,6 @@
 export interface Servicio {
+    IdServicio?: string;
+    IdUsuario?: string;
     Producto?: string;
     Cantidad?: string;
     Cliente?: string;

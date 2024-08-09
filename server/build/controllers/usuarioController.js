@@ -35,22 +35,22 @@ class UsuarioController {
     }
     delete(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { id } = req.params;
-            yield database_1.default.query('DELETE FROM Usuario WHERE id = ?', [id]);
+            const { idUser } = req.params;
+            yield database_1.default.query('DELETE FROM Usuario WHERE IdUsuario = ?', [idUser]);
             res.json({ message: 'The user was deleted' });
         });
     }
     update(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { id } = req.params;
-            yield database_1.default.query('UPDATE Usuario set ? WHERE id = ?', [req.body, id]);
+            const { idUser } = req.params;
+            yield database_1.default.query('UPDATE Usuario set ? WHERE IdUsuario = ?', [req.body, idUser]);
             res.json({ message: 'The user was updated' });
         });
     }
     getOne(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { id } = req.params;
-            const usuario = yield database_1.default.query('SELECT * FROM Usuario WHERE id = ?', [id]);
+            const { idUser } = req.params;
+            const usuario = yield database_1.default.query('SELECT * FROM Usuario WHERE IdUsuario = ?', [idUser]);
             if (usuario.length > 0) {
                 res.json(usuario[0]);
             }

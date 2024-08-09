@@ -11,11 +11,11 @@ class IngresoRoutes {
         this.config();
     }
     config() {
-        this.router.get('/', ingresoController_1.default.list);
-        this.router.post('/', ingresoController_1.default.create);
-        this.router.delete('/:id', ingresoController_1.default.delete);
-        this.router.put('/:id', ingresoController_1.default.update);
-        this.router.get('/:id', ingresoController_1.default.getOne);
+        this.router.get('/:idUser', ingresoController_1.default.list);
+        this.router.post('/:idUser', ingresoController_1.default.create);
+        this.router.delete('/:idUser/:id', ingresoController_1.default.delete);
+        this.router.put('/:idUser/:id', ingresoController_1.default.update);
+        this.router.get('/:idUser/:id', ingresoController_1.default.getOne);
     }
 }
 const ingresoRoutes = new IngresoRoutes();

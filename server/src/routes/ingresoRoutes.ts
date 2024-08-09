@@ -9,11 +9,11 @@ class IngresoRoutes {
   }
 
   config(): void {
-    this.router.get('/', ingresoController.list);
-    this.router.post('/', ingresoController.create);
-    this.router.delete('/:id', ingresoController.delete);
-    this.router.put('/:id', ingresoController.update);
-    this.router.get('/:id', ingresoController.getOne);
+    this.router.get('/:idUser', ingresoController.list);
+    this.router.post('/:idUser', ingresoController.create);
+    this.router.delete('/:idUser/:id', ingresoController.delete);
+    this.router.put('/:idUser/:id', ingresoController.update);
+    this.router.get('/:idUser/:id', ingresoController.getOne);
   }
 }
 
