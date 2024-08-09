@@ -22,6 +22,7 @@ export class GastoFormComponent implements OnInit {
   isEditMode = false;
   gastoId: string | null = '';
   errorMessages: { [key: string]: string } = {};
+  idUsuario: string | null = null;
 
   constructor(
     private gastosService: GastosService,
@@ -31,10 +32,11 @@ export class GastoFormComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.idUsuario = localStorage.getItem('IdUsuario'); 
     this.gastoId = this.route.snapshot.paramMap.get('id');
     if (this.gastoId) {
       this.isEditMode = true;
-      this.gastosService.getGasto(this.gastoId).subscribe(
+      this.gastosService.getGasto(this.gastoId, this.idUsuario).subscribe(
         (gasto: Gasto) => {
           this.gasto = gasto;
         },
@@ -42,9 +44,10 @@ export class GastoFormComponent implements OnInit {
       );
     }
   }
+  
 
   validateForm(): boolean {
-    this.errorMessages = {}; // Reset error messages
+    this.errorMessages = {}; 
 
     if (!this.gasto.Descripcion) {
       this.errorMessages['Descripcion'] = 'Agregue una descripción*';
@@ -67,23 +70,32 @@ export class GastoFormComponent implements OnInit {
 
   saveGasto() {
     if (this.validateForm()) {
+      console.log('IdUsuario:', this.idUsuario);
+      console.log('Gasto:', this.gasto);
+    
       if (this.isEditMode && this.gastoId) {
-        this.gastosService.updateGasto(this.gastoId, this.gasto).subscribe(
+        this.gastosService.updateGasto(this.gastoId, this.idUsuario, this.gasto).subscribe(
           res => {
             console.log(res);
             this.notificationService.showNotification('Gasto actualizado correctamente');
             this.router.navigate(['/gastos/list']);
           },
-          err => console.log(err)
+          err => {
+            console.log(err);
+            this.notificationService.showNotification('Error al actualizar el gasto');
+          }
         );
       } else {
-        this.gastosService.saveGastos(this.gasto).subscribe(
+        this.gastosService.saveGastos(this.idUsuario, this.gasto).subscribe(
           res => {
             console.log(res);
             this.notificationService.showNotification('Gasto guardado correctamente');
             this.router.navigate(['/gastos/list']);
           },
-          err => console.log(err)
+          err => {
+            console.log(err);
+            this.notificationService.showNotification('Error al guardar el gasto');
+          }
         );
       }
     }

@@ -13,9 +13,9 @@ class UsuarioRoutes {
     config() {
         this.router.get('/', usuarioController_1.default.list);
         this.router.post('/', usuarioController_1.default.create);
-        this.router.delete('/:id', usuarioController_1.default.delete);
-        this.router.put('/:id', usuarioController_1.default.update);
-        this.router.get('/:id', usuarioController_1.default.getOne);
+        this.router.delete('/:idUser', usuarioController_1.default.delete);
+        this.router.put('/:idUser', usuarioController_1.default.update);
+        this.router.get('/:idUser', usuarioController_1.default.getOne);
     }
 }
 const usuarioRoutes = new UsuarioRoutes();

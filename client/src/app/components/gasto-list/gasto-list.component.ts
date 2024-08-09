@@ -11,6 +11,7 @@ import { NotificationService } from '../../services/notification.service';
 export class GastoListComponent implements OnInit {
   gastos: any = [];
   notificationMessage: string | null = null;
+  idUsuario: string | null = null;
 
   constructor(
     private gastosService: GastosService,
@@ -19,24 +20,34 @@ export class GastoListComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.loadGastos();
+    this.idUsuario = localStorage.getItem('IdUsuario');
+    if (this.idUsuario) {
+      this.loadGastos();
+    } else {
+      console.error('Usuario no autenticado');
+      this.router.navigate(['/login']);
+    }
+
     this.notificationService.notification$.subscribe(message => {
       this.notificationMessage = message;
     });
   }
 
   loadGastos() {
-    this.gastosService.getGastos().subscribe(
-      (resp: any) => {
-        this.gastos = resp.gastos;
-      },
-      err => console.log(err)
-    );
+    if (this.idUsuario) {
+      this.gastosService.getGastos(this.idUsuario).subscribe(
+        (resp: any) => {
+          this.gastos = resp;
+        },
+        err => console.log(err)
+      );
+    }
   }
+  
 
   deleteGasto(id: number) {
-    if (confirm('¿Estás seguro de que deseas eliminar este gasto?')) {
-      this.gastosService.deleteGasto(id.toString()).subscribe(
+    if (this.idUsuario && confirm('¿Estás seguro de que deseas eliminar este gasto?')) {
+      this.gastosService.deleteGasto(id.toString(), this.idUsuario).subscribe(
         () => {
           this.gastos = this.gastos.filter((gasto: any) => gasto.IdGasto !== id);
         },

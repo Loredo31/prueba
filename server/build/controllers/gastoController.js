@@ -17,8 +17,9 @@ const database_1 = __importDefault(require("../database"));
 class GastoController {
     list(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
+            const { idUser } = req.params;
             try {
-                const gastos = yield database_1.default.query('SELECT * FROM Gasto');
+                const gastos = yield database_1.default.query('SELECT * FROM Gasto WHERE IdUsuario = ?', [idUser]);
                 res.json({ gastos });
             }
             catch (err) {
@@ -28,8 +29,13 @@ class GastoController {
     }
     create(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
+            const { idUser } = req.params;
+            const gasto = req.body;
+            console.log('IdUsuario:', idUser);
+            console.log('Gasto:', gasto);
+            gasto.IdUsuario = idUser;
             try {
-                yield database_1.default.query('INSERT INTO Gasto SET ?', [req.body]);
+                yield database_1.default.query('INSERT INTO Gasto SET ?', [gasto]);
                 res.json({ message: 'Gasto guardado' });
             }
             catch (err) {
@@ -39,9 +45,9 @@ class GastoController {
     }
     delete(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { id } = req.params;
+            const { id, idUser } = req.params;
             try {
-                yield database_1.default.query('DELETE FROM Gasto WHERE IdGasto = ?', [id]);
+                yield database_1.default.query('DELETE FROM Gasto WHERE IdGasto = ? AND IdUsuario = ?', [id, idUser]);
                 res.json({ message: 'El gasto fue eliminado' });
             }
             catch (err) {
@@ -51,10 +57,19 @@ class GastoController {
     }
     update(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { id } = req.params;
+            const { id, idUser } = req.params;
+            const gasto = req.body;
+            console.log('IdGasto:', id);
+            console.log('IdUsuario:', idUser);
+            console.log('Gasto:', gasto);
             try {
-                yield database_1.default.query('UPDATE Gasto SET ? WHERE IdGasto = ?', [req.body, id]);
-                res.json({ message: 'El gasto fue actualizado' });
+                const result = yield database_1.default.query('UPDATE Gasto SET ? WHERE IdGasto = ? AND IdUsuario = ?', [gasto, id, idUser]);
+                if (result.affectedRows > 0) {
+                    res.json({ message: 'El gasto fue actualizado' });
+                }
+                else {
+                    res.status(404).json({ error: 'El gasto no fue encontrado o el usuario no coincide' });
+                }
             }
             catch (err) {
                 res.status(500).json({ error: 'Error al actualizar el gasto' });
@@ -63,9 +78,9 @@ class GastoController {
     }
     getOne(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { id } = req.params;
+            const { id, idUser } = req.params;
             try {
-                const gasto = yield database_1.default.query('SELECT * FROM Gasto WHERE IdGasto = ?', [id]);
+                const gasto = yield database_1.default.query('SELECT * FROM Gasto WHERE IdGasto = ? AND IdUsuario = ?', [id, idUser]);
                 if (gasto.length > 0) {
                     res.json(gasto[0]);
                 }

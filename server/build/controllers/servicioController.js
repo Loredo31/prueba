@@ -17,8 +17,9 @@ const database_1 = __importDefault(require("../database"));
 class ServicioController {
     list(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
+            const { idUser } = req.params;
             try {
-                const servicios = yield database_1.default.query('SELECT * FROM Servicio');
+                const servicios = yield database_1.default.query('SELECT * FROM Servicio WHERE IdUsuario = ?', [idUser]);
                 res.json({ servicios });
             }
             catch (err) {
@@ -28,33 +29,47 @@ class ServicioController {
     }
     create(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
+            const { idUser } = req.params;
+            const servicio = req.body;
+            console.log('IdUsuario:', idUser);
+            console.log('Servicio:', servicio);
+            servicio.IdUsuario = idUser;
             try {
-                yield database_1.default.query('INSERT INTO Servicio SET ?', [req.body]);
+                yield database_1.default.query('INSERT INTO Servicio SET ?', [servicio]);
                 res.json({ message: 'Servicio guardado' });
             }
             catch (err) {
-                res.status(500).json({ error: 'Error al crear el servicio' });
+                res.status(500).json({ error: 'Error al crear el Servicio' });
             }
         });
     }
     delete(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { id } = req.params;
+            const { id, idUser } = req.params;
             try {
-                yield database_1.default.query('DELETE FROM Servicio WHERE IdServicio = ?', [id]);
-                res.json({ message: 'El servicio fue eliminado' });
+                yield database_1.default.query('DELETE FROM Servicio WHERE IdServicio = ? AND IdUsuario = ?', [id, idUser]);
+                res.json({ message: 'El Servicio fue eliminado' });
             }
             catch (err) {
-                res.status(500).json({ error: 'Error al eliminar el servicio' });
+                res.status(500).json({ error: 'Error al eliminar el Servicio' });
             }
         });
     }
     update(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { id } = req.params;
+            const { id, idUser } = req.params;
+            const servicio = req.body;
+            console.log('IdServicio:', id);
+            console.log('IdUsuario:', idUser);
+            console.log('Servicio:', servicio);
             try {
-                yield database_1.default.query('UPDATE Servicio SET ? WHERE IdServicio = ?', [req.body, id]);
-                res.json({ message: 'El servicio fue actualizado' });
+                const result = yield database_1.default.query('UPDATE Servicio SET ? WHERE IdServicio = ? AND IdUsuario = ?', [servicio, id, idUser]);
+                if (result.affectedRows > 0) {
+                    res.json({ message: 'El servicio fue actualizado' });
+                }
+                else {
+                    res.status(404).json({ error: 'El servicio no fue encontrado o el usuario no coincide' });
+                }
             }
             catch (err) {
                 res.status(500).json({ error: 'Error al actualizar el servicio' });
@@ -63,9 +78,9 @@ class ServicioController {
     }
     getOne(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { id } = req.params;
+            const { id, idUser } = req.params;
             try {
-                const servicio = yield database_1.default.query('SELECT * FROM Servicio WHERE IdGasto = ?', [id]);
+                const servicio = yield database_1.default.query('SELECT * FROM Servicio WHERE IdServicio = ? AND IdUsuario = ?', [id, idUser]);
                 if (servicio.length > 0) {
                     res.json(servicio[0]);
                 }

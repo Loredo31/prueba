@@ -7,6 +7,7 @@ import { Ingreso } from '../../models/Ingreso';
 import { Servicio } from '../../models/Servicio';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
+
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
@@ -19,6 +20,7 @@ export class ResumenComponent implements OnInit {
   ingresos: Ingreso[] = [];
   servicios: Servicio[] = [];
   resumen: any[] = [];
+  idUsuario: string | null = null;
 
   constructor(
     private gastoService: GastosService,
@@ -27,7 +29,12 @@ export class ResumenComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getAllData();
+    this.idUsuario = localStorage.getItem('IdUsuario');
+    if (this.idUsuario) {
+      this.getAllData();
+    } else {
+      console.error('Usuario no autenticado');
+    }
   }
 
   createPdf() {
@@ -100,33 +107,39 @@ export class ResumenComponent implements OnInit {
   }
 
   getAllData() {
-    this.gastoService.getGastos().subscribe((data: any) => {
-      if (data && Array.isArray(data.gastos)) {
-        this.gastos = data.gastos;
-        this.addToResumen(this.gastos, 'Gasto');
-      } else {
-        console.error('Data received is not an array:', data.gastos);
-      }
-    });
-
-    this.ingresoService.getIngresos().subscribe((data: any) => {
-      if (data && Array.isArray(data.ingresos)) {
-        this.ingresos = data.ingresos;
-        this.addToResumen(this.ingresos, 'Ingreso');
-      } else {
-        console.error('Data received is not an array:', data.ingresos);
-      }
-    });
-
-    this.servicioService.getServicios().subscribe((data: any) => {
-      if (data && Array.isArray(data.servicios)) {
-        this.servicios = data.servicios;
-        this.addToResumen(this.servicios, 'Servicio');
-      } else {
-        console.error('Data received is not an array:', data.servicios);
-      }
-    });
+    if (this.idUsuario) {
+      this.gastoService.getGastos(this.idUsuario).subscribe((data: any) => {
+        console.log('Gastos data:', data); // Añadir console.log aquí
+        if (data && Array.isArray(data.gastos)) {
+          this.gastos = data.gastos;
+          this.addToResumen(this.gastos, 'Gasto');
+        } else {
+          console.error('Data received is not an array or missing property:', data);
+        }
+      });
+    
+      this.ingresoService.getIngresos(this.idUsuario).subscribe((data: any) => {
+        console.log('Ingresos data:', data); // Añadir console.log aquí
+        if (data && Array.isArray(data.ingresos)) {
+          this.ingresos = data.ingresos;
+          this.addToResumen(this.ingresos, 'Ingreso');
+        } else {
+          console.error('Data received is not an array or missing property:', data);
+        }
+      });
+  
+      this.servicioService.getServicios(this.idUsuario).subscribe((data: any) => {
+        console.log('Servicios data:', data); // Añadir console.log aquí
+        if (data && Array.isArray(data.servicios)) {
+          this.servicios = data.servicios;
+          this.addToResumen(this.servicios, 'Servicio');
+        } else {
+          console.error('Data received is not an array or missing property:', data);
+        }
+      });
+    }
   }
+  
 
   addToResumen(data: any[], type: string) {
     if (Array.isArray(data)) {

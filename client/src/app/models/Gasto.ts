@@ -1,4 +1,6 @@
 export interface Gasto{
+    IdGasto?: string;
+    IdUsuario?: string;
     Descripcion?: string;
     Categoria?: string,
     Monto?: string,

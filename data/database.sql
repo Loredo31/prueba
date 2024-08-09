@@ -14,44 +14,111 @@ CREATE TABLE Usuario (
     Contrasena VARCHAR(30) NOT NULL
 );
 
+CREATE TABLE Presupuesto (
+    IdUsuario INT PRIMARY KEY,
+    PresupuestoTotal DECIMAL(10, 2),
+    PresupuestoActual DECIMAL(10, 2),
+    FOREIGN KEY (IdUsuario) REFERENCES Usuario(IdUsuario)
+);
+
 CREATE TABLE Servicio (
     IdServicio INT PRIMARY KEY AUTO_INCREMENT,
-    IdUsuario INT,
-    Producto VARCHAR(100),
-    Cantidad INT,
-    Cliente VARCHAR(50),
-    Estado VARCHAR(20),
-    Monto DECIMAL(10, 2),
-    FechaServicio DATETIME,
+    IdUsuario INT NOT NULL,
+    Producto VARCHAR(100) NOT NULL,
+    Cantidad INT NOT NULL,
+    Cliente VARCHAR(50) NOT NULL,
+    Estado VARCHAR(20) NOT NULL,
+    Monto DECIMAL(10, 2) NOT NULL,
+    FechaServicio DATETIME NOT NULL,
     FOREIGN KEY (IdUsuario) REFERENCES Usuario(IdUsuario)
 );
 
 CREATE TABLE Ingreso (
     IdIngreso INT PRIMARY KEY AUTO_INCREMENT,
-    IdUsuario INT,
-    TipoIngreso VARCHAR(50),
-    OrigenIngreso VARCHAR(100),
-    Categoria VARCHAR(30),
-    Monto DECIMAL(10, 2),
-    FechaIngreso DATETIME,
+    IdUsuario INT NOT NULL,
+    TipoIngreso VARCHAR(50) NOT NULL,
+    OrigenIngreso VARCHAR(100) NOT NULL,
+    Categoria VARCHAR(30) NOT NULL,
+    Monto DECIMAL(10, 2) NOT NULL,
+    FechaIngreso DATETIME NOT NULL,
     FOREIGN KEY (IdUsuario) REFERENCES Usuario(IdUsuario)
 );
 
 CREATE TABLE Gasto (
     IdGasto INT PRIMARY KEY AUTO_INCREMENT,
-    IdUsuario INT,
-    Descripcion VARCHAR(100),
-    Categoria VARCHAR(30),
-    Monto DECIMAL(10, 2),
-    FechaTransaccion DATETIME,
-    MetodoPago VARCHAR(50),
+    IdUsuario INT NOT NULL,
+    Descripcion VARCHAR(100) NOT NULL,
+    Categoria VARCHAR(30) NOT NULL,
+    Monto DECIMAL(10, 2) NOT NULL,
+    FechaTransaccion DATETIME NOT NULL,
+    MetodoPago VARCHAR(50) NOT NULL,
     Comprobante VARCHAR(100),
     FOREIGN KEY (IdUsuario) REFERENCES Usuario(IdUsuario)
 );
 
-CREATE TABLE Presupuesto (
-    PresupuestoTotal INT PRIMARY KEY,
-    PresupuestoActual INT,
-    IdUsuario INT, -- Agregar esta columna
-    FOREIGN KEY (IdUsuario) REFERENCES Usuario(IdUsuario)
-);
+-- Trigger que se encarga de actualizar el IdUsuario de la tabla Presupuesto
+-- y que comience en 0
+
+DELIMITER //
+
+CREATE TRIGGER after_usuario_insert
+AFTER INSERT ON Usuario
+FOR EACH ROW
+BEGIN
+    INSERT INTO Presupuesto (IdUsuario, PresupuestoTotal, PresupuestoActual)
+    VALUES (NEW.IdUsuario, 0, 0);
+END //
+
+DELIMITER ;
+
+
+-- Trigger que actualiza el presupuesto cuando se crea un ingreso
+
+DELIMITER //
+
+CREATE TRIGGER after_ingreso_insert
+AFTER INSERT ON Ingreso
+FOR EACH ROW
+BEGIN
+    UPDATE Presupuesto
+    SET 
+        PresupuestoTotal = PresupuestoTotal + NEW.Monto,
+        PresupuestoActual = PresupuestoActual + NEW.Monto
+    WHERE IdUsuario = NEW.IdUsuario;
+END //
+
+DELIMITER ;
+
+
+-- Trigger que actualiza el presupuesto cuando se crea un servicio
+
+DELIMITER //
+
+CREATE TRIGGER after_servicio_insert
+AFTER INSERT ON Servicio
+FOR EACH ROW
+BEGIN
+    UPDATE Presupuesto
+    SET 
+        PresupuestoTotal = PresupuestoTotal + NEW.Monto,
+        PresupuestoActual = PresupuestoActual + NEW.Monto
+    WHERE IdUsuario = NEW.IdUsuario;
+END //
+
+DELIMITER ;
+
+-- Trigger que actualiza el presupuesto cuando se crea un gasto
+
+DELIMITER //
+
+CREATE TRIGGER after_gasto_insert
+AFTER INSERT ON Gasto
+FOR EACH ROW
+BEGIN
+    UPDATE Presupuesto
+    SET 
+        PresupuestoActual = PresupuestoActual - NEW.Monto
+    WHERE IdUsuario = NEW.IdUsuario;
+END //
+
+DELIMITER ;

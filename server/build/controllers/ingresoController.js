@@ -8,17 +8,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __rest = (this && this.__rest) || function (s, e) {
-    var t = {};
-    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
-        t[p] = s[p];
-    if (s != null && typeof Object.getOwnPropertySymbols === "function")
-        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
-            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
-                t[p[i]] = s[p[i]];
-        }
-    return t;
-};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -28,8 +17,9 @@ const database_1 = __importDefault(require("../database"));
 class IngresoController {
     list(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
+            const { idUser } = req.params;
             try {
-                const ingresos = yield database_1.default.query('SELECT * FROM Ingreso');
+                const ingresos = yield database_1.default.query('SELECT * FROM Ingreso WHERE IdUsuario = ?', [idUser]);
                 res.json({ ingresos });
             }
             catch (err) {
@@ -39,8 +29,13 @@ class IngresoController {
     }
     create(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
+            const { idUser } = req.params;
+            const ingreso = req.body;
+            console.log('IdUsuario:', idUser);
+            console.log('Ingreso:', ingreso);
+            ingreso.IdUsuario = idUser;
             try {
-                yield database_1.default.query('INSERT INTO Ingreso SET ?', [req.body]);
+                yield database_1.default.query('INSERT INTO Ingreso SET ?', [ingreso]);
                 res.json({ message: 'Ingreso guardado' });
             }
             catch (err) {
@@ -50,9 +45,9 @@ class IngresoController {
     }
     delete(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { id } = req.params;
+            const { id, idUser } = req.params;
             try {
-                yield database_1.default.query('DELETE FROM Ingreso WHERE IdIngreso = ?', [id]);
+                yield database_1.default.query('DELETE FROM Ingreso WHERE IdIngreso = ? AND IdUsuario = ?', [id, idUser]);
                 res.json({ message: 'El ingreso fue eliminado' });
             }
             catch (err) {
@@ -62,11 +57,19 @@ class IngresoController {
     }
     update(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { id } = req.params;
-            const _a = req.body, { userId } = _a, gastoData = __rest(_a, ["userId"]);
+            const { id, idUser } = req.params;
+            const ingreso = req.body;
+            console.log('IdIngreso:', id);
+            console.log('IdUsuario:', idUser);
+            console.log('Ingreso:', ingreso);
             try {
-                yield database_1.default.query('UPDATE Ingreso SET ? WHERE IdIngreso = ? AND IdUsuario = ?', [gastoData, id, userId]);
-                res.json({ message: 'El ingreso fue actualizado' });
+                const result = yield database_1.default.query('UPDATE Ingreso SET ? WHERE IdIngreso = ? AND IdUsuario = ?', [ingreso, id, idUser]);
+                if (result.affectedRows > 0) {
+                    res.json({ message: 'El ingreso fue actualizado' });
+                }
+                else {
+                    res.status(404).json({ error: 'El ingreso no fue encontrado o el usuario no coincide' });
+                }
             }
             catch (err) {
                 res.status(500).json({ error: 'Error al actualizar el ingreso' });
@@ -75,9 +78,9 @@ class IngresoController {
     }
     getOne(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { id } = req.params;
+            const { id, idUser } = req.params;
             try {
-                const ingreso = yield database_1.default.query('SELECT * FROM Ingreso WHERE id = ?', [id]);
+                const ingreso = yield database_1.default.query('SELECT * FROM Ingreso WHERE id = ? AND IdUsuario = ?', [id, idUser]);
                 if (ingreso.length > 0) {
                     res.json(ingreso[0]);
                 }

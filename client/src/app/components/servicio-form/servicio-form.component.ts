@@ -1,7 +1,7 @@
-import { Component, OnInit, HostBinding } from '@angular/core';
-import { ServiciosService } from '../../services/servicios.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
 import { Servicio } from '../../models/Servicio';
+import { ServiciosService } from '../../services/servicios.service';
+import { Router, ActivatedRoute } from '@angular/router';
 import { NotificationService } from '../../services/notification.service';
 
 @Component({
@@ -10,8 +10,6 @@ import { NotificationService } from '../../services/notification.service';
   styleUrls: ['./servicio-form.component.css']
 })
 export class ServicioFormComponent implements OnInit {
-  @HostBinding('class') classes = 'row';
-  mostrarOtros: boolean = false;
 
   servicio: Servicio = {
     Producto: '',
@@ -25,18 +23,21 @@ export class ServicioFormComponent implements OnInit {
   isEditMode = false;
   servicioId: string | null = '';
   errorMessages: { [key: string]: string } = {};
+  idUsuario: string | null = null;
 
-  constructor(private serviciosService: ServiciosService, 
-              private router: Router, 
-              private route: ActivatedRoute,
-              private notificationService: NotificationService
+  constructor(
+    private serviciosService: ServiciosService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private notificationService: NotificationService
   ) {}
 
   ngOnInit() {
+    this.idUsuario = localStorage.getItem('IdUsuario'); 
     this.servicioId = this.route.snapshot.paramMap.get('id');
     if (this.servicioId) {
       this.isEditMode = true;
-      this.serviciosService.getServicio(this.servicioId).subscribe(
+      this.serviciosService.getServicio(this.servicioId, this.idUsuario).subscribe(
         (servicio: Servicio) => {
           this.servicio = servicio;
         },
@@ -44,10 +45,11 @@ export class ServicioFormComponent implements OnInit {
       );
     }
   }
+  
 
   validateForm(): boolean {
-    this.errorMessages = {}; // Reset error messages
-
+    this.errorMessages = {};
+  
     if (!this.servicio.Producto) {
       this.errorMessages['Producto'] = 'Seleccione el producto*';
     }
@@ -72,26 +74,34 @@ export class ServicioFormComponent implements OnInit {
 
   saveServicio() {
     if (this.validateForm()) {
+      console.log('IdUsuario:', this.idUsuario);
+      console.log('Servicio:', this.servicio);
+    
       if (this.isEditMode && this.servicioId) {
-        this.serviciosService.updateServicio(this.servicioId, this.servicio).subscribe(
+        this.serviciosService.updateServicio(this.servicioId, this.idUsuario, this.servicio).subscribe(
           res => {
             console.log(res);
             this.notificationService.showNotification('Servicio actualizado correctamente');
             this.router.navigate(['/servicios/list']);
           },
-          err => console.log(err)
+          err => {
+            console.log(err);
+            this.notificationService.showNotification('Error al actualizar el servicio');
+          }
         );
       } else {
-        this.serviciosService.saveServicios(this.servicio).subscribe(
+        this.serviciosService.saveServicios(this.idUsuario, this.servicio).subscribe(
           res => {
             console.log(res);
             this.notificationService.showNotification('Servicio guardado correctamente');
             this.router.navigate(['/servicios/list']);
           },
-          err => console.log(err)
+          err => {
+            console.log(err);
+            this.notificationService.showNotification('Error al guardar el servicio');
+          }
         );
       }
     }
   }
-
 }
