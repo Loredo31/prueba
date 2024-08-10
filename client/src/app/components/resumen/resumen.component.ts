@@ -20,7 +20,7 @@ export class ResumenComponent implements OnInit {
   ingresos: Ingreso[] = [];
   servicios: Servicio[] = [];
   resumen: any[] = [];
-  idUsuario: string | null = null;
+  IdUsuario: string | null = null;
 
   constructor(
     private gastoService: GastosService,
@@ -30,8 +30,8 @@ export class ResumenComponent implements OnInit {
 
   ngOnInit(): void {
     if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
-      this.idUsuario = localStorage.getItem('IdUsuario');
-      if (this.idUsuario) {
+      this.IdUsuario = localStorage.getItem('IdUsuario');
+      if (this.IdUsuario) {
         this.getAllData();
       } else {
         console.error('Usuario no autenticado');
@@ -113,41 +113,30 @@ export class ResumenComponent implements OnInit {
   }
 
   getAllData() {
-    if (this.idUsuario) {
-      this.gastoService.getGastos(this.idUsuario).subscribe((data: any) => {
-        console.log('Gastos data:', data); // Añadir console.log aquí
-        if (data && Array.isArray(data.gastos)) {
-          this.gastos = data.gastos;
-          this.addToResumen(this.gastos, 'Gasto');
-        } else {
-          console.error('Data received is not an array or missing property:', data);
-        }
+    if (this.IdUsuario) {
+      this.gastoService.getGastos(this.IdUsuario).subscribe((data: Gasto[]) => {
+        this.gastos = data;
+        this.addToResumen(this.gastos, 'Gasto');
+      }, error => {
+        console.error('Error fetching gastos:', error);
       });
   
-      this.ingresoService.getIngresos(this.idUsuario).subscribe((data: any) => {
-        console.log('Ingresos data:', data); // Añadir console.log aquí
-        if (data && Array.isArray(data.ingresos)) {
-          this.ingresos = data.ingresos;
-          this.addToResumen(this.ingresos, 'Ingreso');
-        } else {
-          console.error('Data received is not an array or missing property:', data);
-        }
+      this.ingresoService.getIngresos(this.IdUsuario).subscribe((data: Ingreso[]) => {
+        this.ingresos = data;
+        this.addToResumen(this.ingresos, 'Ingreso');
+      }, error => {
+        console.error('Error fetching ingresos:', error);
       });
   
-      this.servicioService.getServicios(this.idUsuario).subscribe((data: any) => {
-        console.log('Servicios data:', data); // Añadir console.log aquí
-        if (data && Array.isArray(data.servicios)) {
-          this.servicios = data.servicios;
-          this.addToResumen(this.servicios, 'Servicio');
-        } else {
-          console.error('Data received is not an array or missing property:', data);
-        }
+      this.servicioService.getServicios(this.IdUsuario).subscribe((data: Servicio[]) => {
+        this.servicios = data;
+        this.addToResumen(this.servicios, 'Servicio');
+      }, error => {
+        console.error('Error fetching servicios:', error);
       });
     }
-  }  
+  }
   
-  
-
   addToResumen(data: any[], type: string) {
     if (Array.isArray(data)) {
       data.forEach(item => {
