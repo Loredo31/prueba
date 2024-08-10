@@ -8,34 +8,39 @@ import { Router } from '@angular/router';
   styleUrls: ['./inicio-usuario.component.css']
 })
 export class InicioUsuarioComponent implements OnInit {
-  idUsuario: string | null = null;
+  IdUsuario: string | null = null;
   presupuesto: any = {};
 
   constructor(
     private presupuestosService: PresupuestosService,
-    private router: Router,
+    private router: Router
   ) {}
 
   ngOnInit() {
-    this.idUsuario = localStorage.getItem('IdUsuario');
-    if (this.idUsuario) {
-      this.loadPresupuesto();
+    // Verifica si el código se está ejecutando en un entorno de navegador
+    if (typeof window !== 'undefined') {
+      this.IdUsuario = localStorage.getItem('IdUsuario');
+      if (this.IdUsuario) {
+        this.loadPresupuesto();
+      } else {
+        console.error('Usuario no autenticado');
+        this.router.navigate(['/login']);
+      }
     } else {
-      console.error('Usuario no autenticado');
+      console.error('No se puede acceder a localStorage en este entorno');
       this.router.navigate(['/login']);
     }
   }
 
   loadPresupuesto() {
-    if (this.idUsuario) {
-      this.presupuestosService.getPresupuestos(this.idUsuario).subscribe(
+    if (this.IdUsuario) {
+      this.presupuestosService.getPresupuestos(this.IdUsuario).subscribe(
         (resp: any) => {
           console.log('Respuesta del presupuesto:', resp);
           this.presupuesto = resp;
         },
-        err => console.log(err)
+        err => console.error('Error al cargar el presupuesto:', err)
       );
     }
   }
-  
 }

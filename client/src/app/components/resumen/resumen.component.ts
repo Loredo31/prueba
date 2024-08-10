@@ -51,14 +51,14 @@ export class ResumenComponent implements OnInit {
     this.resumen.forEach(item => {
       tableBody.push([
         item.type,
-        item.Descripcion || item.TipoIngreso || item.Producto,
+        item.Descripcion || item.OrigenIngreso || item.Producto,
         `$${item.Monto}`,
         new Date(item.FechaTransaccion || item.FechaIngreso || item.FechaServicio).toLocaleDateString()
       ]);
     });
 
     const pdfDefinition: any = {
-      pageMargins: [40, 60, 40, 60], // Márgenes de la página
+      pageMargins: [40, 60, 40, 60], 
       pageSize: 'A4',
       background: function(currentPage, pageSize) {
         return {
@@ -82,12 +82,20 @@ export class ResumenComponent implements OnInit {
           style: 'tableExample',
           table: {
             body: tableBody,
-            widths: ['25%', '25%', '25%', '25%'], // Anchos iguales para ocupar toda la hoja
+            widths: ['25%', '25%', '25%', '25%'], 
           },
           layout: {
             fillColor: function (rowIndex) {
-              return (rowIndex === 0) ? '#CCCCCC' : null; // Color de los encabezados
-            }
+              if (rowIndex === 0) {
+                return '#3a3a3a'; 
+              } else if (rowIndex % 2 === 0) {
+                return '#f2f2f2'; 
+              } else {
+                return '#ffffff'; 
+              }
+            },
+            hLineColor: '#CCCCCC',
+            vLineColor: '#CCCCCC', 
           }
         }
       ],
@@ -104,12 +112,12 @@ export class ResumenComponent implements OnInit {
         tableHeader: {
           bold: true,
           fontSize: 13,
-          color: 'black'
+          color: 'white', // Color de la fuente del encabezado
         },
       }
     };
-
-    pdfMake.createPdf(pdfDefinition).download('ResumenGastos.pdf');
+    
+    pdfMake.createPdf(pdfDefinition).download('ResumenGastos.pdf');    
   }
 
   getAllData() {

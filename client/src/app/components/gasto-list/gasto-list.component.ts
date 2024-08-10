@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { GastosService } from '../../services/gastos.service';
 import { Router } from '@angular/router';
 import { NotificationService } from '../../services/notification.service';
@@ -16,15 +17,21 @@ export class GastoListComponent implements OnInit {
   constructor(
     private gastosService: GastosService,
     private router: Router,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    @Inject(PLATFORM_ID) private platformId: Object
   ) {}
 
   ngOnInit() {
-    this.idUsuario = localStorage.getItem('IdUsuario');
-    if (this.idUsuario) {
-      this.loadGastos();
+    if (isPlatformBrowser(this.platformId)) {
+      this.idUsuario = localStorage.getItem('IdUsuario');
+      if (this.idUsuario) {
+        this.loadGastos();
+      } else {
+        console.error('Usuario no autenticado');
+        this.router.navigate(['/login']);
+      }
     } else {
-      console.error('Usuario no autenticado');
+      console.warn('No se puede acceder a localStorage en el lado del servidor.');
       this.router.navigate(['/login']);
     }
 
@@ -44,7 +51,6 @@ export class GastoListComponent implements OnInit {
     }
   }
   
-
   deleteGasto(id: number) {
     if (this.idUsuario && confirm('¿Estás seguro de que deseas eliminar este gasto?')) {
       this.gastosService.deleteGasto(id.toString(), this.idUsuario).subscribe(
