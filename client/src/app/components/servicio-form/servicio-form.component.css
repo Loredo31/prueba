@@ -71,9 +71,10 @@ body {
     font-family: sans-serif;
     font-weight: 600;
 }
+
 .main-content {
     background-color: #f1edec;
-    background-image: url('/assets/FondoFL.jpg');
+    background-image: url('/assets/FondoA.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -87,61 +88,67 @@ body {
 
 .form-grid {
     width: 100%; 
-    max-width: 800px; 
+    max-width: 1100px; 
     margin-top: 20px; 
     padding: 30px; 
-    border: 1px solid #ccc; 
+    border: 2px solid #00065a; 
     border-radius: 5px; 
     box-shadow: 13px 13px 23px rgba(0, 0, 0, 0.5);
-    border: 2px solid #262f57;
-    background: rgba(112, 247, 100, 0.356); 
+    border: 2px solid #000b3b6c;
+    background: rgba(125, 111, 248, 0.205);
     backdrop-filter: blur(10px);
     display: grid; 
     grid-template-columns: repeat(3, 1fr); 
-    gap: 30px; 
+    gap: 30px;
 }
 
 .form-group {
     margin-bottom: 20px; 
 }
 
-label {
-    display: block; 
-    margin-bottom: 5px;
-    font-weight: bold;
+.form-floating {
+    position: relative;
+    margin-bottom: 20px;
 }
 
-input {
-    width: calc(100% - 12px); 
+.form-floating input,
+.form-floating select {
+    width: 300px; 
     padding: 10px; 
-    border: 1px solid #ccc; 
+    border: 3px solid #ffffff93; 
     border-radius: 4px; 
     box-sizing: border-box; 
-    font-size: 12px; 
+    font-size: 15px; 
     font-family: sans-serif;
+    background-color: transparent;
+    color: #000;
+    transition: all 0.2s ease;
 }
 
-.file-input {
-    padding: 0; 
-    border: 1px solid #ccc; 
-    border-radius: 4px; 
-    background-color: #fff;
-    cursor: pointer;
-    font-size: 12px; 
+.form-floating label {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 15px;
+    color: #666;
+    pointer-events: none;
+    transition: all 0.2s ease;
 }
 
-.file-input::file-selector-button {
-    border: none;
-    background: #4431318e;
-    color: #fff2cc;
-    padding: 10px 15px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 12px;
+.form-floating input:focus,
+.form-floating select:focus {
+    border-color: #4a4657;
+    outline: none;
 }
 
-.file-input::file-selector-button:hover {
-    background: #00000094;
+.form-floating input:focus + label,
+.form-floating select:focus + label,
+.form-floating input:not(:placeholder-shown) + label,
+.form-floating select:not(:placeholder-shown) + label {
+    top: -17px;
+    left: 0;
+    font-size: 14px;
+    color: #4a4657;
 }
 
 button {
@@ -153,6 +160,7 @@ button {
     border-radius: 4px; 
     cursor: pointer; 
     font-size: 16px; 
+    align-items: center;
 }
 
 button:hover {
@@ -206,17 +214,3 @@ button:hover {
 .form-group.error select {
     border-color: #af1919;
 }
-
-input, select {
-    width: calc(100% - 12px); 
-    padding: 10px; 
-    border: 1px solid #ccc; 
-    border-radius: 4px; 
-    box-sizing: border-box; 
-    font-size: 12px; 
-    font-family: sans-serif;
-}
-
-#otrosInput {
-    display: none;
-  }

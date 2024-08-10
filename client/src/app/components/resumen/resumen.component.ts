@@ -29,13 +29,19 @@ export class ResumenComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.idUsuario = localStorage.getItem('IdUsuario');
-    if (this.idUsuario) {
-      this.getAllData();
+    if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
+      this.idUsuario = localStorage.getItem('IdUsuario');
+      if (this.idUsuario) {
+        this.getAllData();
+      } else {
+        console.error('Usuario no autenticado');
+      }
     } else {
-      console.error('Usuario no autenticado');
+      console.error('localStorage no está disponible en este entorno');
     }
   }
+  
+  
 
   createPdf() {
     const tableBody = [
@@ -45,7 +51,7 @@ export class ResumenComponent implements OnInit {
     this.resumen.forEach(item => {
       tableBody.push([
         item.type,
-        item.Descripcion || item.TipoIngreso || item.Cliente,
+        item.Descripcion || item.TipoIngreso || item.Producto,
         `$${item.Monto}`,
         new Date(item.FechaTransaccion || item.FechaIngreso || item.FechaServicio).toLocaleDateString()
       ]);
@@ -117,7 +123,7 @@ export class ResumenComponent implements OnInit {
           console.error('Data received is not an array or missing property:', data);
         }
       });
-    
+  
       this.ingresoService.getIngresos(this.idUsuario).subscribe((data: any) => {
         console.log('Ingresos data:', data); // Añadir console.log aquí
         if (data && Array.isArray(data.ingresos)) {
@@ -138,12 +144,14 @@ export class ResumenComponent implements OnInit {
         }
       });
     }
-  }
+  }  
+  
   
 
   addToResumen(data: any[], type: string) {
     if (Array.isArray(data)) {
       data.forEach(item => {
+        console.log('Adding to resumen:', { type: type, ...item }); // Añadir console.log aquí
         this.resumen.push({
           type: type,
           ...item
@@ -151,4 +159,5 @@ export class ResumenComponent implements OnInit {
       });
     }
   }
+  
 }

@@ -73,7 +73,7 @@ body {
 
 .main-content {
     background-color: #f1edec;
-    background-image:url('/assets/FondoFL.jpg') ;
+    background-image:url('/assets/FondoA.jpg') ;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -93,7 +93,7 @@ body {
     border: 2px solid #262f57;
     background: transparent;
     backdrop-filter: blur(10px);
-    background: rgba(112, 247, 100, 0.356); 
+    background: rgba(125, 111, 248, 0.205);
     width: 90%;
     margin: 0 auto;
 }
