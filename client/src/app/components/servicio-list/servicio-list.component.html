@@ -18,6 +18,11 @@
                 <div *ngIf="notificationMessage" class="notification">
                     {{ notificationMessage }} <i class="fas fa-check"></i>
                 </div>
+                <div class="floating-window">
+                    <li class="left" *ngFor="let presupuesto of presupuestos">
+                        <a>Presupuesto actual: ${{ presupuesto.PresupuestoActual }}</a>
+                    </li>
+                </div>
                 <h1>Lista de servicios</h1>
                 <div class="white-container">
                     <table class="expenses-table">

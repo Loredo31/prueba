@@ -5,5 +5,6 @@ export interface Gasto{
     Categoria?: string,
     Monto?: string,
     FechaTransaccion?: string;
-    MetodoPago?: string
+    MetodoPago?: string;
+    Comprobante: string;
 }

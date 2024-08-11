@@ -21,6 +21,11 @@
         <div *ngIf="notificationMessage" class="notification">
           {{ notificationMessage }} <i class="fas fa-check"></i>
         </div>
+        <div class="floating-window">
+          <li class="left" *ngFor="let presupuesto of presupuestos">
+              <a>Presupuesto actual: ${{ presupuesto.PresupuestoActual }}</a>
+          </li>
+        </div>
         <h1>Lista de Gastos</h1>
         <div class="white-container">
           <table class="expenses-table">
@@ -31,6 +36,7 @@
                 <th>Monto</th>
                 <th>Fecha de transaccion</th>
                 <th>Metodo de Pago</th>
+                <th>Comprobante</th>
                 <th>Acciones</th>
               </tr>
             </thead>
@@ -41,6 +47,7 @@
                 <td>$ {{ gasto.Monto }}</td>
                 <td>{{ gasto.FechaTransaccion | date }}</td>
                 <td>{{ gasto.MetodoPago }}</td>
+                <td> link comprobante </td>
                 <td>
                   <button class="edit-button" (click)="editGasto(gasto.IdGasto)"><i class="fas fa-edit"></i></button>
                   <button class="delete-button" (click)="deleteGasto(gasto.IdGasto)"><i class="fas fa-trash-alt"></i></button>
