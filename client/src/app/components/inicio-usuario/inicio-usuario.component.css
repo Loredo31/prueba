@@ -257,3 +257,35 @@ li:hover .tooltip {
     visibility: visible;
     opacity: 1;
 }
+
+.info-container {
+    display: flex;
+    justify-content: start; 
+    width: auto; 
+    margin: 10px 0;
+    position: absolute;
+    top: 90px; 
+    left: 10px; 
+    z-index: 10; 
+}
+
+.floating-window {
+    background-color: rgba(100, 175, 140, 0.85); 
+    padding: 10px;
+    border-radius: 8px;
+    width: 230px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    color: white;
+    font-family: sans-serif;
+    font-size: 18px;
+    margin-right: 10px; 
+    z-index: 10; 
+    width: 250px;
+    height: 45px;
+    font-weight: 600;
+}
+
+.floating-window:last-child {
+    margin-right: 0; 
+}
+
