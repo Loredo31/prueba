@@ -2,6 +2,7 @@ import { Component, OnInit, HostBinding } from '@angular/core';
 import { Usuario } from '../../../models/Usuario';
 import { UsuarioService } from '../../../services/usuario.service';
 import { Router } from '@angular/router';
+import { NotificationService } from '../../../services/notification.service';
 
 @Component({
   selector: 'app-registrarse-form',
@@ -24,7 +25,8 @@ export class RegistrarseComponent implements OnInit {
 
   errorMessages: { [key: string]: string } = {};
 
-  constructor(private usuarioService: UsuarioService, private router: Router) {}
+  constructor(private usuarioService: UsuarioService, private router: Router, 
+    private notificationService: NotificationService) {}
 
   ngOnInit() {}
 
@@ -96,10 +98,10 @@ export class RegistrarseComponent implements OnInit {
       this.usuarioService.createUser(this.usuario).subscribe(
         res => {
           console.log(res);
-          this.router.navigate(['/inicio-usuario']);
+          this.notificationService.showNotification('Usuario creado correctamente');
+          this.router.navigate(['/login']);
         },
-        err => console.log(err)
-      );
+        err => console.log(err));
     }
   }
 }

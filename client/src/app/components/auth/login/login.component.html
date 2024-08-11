@@ -20,6 +20,9 @@
       </nav>
     </header>
     <main class="main-content">
+      <div *ngIf="notificationMessage" class="notification">
+        {{ notificationMessage }} <i class="fas fa-check"></i>
+      </div>
       <form class="form-container" (ngSubmit)="onSubmit(loginForm)" #loginForm="ngForm" novalidate>
         <h1>Inicia Sesión</h1>
         <div class="form-group">

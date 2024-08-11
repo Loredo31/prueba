@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UsuarioService } from '../../../services/usuario.service';
+import { NotificationService } from '../../../services/notification.service';
 
 @Component({
   selector: 'app-login',
@@ -9,13 +10,24 @@ import { UsuarioService } from '../../../services/usuario.service';
 })
 export class LoginComponent {
   errorMessage: string | null = null;
+  notificationMessage: string | null = null;
 
-  constructor(private usuarioService: UsuarioService, private router: Router) {}
+  constructor(private usuarioService: UsuarioService, private router: Router,
+    private notificationService: NotificationService,) {}
 
+    ngOnInit() {
+      this.notificationService.notification$.subscribe(message => {
+        this.notificationMessage = message;
+      });
+    }
+
+    
   onSubmit(loginForm: any) {
     if (loginForm.invalid) {
       this.errorMessage = 'Los campos no pueden estar vacíos';
       return;
+
+      
     }
 
     const { username, password } = loginForm.value;
@@ -36,5 +48,7 @@ export class LoginComponent {
         this.errorMessage = 'Ocurrió un error al verificar el usuario. Intente nuevamente más tarde.';
       }
     );
+    
   }
+  
 }

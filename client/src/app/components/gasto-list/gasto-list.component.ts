@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { GastosService } from '../../services/gastos.service';
+import { PresupuestosService } from '../../services/presupuestos.service';
 import { Router } from '@angular/router';
 import { NotificationService } from '../../services/notification.service';
 
@@ -13,9 +14,11 @@ export class GastoListComponent implements OnInit {
   gastos: any = [];
   notificationMessage: string | null = null;
   idUsuario: string | null = null;
+  presupuestos: any = [];
 
   constructor(
     private gastosService: GastosService,
+    private presupuestosService: PresupuestosService,
     private router: Router,
     private notificationService: NotificationService,
     @Inject(PLATFORM_ID) private platformId: Object
@@ -26,6 +29,7 @@ export class GastoListComponent implements OnInit {
       this.idUsuario = localStorage.getItem('IdUsuario');
       if (this.idUsuario) {
         this.loadGastos();
+        this.loadPresupuestos();
       } else {
         console.error('Usuario no autenticado');
         this.router.navigate(['/login']);
@@ -40,6 +44,7 @@ export class GastoListComponent implements OnInit {
     });
   }
 
+  
   loadGastos() {
     if (this.idUsuario) {
       this.gastosService.getGastos(this.idUsuario).subscribe(
@@ -65,4 +70,15 @@ export class GastoListComponent implements OnInit {
   editGasto(id: number) {
     this.router.navigate(['/gastos/edit', id]);
   }
+
+  loadPresupuestos() {
+    if (this.idUsuario) {
+      this.presupuestosService.getPresupuestos(this.idUsuario).subscribe(
+        (resp: any) => {
+          this.presupuestos = resp;
+        },
+        err => console.log(err)
+      );
+    }
+}
 }

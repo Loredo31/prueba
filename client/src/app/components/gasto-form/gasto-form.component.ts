@@ -16,7 +16,8 @@ export class GastoFormComponent implements OnInit {
     Categoria: '',
     Monto: '',
     FechaTransaccion: '',
-    MetodoPago: ''
+    MetodoPago: '',
+    Comprobante: ''
   };
 
   isEditMode = false;
@@ -44,6 +45,8 @@ export class GastoFormComponent implements OnInit {
       );
     }
   }
+
+  
   
 
   validateForm(): boolean {

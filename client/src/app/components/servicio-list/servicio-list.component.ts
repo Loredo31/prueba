@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ServiciosService } from '../../services/servicios.service';
+import { PresupuestosService } from '../../services/presupuestos.service';
 import { Router } from '@angular/router';
 import { NotificationService } from '../../services/notification.service';
 
@@ -12,9 +13,11 @@ export class ServicioListComponent implements OnInit {
   servicios: any = [];
   notificationMessage: string | null = null;
   idUsuario: string | null = null;
+  presupuestos: any = [];
 
   constructor(
     private serviciosService: ServiciosService,
+    private presupuestosService: PresupuestosService,
     private router: Router,
     private notificationService: NotificationService
   ) {}
@@ -23,11 +26,13 @@ export class ServicioListComponent implements OnInit {
     this.idUsuario = localStorage.getItem('IdUsuario');
     if (this.idUsuario) {
       this.loadServicios();
+      this.loadPresupuestos();
     } else {
       console.error('Usuario no autenticado');
       this.router.navigate(['/login']);
     }
 
+    
     this.notificationService.notification$.subscribe(message => {
       this.notificationMessage = message;
     });
@@ -59,4 +64,15 @@ export class ServicioListComponent implements OnInit {
   editServicio(id: number) {
     this.router.navigate(['/servicios/edit', id]);
   }
+
+  loadPresupuestos() {
+    if (this.idUsuario) {
+      this.presupuestosService.getPresupuestos(this.idUsuario).subscribe(
+        (resp: any) => {
+          this.presupuestos = resp;
+        },
+        err => console.log(err)
+      );
+    }
+}
 }
