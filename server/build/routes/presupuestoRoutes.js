@@ -11,7 +11,7 @@ class PresupuestoRoutes {
         this.config();
     }
     config() {
-        this.router.get('/:idUser', presupuestoController_1.default.getPresupuesto);
+        this.router.get('/:idUser', presupuestoController_1.default.list);
     }
 }
 const presupuestoRoutes = new PresupuestoRoutes();

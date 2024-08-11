@@ -12,7 +12,9 @@ export class PresupuestosService {
 
   constructor(private http: HttpClient) { }
 
-  getPresupuestos(idUser: string): Observable<Presupuesto> {
-    return this.http.get<Presupuesto>(`${this.API_URI}/${idUser}`);
+  getPresupuestos(idUser: string): Observable<Presupuesto[]> {
+    return this.http.get<{ presupuestos: Presupuesto[] }>(`${this.API_URI}/${idUser}`).pipe(
+      map(response => response.presupuestos)
+    );
   }  
 }

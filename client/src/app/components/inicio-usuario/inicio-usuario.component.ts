@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { PresupuestosService } from '../../services/presupuestos.service';
 import { Router } from '@angular/router';
 
@@ -8,39 +9,38 @@ import { Router } from '@angular/router';
   styleUrls: ['./inicio-usuario.component.css']
 })
 export class InicioUsuarioComponent implements OnInit {
-  IdUsuario: string | null = null;
-  presupuesto: any = {};
+  presupuestos: any = [];
+  idUsuario: string | null = null;
 
   constructor(
     private presupuestosService: PresupuestosService,
-    private router: Router
+    private router: Router,
+    @Inject(PLATFORM_ID) private platformId: Object
   ) {}
 
   ngOnInit() {
-    // Verifica si el código se está ejecutando en un entorno de navegador
-    if (typeof window !== 'undefined') {
-      this.IdUsuario = localStorage.getItem('IdUsuario');
-      if (this.IdUsuario) {
-        this.loadPresupuesto();
+    if (isPlatformBrowser(this.platformId)) {
+      this.idUsuario = localStorage.getItem('IdUsuario');
+      if (this.idUsuario) {
+        this.loadPresupuestos();
       } else {
         console.error('Usuario no autenticado');
         this.router.navigate(['/login']);
       }
     } else {
-      console.error('No se puede acceder a localStorage en este entorno');
+      console.warn('No se puede acceder a localStorage en el lado del servidor.');
       this.router.navigate(['/login']);
     }
   }
 
-  loadPresupuesto() {
-    if (this.IdUsuario) {
-      this.presupuestosService.getPresupuestos(this.IdUsuario).subscribe(
+  loadPresupuestos() {
+    if (this.idUsuario) {
+      this.presupuestosService.getPresupuestos(this.idUsuario).subscribe(
         (resp: any) => {
-          console.log('Respuesta del presupuesto:', resp);
-          this.presupuesto = resp;
+          this.presupuestos = resp;
         },
-        err => console.error('Error al cargar el presupuesto:', err)
+        err => console.log(err)
       );
     }
   }
-}
+  }

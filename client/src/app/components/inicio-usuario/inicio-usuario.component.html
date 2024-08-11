@@ -14,7 +14,12 @@
                     <li class="left">
                         <a routerLink="/inicio-usuario">Control de Gastos</a>
                     </li>
-                                       
+                    <li class="left" *ngFor="let presupuesto of presupuestos">
+                        <a>Presupuesto total: ${{ presupuesto.PresupuestoTotal }}</a>
+                    </li>
+                    <li class="left" *ngFor="let presupuesto of presupuestos">
+                        <a>Presupuesto actual: ${{ presupuesto.PresupuestoActual }}</a>
+                    </li>
                     <li class="right">
                         <a routerLink="/inicio-usuario">
                             <i class="fas fa-headset"></i>
