@@ -9,7 +9,7 @@ class PresupuestoRoutes {
   }
 
   config(): void {
-    this.router.get('/:idUser', presupuestoController.getPresupuesto);
+    this.router.get('/:idUser', presupuestoController.list);
   }
 }
 

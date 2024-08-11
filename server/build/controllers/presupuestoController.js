@@ -21,27 +21,10 @@ class PresupuestoController {
             try {
                 const presupuestos = yield database_1.default.query('SELECT * FROM Presupuesto WHERE IdUsuario = ?', [idUser]);
                 res.json({ presupuestos });
+                console.log('Presupuesto:', presupuestos);
             }
             catch (err) {
-                res.status(500).json({ error: 'Error al obtener los presupuestos' });
-            }
-        });
-    }
-    getPresupuesto(req, res) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const { idUser } = req.params;
-            try {
-                const [presupuesto] = yield database_1.default.query('SELECT * FROM Presupuesto WHERE IdUsuario = ?', [idUser]);
-                console.log('Presupuesto:', presupuesto);
-                if (presupuesto.length > 0) {
-                    res.json(presupuesto[0]);
-                }
-                else {
-                    res.status(404).json({ error: 'Presupuesto no encontrado' });
-                }
-            }
-            catch (err) {
-                res.status(500).json({ error: 'Error al obtener el presupuesto' });
+                res.status(500).json({ error: 'Error al obtener los gastos' });
             }
         });
     }
