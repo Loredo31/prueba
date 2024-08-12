@@ -2,7 +2,7 @@ import { Component, OnInit, HostBinding } from '@angular/core';
 import { Usuario } from '../../../models/Usuario';
 import { UsuarioService } from '../../../services/usuario.service';
 import { Router } from '@angular/router';
-import { NotificationService } from '../../../services/notification.service';
+import { NotificationService } from '../../../services/notification.service';  // Importa NotificationService
 
 @Component({
   selector: 'app-registrarse-form',
@@ -23,10 +23,15 @@ export class RegistrarseComponent implements OnInit {
     Contrasena: ''
   };
 
+  confirmarContrasena: string = ''; // Nueva propiedad para confirmar la contraseña
+
   errorMessages: { [key: string]: string } = {};
 
-  constructor(private usuarioService: UsuarioService, private router: Router, 
-    private notificationService: NotificationService) {}
+  constructor(
+    private usuarioService: UsuarioService,
+    private router: Router,
+    private notificationService: NotificationService  // Inyecta NotificationService
+  ) {}
 
   ngOnInit() {}
 
@@ -56,6 +61,9 @@ export class RegistrarseComponent implements OnInit {
     }
     if (!this.usuario.Contrasena || !this.isValidPassword(this.usuario.Contrasena)) {
       this.errorMessages['Contrasena'] = 'La contraseña debe tener al menos 8 caracteres, incluyendo un número o carácter especial*';
+    }
+    if (this.usuario.Contrasena !== this.confirmarContrasena) {
+      this.errorMessages['ConfirmarContrasena'] = 'Las contraseñas no coinciden*';
     }
 
     return Object.keys(this.errorMessages).length === 0;
@@ -97,11 +105,14 @@ export class RegistrarseComponent implements OnInit {
     if (this.validateForm()) {
       this.usuarioService.createUser(this.usuario).subscribe(
         res => {
-          console.log(res);
-          this.notificationService.showNotification('Usuario creado correctamente');
-          this.router.navigate(['/login']);
+          this.notificationService.showNotification('Cuenta creada exitosamente');  // Muestra notificación
+          this.router.navigate(['/home']);
         },
-        err => console.log(err));
+        err => {
+          console.log(err);
+          this.notificationService.showNotification('Hubo un error al crear la cuenta');  // Muestra notificación de error
+        }
+      );
     }
   }
 }

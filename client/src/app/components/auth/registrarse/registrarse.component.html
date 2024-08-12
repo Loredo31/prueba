@@ -94,11 +94,11 @@
                     </div>
                     <div class="form-group">
                         <div class="form-floating">
-                            <input type="password" id="confirmarContrasena" name="confirmarContrasena" placeholder=" " required [(ngModel)]="usuario.Contrasena">
+                            <input type="password" id="confirmarContrasena" name="confirmarContrasena" placeholder=" " required [(ngModel)]="confirmarContrasena">
                             <label for="confirmarContrasena">Confirma Contraseña</label>
                         </div>
-                        <div class="error-message" *ngIf="errorMessages['Contrasena']">
-                            <i class="fas fa-exclamation-circle"></i> {{ errorMessages['Contrasena'] }}
+                        <div class="error-message" *ngIf="errorMessages['ConfirmarContrasena']">
+                            <i class="fas fa-exclamation-circle"></i> {{ errorMessages['ConfirmarContrasena'] }}
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i></button>
