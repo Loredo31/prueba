@@ -42,27 +42,32 @@ class IngresoController {
   public async update(req: Request, res: Response): Promise<void> {
     const { id, idUser } = req.params;
     const ingreso = req.body;
-  
+    
     console.log('IdIngreso:', id);
     console.log('IdUsuario:', idUser);
     console.log('Ingreso:', ingreso);
-  
+    
     try {
-      const result = await pool.query('UPDATE Ingreso SET ? WHERE IdIngreso = ? AND IdUsuario = ?', [ingreso, id, idUser]);
+      const result = await pool.query(`UPDATE Ingreso SET TipoIngreso = ?, OrigenIngreso = ?, Categoria = ?, Monto = ?, FechaIngreso = ? WHERE IdIngreso = ? AND IdUsuario = ?`,
+        [ingreso.TipoIngreso, ingreso.OrigenIngreso, ingreso.Categoria, ingreso.Monto, ingreso.FechaIngreso, id, idUser]
+      );
+      
       if (result.affectedRows > 0) {
         res.json({ message: 'El ingreso fue actualizado' });
       } else {
         res.status(404).json({ error: 'El ingreso no fue encontrado o el usuario no coincide' });
       }
     } catch (err) {
+      console.error(err);
       res.status(500).json({ error: 'Error al actualizar el ingreso' });
     }
   }
+  
 
   public async getOne(req: Request, res: Response): Promise<void> {
     const { id, idUser } = req.params;
     try {
-      const ingreso = await pool.query('SELECT * FROM Ingreso WHERE id = ? AND IdUsuario = ?', [id, idUser]);
+      const ingreso = await pool.query('SELECT * FROM Ingreso WHERE IdIngreso = ? AND IdUsuario = ?', [id, idUser]);
       if (ingreso.length > 0) {
         res.json(ingreso[0]);
       } else {
