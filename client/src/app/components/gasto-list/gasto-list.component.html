@@ -36,7 +36,6 @@
                 <th>Monto</th>
                 <th>Fecha de transaccion</th>
                 <th>Metodo de Pago</th>
-                <th>Comprobante</th>
                 <th>Acciones</th>
               </tr>
             </thead>
@@ -47,7 +46,6 @@
                 <td>$ {{ gasto.Monto }}</td>
                 <td>{{ gasto.FechaTransaccion | date }}</td>
                 <td>{{ gasto.MetodoPago }}</td>
-                <td> link comprobante </td>
                 <td>
                   <button class="edit-button" (click)="editGasto(gasto.IdGasto)"><i class="fas fa-edit"></i></button>
                   <button class="delete-button" (click)="deleteGasto(gasto.IdGasto)"><i class="fas fa-trash-alt"></i></button>

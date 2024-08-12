@@ -122,3 +122,121 @@ BEGIN
 END //
 
 DELIMITER ;
+
+--Editar Gasto
+
+DELIMITER //
+
+CREATE TRIGGER after_Gasto_update
+AFTER UPDATE ON Gasto
+FOR EACH ROW
+BEGIN
+    -- Revertir el impacto del monto antiguo
+    UPDATE Presupuesto
+    SET 
+        PresupuestoActual = PresupuestoActual + OLD.Monto
+    WHERE IdUsuario = OLD.IdUsuario;
+
+    -- Aplicar el nuevo monto
+    UPDATE Presupuesto
+    SET 
+        PresupuestoActual = PresupuestoActual - NEW.Monto
+    WHERE IdUsuario = NEW.IdUsuario;
+END //
+
+DELIMITER ;
+
+--Eliminar Gasto
+
+DELIMITER //
+
+CREATE TRIGGER after_gasto_delete
+AFTER DELETE ON Gasto
+FOR EACH ROW
+BEGIN
+    UPDATE Presupuesto
+    SET 
+        PresupuestoActual = PresupuestoActual + OLD.Monto
+    WHERE IdUsuario = OLD.IdUsuario;
+END //
+
+DELIMITER ;
+
+--Editar Servicio
+
+DELIMITER //
+
+CREATE TRIGGER after_Servicio_update
+AFTER UPDATE ON Servicio
+FOR EACH ROW
+BEGIN
+    -- Revertir el impacto del monto antiguo
+    UPDATE Presupuesto
+    SET 
+        PresupuestoActual = PresupuestoActual - OLD.Monto
+    WHERE IdUsuario = OLD.IdUsuario;
+
+    -- Aplicar el nuevo monto
+    UPDATE Presupuesto
+    SET 
+        PresupuestoActual = PresupuestoActual + NEW.Monto
+    WHERE IdUsuario = NEW.IdUsuario;
+END //
+
+DELIMITER ;
+
+
+--Eliminar Servicio
+
+DELIMITER //
+
+CREATE TRIGGER after_servicio_delete
+AFTER DELETE ON Servicio
+FOR EACH ROW
+BEGIN
+    UPDATE Presupuesto
+    SET 
+        PresupuestoActual = PresupuestoActual - OLD.Monto
+    WHERE IdUsuario = OLD.IdUsuario;
+END //
+
+DELIMITER ;
+
+--Editar Ingreso
+
+DELIMITER //
+
+CREATE TRIGGER after_Ingreso_update
+AFTER UPDATE ON Ingreso
+FOR EACH ROW
+BEGIN
+    -- Revertir el impacto del monto antiguo
+    UPDATE Presupuesto
+    SET 
+        PresupuestoActual = PresupuestoActual - OLD.Monto
+    WHERE IdUsuario = OLD.IdUsuario;
+
+    -- Aplicar el nuevo monto
+    UPDATE Presupuesto
+    SET 
+        PresupuestoActual = PresupuestoActual + NEW.Monto
+    WHERE IdUsuario = NEW.IdUsuario;
+END //
+
+DELIMITER ;
+
+--Eliminar Ingreso
+
+DELIMITER //
+
+CREATE TRIGGER after_ingreso_delete
+AFTER DELETE ON Ingreso
+FOR EACH ROW
+BEGIN
+    UPDATE Presupuesto
+    SET 
+        PresupuestoActual = PresupuestoActual - OLD.Monto
+    WHERE IdUsuario = OLD.IdUsuario;
+END //
+
+DELIMITER ;
