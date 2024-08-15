@@ -1,3 +1,5 @@
+-- Base de datos de Control de gasto;
+
 DROP DATABASE IF EXISTS ControlGasto;
 CREATE DATABASE ControlGasto;
 USE ControlGasto;
@@ -56,8 +58,8 @@ CREATE TABLE Gasto (
     FOREIGN KEY (IdUsuario) REFERENCES Usuario(IdUsuario)
 );
 
--- Trigger que se encarga de actualizar el IdUsuario de la tabla Presupuesto
--- y que comience en 0
+
+-- Trigger que actualiza el presupuesto cuando se crea un usuario
 
 DELIMITER //
 
@@ -71,6 +73,136 @@ END //
 
 DELIMITER ;
 
+
+-------------
+-- Gastos --
+-------------
+
+-- Trigger que actualiza el presupuesto cuando se crea un gasto
+
+DELIMITER //
+
+CREATE TRIGGER after_gasto_insert
+AFTER INSERT ON Gasto
+FOR EACH ROW
+BEGIN
+    UPDATE Presupuesto
+    SET 
+        PresupuestoActual = PresupuestoActual - NEW.Monto
+    WHERE IdUsuario = NEW.IdUsuario;
+END //
+
+DELIMITER ;
+
+
+-- Trigger que actualiza el presupuesto cuando se edita un gasto
+
+DELIMITER //
+
+CREATE TRIGGER after_Gasto_update
+AFTER UPDATE ON Gasto
+FOR EACH ROW
+BEGIN
+    UPDATE Presupuesto
+    SET 
+        PresupuestoActual = PresupuestoActual + OLD.Monto
+    WHERE IdUsuario = OLD.IdUsuario;
+
+    -- Aplicar el nuevo monto
+    UPDATE Presupuesto
+    SET 
+        PresupuestoActual = PresupuestoActual - NEW.Monto
+    WHERE IdUsuario = NEW.IdUsuario;
+END //
+
+DELIMITER ;
+
+
+-- Trigger que actualiza el presupuesto cuando se elimina un gasto
+
+DELIMITER //
+
+CREATE TRIGGER after_gasto_delete
+AFTER DELETE ON Gasto
+FOR EACH ROW
+BEGIN
+    UPDATE Presupuesto
+    SET 
+        PresupuestoActual = PresupuestoActual + OLD.Monto,
+        PresupuestoTotal = PresupuestoTotal + OLD.Monto
+    WHERE IdUsuario = OLD.IdUsuario;
+END //
+
+DELIMITER ;
+
+---------------
+-- Servicios --
+---------------
+
+-- Trigger que actualiza el presupuesto cuando se crea un servicio
+
+DELIMITER //
+
+CREATE TRIGGER after_servicio_insert
+AFTER INSERT ON Servicio
+FOR EACH ROW
+BEGIN
+    UPDATE Presupuesto
+    SET 
+        PresupuestoTotal = PresupuestoTotal + NEW.Monto,
+        PresupuestoActual = PresupuestoActual + NEW.Monto
+    WHERE IdUsuario = NEW.IdUsuario;
+END //
+
+DELIMITER ;
+
+
+-- Trigger que actualiza el presupuesto cuando se edita un servicio
+
+DELIMITER //
+
+CREATE TRIGGER after_Servicio_update
+AFTER UPDATE ON Servicio
+FOR EACH ROW
+BEGIN
+    UPDATE Presupuesto
+    SET 
+        PresupuestoActual = PresupuestoActual - OLD.Monto,
+        PresupuestoTotal = PresupuestoTotal - OLD.Monto
+    WHERE IdUsuario = OLD.IdUsuario;
+
+    -- Aplicar el nuevo monto
+    UPDATE Presupuesto
+    SET 
+        PresupuestoActual = PresupuestoActual + NEW.Monto,
+        PresupuestoTotal = PresupuestoTotal + NEW.Monto
+    WHERE IdUsuario = NEW.IdUsuario;
+END //
+
+DELIMITER ;
+
+
+-- Trigger que actualiza el presupuesto cuando se elimina un servicio
+
+DELIMITER //
+
+CREATE TRIGGER after_servicio_delete
+AFTER DELETE ON Servicio
+FOR EACH ROW
+BEGIN
+    UPDATE Presupuesto
+    SET 
+        PresupuestoActual = PresupuestoActual - OLD.Monto,
+        PresupuestoTotal = PresupuestoTotal - OLD.Monto
+    WHERE IdUsuario = OLD.IdUsuario;
+END //
+
+DELIMITER ;
+
+
+--------------
+-- Ingresos --
+--------------
 
 -- Trigger que actualiza el presupuesto cuando se crea un ingreso
 
@@ -90,119 +222,7 @@ END //
 DELIMITER ;
 
 
--- Trigger que actualiza el presupuesto cuando se crea un servicio
-
-DELIMITER //
-
-CREATE TRIGGER after_servicio_insert
-AFTER INSERT ON Servicio
-FOR EACH ROW
-BEGIN
-    UPDATE Presupuesto
-    SET 
-        PresupuestoTotal = PresupuestoTotal + NEW.Monto,
-        PresupuestoActual = PresupuestoActual + NEW.Monto
-    WHERE IdUsuario = NEW.IdUsuario;
-END //
-
-DELIMITER ;
-
--- Trigger que actualiza el presupuesto cuando se crea un gasto
-
-DELIMITER //
-
-CREATE TRIGGER after_gasto_insert
-AFTER INSERT ON Gasto
-FOR EACH ROW
-BEGIN
-    UPDATE Presupuesto
-    SET 
-        PresupuestoActual = PresupuestoActual - NEW.Monto
-    WHERE IdUsuario = NEW.IdUsuario;
-END //
-
-DELIMITER ;
-
---Editar Gasto
-
-DELIMITER //
-
-CREATE TRIGGER after_Gasto_update
-AFTER UPDATE ON Gasto
-FOR EACH ROW
-BEGIN
-    -- Revertir el impacto del monto antiguo
-    UPDATE Presupuesto
-    SET 
-        PresupuestoActual = PresupuestoActual + OLD.Monto
-    WHERE IdUsuario = OLD.IdUsuario;
-
-    -- Aplicar el nuevo monto
-    UPDATE Presupuesto
-    SET 
-        PresupuestoActual = PresupuestoActual - NEW.Monto
-    WHERE IdUsuario = NEW.IdUsuario;
-END //
-
-DELIMITER ;
-
---Eliminar Gasto
-
-DELIMITER //
-
-CREATE TRIGGER after_gasto_delete
-AFTER DELETE ON Gasto
-FOR EACH ROW
-BEGIN
-    UPDATE Presupuesto
-    SET 
-        PresupuestoActual = PresupuestoActual + OLD.Monto
-    WHERE IdUsuario = OLD.IdUsuario;
-END //
-
-DELIMITER ;
-
---Editar Servicio
-
-DELIMITER //
-
-CREATE TRIGGER after_Servicio_update
-AFTER UPDATE ON Servicio
-FOR EACH ROW
-BEGIN
-    -- Revertir el impacto del monto antiguo
-    UPDATE Presupuesto
-    SET 
-        PresupuestoActual = PresupuestoActual - OLD.Monto
-    WHERE IdUsuario = OLD.IdUsuario;
-
-    -- Aplicar el nuevo monto
-    UPDATE Presupuesto
-    SET 
-        PresupuestoActual = PresupuestoActual + NEW.Monto
-    WHERE IdUsuario = NEW.IdUsuario;
-END //
-
-DELIMITER ;
-
-
---Eliminar Servicio
-
-DELIMITER //
-
-CREATE TRIGGER after_servicio_delete
-AFTER DELETE ON Servicio
-FOR EACH ROW
-BEGIN
-    UPDATE Presupuesto
-    SET 
-        PresupuestoActual = PresupuestoActual - OLD.Monto
-    WHERE IdUsuario = OLD.IdUsuario;
-END //
-
-DELIMITER ;
-
---Editar Ingreso
+-- Trigger que actualiza el presupuesto cuando se edita un ingreso
 
 DELIMITER //
 
@@ -210,22 +230,24 @@ CREATE TRIGGER after_Ingreso_update
 AFTER UPDATE ON Ingreso
 FOR EACH ROW
 BEGIN
-    -- Revertir el impacto del monto antiguo
     UPDATE Presupuesto
     SET 
-        PresupuestoActual = PresupuestoActual - OLD.Monto
+        PresupuestoActual = PresupuestoActual - OLD.Monto,
+        PresupuestoTotal = PresupuestoTotal - OLD.Monto
     WHERE IdUsuario = OLD.IdUsuario;
 
     -- Aplicar el nuevo monto
     UPDATE Presupuesto
     SET 
-        PresupuestoActual = PresupuestoActual + NEW.Monto
+        PresupuestoActual = PresupuestoActual + NEW.Monto,
+        PresupuestoTotal = PresupuestoTotal - NEW.Monto
     WHERE IdUsuario = NEW.IdUsuario;
 END //
 
 DELIMITER ;
 
---Eliminar Ingreso
+
+-- Trigger que actualiza el presupuesto cuando se elimina un ingreso
 
 DELIMITER //
 
@@ -235,8 +257,27 @@ FOR EACH ROW
 BEGIN
     UPDATE Presupuesto
     SET 
-        PresupuestoActual = PresupuestoActual - OLD.Monto
+        PresupuestoActual = PresupuestoActual - OLD.Monto,
+        PresupuestoTotal = PresupuestoTotal - OLD.Monto
     WHERE IdUsuario = OLD.IdUsuario;
+END //
+
+DELIMITER ;
+
+------------------------------------------------
+-- Eliminar datos relacionados con el usuario --
+------------------------------------------------
+
+DELIMITER //
+
+CREATE TRIGGER before_usuario_delete
+BEFORE DELETE ON Usuario
+FOR EACH ROW
+BEGIN
+    DELETE FROM Gasto WHERE IdUsuario = OLD.IdUsuario;
+    DELETE FROM Ingreso WHERE IdUsuario = OLD.IdUsuario;
+    DELETE FROM Servicio WHERE IdUsuario = OLD.IdUsuario;
+    DELETE FROM Presupuesto WHERE IdUsuario = OLD.IdUsuario;
 END //
 
 DELIMITER ;

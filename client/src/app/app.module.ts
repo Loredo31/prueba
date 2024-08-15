@@ -1,9 +1,11 @@
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule, provideHttpClient, withFetch } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { registerLocaleData } from '@angular/common';
+import localeEs from '@angular/common/locales/es';
 
 import { LoginComponent } from './components/auth/login/login.component';
 import { RegistrarseComponent } from './components/auth/registrarse/registrarse.component';
@@ -21,7 +23,8 @@ import { UsuarioComponent } from './components/usuario/usuario.component';
 import { ResumenComponent } from './components/resumen/resumen.component';
 import { AhorroComponent } from './components/ahorro/ahorro.component';
 import { BilleteraComponent } from './components/billetera/billetera.component';
-import { ReactiveFormsModule } from '@angular/forms';
+
+registerLocaleData(localeEs, 'es');
 
 @NgModule({
   declarations: [
@@ -51,6 +54,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule
   ],
   providers: [
+    { provide: LOCALE_ID, useValue: 'es' },
     provideHttpClient(withFetch())
   ],
   bootstrap: [AppComponent]
