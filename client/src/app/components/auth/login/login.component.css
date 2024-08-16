@@ -237,12 +237,18 @@ body {
 }
 
 .error-message {
-    color: red;
-    margin-top: 10px;
+    color: #af1919;
     font-size: 14px;
-  }
-  
-  .notification {
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+}
+
+.error-message i {
+    margin-right: 5px;
+}
+
+.notification {
     position: absolute;
     top: 100px;
     right: 20px;

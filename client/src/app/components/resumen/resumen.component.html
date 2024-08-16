@@ -16,13 +16,23 @@
       </header>
       <main class="main-content">
         <h1>Resumen Gastos</h1>
-        <div class="dropdown">
-          <button class="button_descargar">Descargar</button>
-          <div class="dropdown-content">
-            <a (click)="createPdf()">Descargar como PDF</a>
-          </div>
-        </div>
         <div class="white-container">
+          <div class="filter-dropdown">
+            <button class="button_filter">Filtrar Gastos</button>
+            <div class="dropdown-content">
+              <a (click)="filterGastos('day')">Último Día</a>
+              <a (click)="filterGastos('week')">Última Semana</a>
+              <a (click)="filterGastos('month')">Último Mes</a>
+              <a (click)="filterGastos('year')">Último Año</a>
+            </div>
+          </div>
+          <!-- Botón de descarga PDF -->
+          <div class="dropdown">
+            <button class="button_descargar">Descargar</button>
+            <div class="dropdown-content">
+              <a (click)="createPdf()">Descargar como PDF</a>
+            </div>
+          </div>
           <table class="expenses-table">
             <thead>
               <tr>

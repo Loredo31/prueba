@@ -55,6 +55,7 @@ export class ServicioListComponent implements OnInit {
       this.serviciosService.deleteServicio(id.toString(), this.idUsuario).subscribe(
         () => {
           this.servicios = this.servicios.filter((servicio: any) => servicio.IdServicio !== id);
+          this.loadPresupuestos(); //Nuevo
         },
         err => console.log(err)
       );

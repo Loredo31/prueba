@@ -40,8 +40,6 @@ export class ResumenComponent implements OnInit {
       console.error('localStorage no está disponible en este entorno');
     }
   }
-  
-  
 
   createPdf() {
     const tableBody = [
@@ -144,7 +142,7 @@ export class ResumenComponent implements OnInit {
       });
     }
   }
-  
+
   addToResumen(data: any[], type: string) {
     if (Array.isArray(data)) {
       data.forEach(item => {
@@ -156,5 +154,34 @@ export class ResumenComponent implements OnInit {
       });
     }
   }
-  
+
+  // Función para filtrar los datos
+  filterGastos(periodo: string) {
+    const now = new Date();
+    let filteredData: any[] = [];
+
+    switch (periodo) {
+      case 'day':
+        const startOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+        filteredData = this.resumen.filter(item => new Date(item.FechaTransaccion || item.FechaIngreso || item.FechaServicio) >= startOfDay);
+        break;
+      case 'week':
+        const startOfWeek = new Date(now.setDate(now.getDate() - now.getDay()));
+        filteredData = this.resumen.filter(item => new Date(item.FechaTransaccion || item.FechaIngreso || item.FechaServicio) >= startOfWeek);
+        break;
+      case 'month':
+        const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+        filteredData = this.resumen.filter(item => new Date(item.FechaTransaccion || item.FechaIngreso || item.FechaServicio) >= startOfMonth);
+        break;
+      case 'year':
+        const startOfYear = new Date(now.getFullYear(), 0, 1);
+        filteredData = this.resumen.filter(item => new Date(item.FechaTransaccion || item.FechaIngreso || item.FechaServicio) >= startOfYear);
+        break;
+      default:
+        filteredData = this.resumen;
+        break;
+    }
+
+    this.resumen = filteredData;
+  }
 }

@@ -54,6 +54,7 @@ export class IngresoListComponent implements OnInit {
       this.ingresosService.deleteIngreso(id.toString(), this.idUsuario).subscribe(
         () => {
           this.ingresos = this.ingresos.filter((ingreso: any) => ingreso.IdIngreso !== id);
+          this.loadPresupuestos();
         },
         err => console.log(err)
       );

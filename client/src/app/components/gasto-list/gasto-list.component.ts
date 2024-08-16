@@ -61,6 +61,7 @@ export class GastoListComponent implements OnInit {
       this.gastosService.deleteGasto(id.toString(), this.idUsuario).subscribe(
         () => {
           this.gastos = this.gastos.filter((gasto: any) => gasto.IdGasto !== id);
+          this.loadPresupuestos();
         },
         err => console.log(err)
       );

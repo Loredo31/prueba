@@ -185,3 +185,53 @@ body {
 .dropdown:hover .button_descargar {
     background-color: #00000094;
 }
+
+.filter-dropdown {
+    position: relative;
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: -20px;
+}
+
+.button_filter {
+    font-family: sans-serif;
+    padding: 8px 15px;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #270d0a8e;
+    font-family: sans-serif;
+    font-weight: 600;
+    font-size: medium;
+    color: #fff2cc;
+}
+
+.filter-dropdown .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.filter-dropdown .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.filter-dropdown .dropdown-content a:hover {
+    background-color: #8b8b8b;
+}
+
+.filter-dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.filter-dropdown:hover .button_filter {
+    background-color: #00000094;
+}
