@@ -47,9 +47,6 @@ export class GastoFormComponent implements OnInit {
     }
   }
 
-  
-  
-
   validateForm(): boolean {
     this.errorMessages = {}; 
 
@@ -59,8 +56,8 @@ export class GastoFormComponent implements OnInit {
     if (!this.gasto.Categoria) {
       this.errorMessages['Categoria'] = 'Seleccione una categoría*';
     }
-    if (!this.gasto.Monto) {
-      this.errorMessages['Monto'] = 'Ingrese un monto válido*';
+    if (!this.gasto.Monto || isNaN(Number(this.gasto.Monto)) || Number(this.gasto.Monto) <= 0) {
+      this.errorMessages['Monto'] = 'Ingrese un monto válido (debe ser un número positivo)*';
     }
     if (!this.gasto.FechaTransaccion) {
       this.errorMessages['FechaTransaccion'] = 'Seleccione una fecha de transacción*';
@@ -76,7 +73,15 @@ export class GastoFormComponent implements OnInit {
     if (this.validateForm()) {
       console.log('IdUsuario:', this.idUsuario);
       console.log('Gasto:', this.gasto);
-    
+      const monto = Number(this.gasto.Monto);
+
+      if (isNaN(monto) || monto <= 0) {
+        this.errorMessages['Monto'] = 'Ingrese un monto válido (debe ser un número positivo)*';
+        return;
+      }
+
+      this.gasto.Monto = monto.toString();
+
       if (this.isEditMode && this.gastoId) {
         this.gastosService.updateGasto(this.gastoId, this.idUsuario, this.gasto).subscribe(
           res => {

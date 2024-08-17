@@ -19,31 +19,31 @@
     <main class="main-content">
       <h1>Resumen Gastos</h1>
       <div class="white-container">
-        <div class="filter-dropdown">
-          <button class="button_filter">Filtrar Gastos</button>
-          <div class="dropdown-content">
-            <a (click)="filterGastos('day')">Último Día</a>
-            <a (click)="filterGastos('week')">Última Semana</a>
-            <a (click)="filterGastos('month')">Último Mes</a>
-            <a (click)="filterGastos('year')">Último Año</a>
-            <a (click)="filterGastos('all')">Todos</a>
+        <div class="filters-container">
+          <div class="filter-dropdown">
+            <button class="button_filter">Filtrar Gastos</button>
+            <div class="dropdown-content">
+              <a (click)="filterGastos('day')">Último Día</a>
+              <a (click)="filterGastos('week')">Última Semana</a>
+              <a (click)="filterGastos('month')">Último Mes</a>
+              <a (click)="filterGastos('year')">Último Año</a>
+              <a (click)="filterGastos('all')">Todos</a>
+            </div>
           </div>
-        </div>
-        <!-- Nuevo botón para filtrar por tipo -->
-        <div class="type-filter-dropdown">
-          <button class="button_filter">Filtrar por Tipo</button>
-          <div class="dropdown-content">
-            <a (click)="filterByType('Gasto')">Gasto</a>
-            <a (click)="filterByType('Ingreso')">Ingreso</a>
-            <a (click)="filterByType('Servicio')">Servicio</a>
-            <a (click)="filterByType('all')">Todos</a>
+          <div class="type-filter-dropdown">
+            <button class="button_filter">Filtrar por Tipo</button>
+            <div class="dropdown-content">
+              <a (click)="filterByType('Gasto')">Gasto</a>
+              <a (click)="filterByType('Ingreso')">Ingreso</a>
+              <a (click)="filterByType('Servicio')">Servicio</a>
+              <a (click)="filterByType('all')">Todos</a>
+            </div>
           </div>
-        </div>
-        <!-- Botón de descarga PDF -->
-        <div class="dropdown">
-          <button class="button_descargar">Descargar</button>
-          <div class="dropdown-content">
-            <a (click)="createPdf()">Descargar como PDF</a>
+          <div class="dropdown">
+            <button class="button_descargar">Descargar</button>
+            <div class="dropdown-content">
+              <a (click)="createPdf()">Descargar como PDF</a>
+            </div>
           </div>
         </div>
         <table class="expenses-table">

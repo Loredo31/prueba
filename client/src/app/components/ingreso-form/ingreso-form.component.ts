@@ -53,13 +53,13 @@ export class IngresoFormComponent implements OnInit {
       this.errorMessages['TipoIngreso'] = 'Seleccione un tipo de ingreso*';
     }
     if (!this.ingreso.OrigenIngreso) {
-      this.errorMessages['OrigenIngreso'] = 'Ingreso el origen del ingreso*';
+      this.errorMessages['OrigenIngreso'] = 'Ingrese el origen del ingreso*';
     }
     if (!this.ingreso.Categoria) {
-      this.errorMessages['Categoria'] = 'Seleccione una categoria*';
+      this.errorMessages['Categoria'] = 'Seleccione una categoría*';
     }
-    if (!this.ingreso.Monto || isNaN(+this.ingreso.Monto) || +this.ingreso.Monto <= 0) {
-      this.errorMessages['Monto'] = 'Ingreso el monto total*';
+    if (!this.ingreso.Monto || isNaN(Number(this.ingreso.Monto)) || Number(this.ingreso.Monto) <= 0) {
+      this.errorMessages['Monto'] = 'Ingrese un monto válido (debe ser un número positivo)*';
     }
     if (!this.ingreso.FechaIngreso) {
       this.errorMessages['FechaIngreso'] = 'Seleccione una fecha*';
@@ -72,7 +72,16 @@ export class IngresoFormComponent implements OnInit {
     if (this.validateForm()) {
       console.log('IdUsuario:', this.idUsuario);
       console.log('Ingreso:', this.ingreso);
-    
+
+      const monto = Number(this.ingreso.Monto);
+
+      if (isNaN(monto) || monto <= 0) {
+        this.errorMessages['Monto'] = 'Ingrese un monto válido (debe ser un número positivo)*';
+        return;
+      }
+
+      this.ingreso.Monto = monto.toString();
+
       if (this.isEditMode && this.ingresoId) {
         this.ingresosService.updateIngreso(this.ingresoId, this.idUsuario, this.ingreso).subscribe(
           res => {

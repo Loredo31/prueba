@@ -46,7 +46,6 @@ export class ServicioFormComponent implements OnInit {
       );
     }
   }
-  
 
   validateForm(): boolean {
     this.errorMessages = {};
@@ -63,8 +62,8 @@ export class ServicioFormComponent implements OnInit {
     if (!this.servicio.Estado) {
       this.errorMessages['Estado'] = 'Seleccione el estado actual*';
     }
-    if (!this.servicio.Monto || isNaN(+this.servicio.Monto) || +this.servicio.Monto <= 0) {
-      this.errorMessages['Monto'] = 'Ingreso el monto total*';
+    if (!this.servicio.Monto || isNaN(Number(this.servicio.Monto)) || Number(this.servicio.Monto) <= 0) {
+      this.errorMessages['Monto'] = 'Ingrese un monto válido (debe ser un número positivo)*';
     }
     if (!this.servicio.FechaServicio) {
       this.errorMessages['FechaServicio'] = 'Seleccione una fecha*';
@@ -77,7 +76,16 @@ export class ServicioFormComponent implements OnInit {
     if (this.validateForm()) {
       console.log('IdUsuario:', this.idUsuario);
       console.log('Servicio:', this.servicio);
-    
+
+      const monto = Number(this.servicio.Monto);
+
+      if (isNaN(monto) || monto <= 0) {
+        this.errorMessages['Monto'] = 'Ingrese un monto válido (debe ser un número positivo)*';
+        return;
+      }
+
+      this.servicio.Monto = monto.toString();
+
       if (this.isEditMode && this.servicioId) {
         this.serviciosService.updateServicio(this.servicioId, this.idUsuario, this.servicio).subscribe(
           res => {
