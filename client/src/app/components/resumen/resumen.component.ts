@@ -20,6 +20,7 @@ export class ResumenComponent implements OnInit {
   ingresos: Ingreso[] = [];
   servicios: Servicio[] = [];
   resumen: any[] = [];
+  resumenOriginal: any[] = []; // Nueva propiedad para almacenar los datos originales
   IdUsuario: string | null = null;
 
   constructor(
@@ -56,7 +57,7 @@ export class ResumenComponent implements OnInit {
     });
 
     const pdfDefinition: any = {
-      pageMargins: [40, 60, 40, 60], 
+      pageMargins: [40, 60, 40, 60],
       pageSize: 'A4',
       background: function(currentPage, pageSize) {
         return {
@@ -80,20 +81,20 @@ export class ResumenComponent implements OnInit {
           style: 'tableExample',
           table: {
             body: tableBody,
-            widths: ['25%', '25%', '25%', '25%'], 
+            widths: ['25%', '25%', '25%', '25%'],
           },
           layout: {
             fillColor: function (rowIndex) {
               if (rowIndex === 0) {
-                return '#3a3a3a'; 
+                return '#3a3a3a';
               } else if (rowIndex % 2 === 0) {
-                return '#f2f2f2'; 
+                return '#f2f2f2';
               } else {
-                return '#ffffff'; 
+                return '#ffffff';
               }
             },
             hLineColor: '#CCCCCC',
-            vLineColor: '#CCCCCC', 
+            vLineColor: '#CCCCCC',
           }
         }
       ],
@@ -110,12 +111,12 @@ export class ResumenComponent implements OnInit {
         tableHeader: {
           bold: true,
           fontSize: 13,
-          color: 'white', // Color de la fuente del encabezado
+          color: 'white',
         },
       }
     };
     
-    pdfMake.createPdf(pdfDefinition).download('ResumenGastos.pdf');    
+    pdfMake.createPdf(pdfDefinition).download('ResumenGastos.pdf');
   }
 
   getAllData() {
@@ -126,14 +127,14 @@ export class ResumenComponent implements OnInit {
       }, error => {
         console.error('Error fetching gastos:', error);
       });
-  
+
       this.ingresoService.getIngresos(this.IdUsuario).subscribe((data: Ingreso[]) => {
         this.ingresos = data;
         this.addToResumen(this.ingresos, 'Ingreso');
       }, error => {
         console.error('Error fetching ingresos:', error);
       });
-  
+
       this.servicioService.getServicios(this.IdUsuario).subscribe((data: Servicio[]) => {
         this.servicios = data;
         this.addToResumen(this.servicios, 'Servicio');
@@ -146,42 +147,53 @@ export class ResumenComponent implements OnInit {
   addToResumen(data: any[], type: string) {
     if (Array.isArray(data)) {
       data.forEach(item => {
-        console.log('Adding to resumen:', { type: type, ...item }); // Añadir console.log aquí
         this.resumen.push({
           type: type,
           ...item
         });
       });
+      this.resumenOriginal = [...this.resumen]; // Almacena una copia de los datos originales
     }
   }
 
-  // Función para filtrar los datos
   filterGastos(periodo: string) {
-    const now = new Date();
-    let filteredData: any[] = [];
+    if (periodo === 'all') {
+      this.resumen = [...this.resumenOriginal]; // Restaura los datos originales
+    } else {
+      const now = new Date();
+      let filteredData: any[] = [];
 
-    switch (periodo) {
-      case 'day':
-        const startOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-        filteredData = this.resumen.filter(item => new Date(item.FechaTransaccion || item.FechaIngreso || item.FechaServicio) >= startOfDay);
-        break;
-      case 'week':
-        const startOfWeek = new Date(now.setDate(now.getDate() - now.getDay()));
-        filteredData = this.resumen.filter(item => new Date(item.FechaTransaccion || item.FechaIngreso || item.FechaServicio) >= startOfWeek);
-        break;
-      case 'month':
-        const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
-        filteredData = this.resumen.filter(item => new Date(item.FechaTransaccion || item.FechaIngreso || item.FechaServicio) >= startOfMonth);
-        break;
-      case 'year':
-        const startOfYear = new Date(now.getFullYear(), 0, 1);
-        filteredData = this.resumen.filter(item => new Date(item.FechaTransaccion || item.FechaIngreso || item.FechaServicio) >= startOfYear);
-        break;
-      default:
-        filteredData = this.resumen;
-        break;
+      switch (periodo) {
+        case 'day':
+          const startOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+          filteredData = this.resumenOriginal.filter(item => new Date(item.FechaTransaccion || item.FechaIngreso || item.FechaServicio) >= startOfDay);
+          break;
+        case 'week':
+          const startOfWeek = new Date(now.setDate(now.getDate() - now.getDay()));
+          filteredData = this.resumenOriginal.filter(item => new Date(item.FechaTransaccion || item.FechaIngreso || item.FechaServicio) >= startOfWeek);
+          break;
+        case 'month':
+          const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+          filteredData = this.resumenOriginal.filter(item => new Date(item.FechaTransaccion || item.FechaIngreso || item.FechaServicio) >= startOfMonth);
+          break;
+        case 'year':
+          const startOfYear = new Date(now.getFullYear(), 0, 1);
+          filteredData = this.resumenOriginal.filter(item => new Date(item.FechaTransaccion || item.FechaIngreso || item.FechaServicio) >= startOfYear);
+          break;
+        default:
+          filteredData = this.resumenOriginal;
+          break;
+      }
+
+      this.resumen = filteredData;
     }
+  }
 
-    this.resumen = filteredData;
+  filterByType(type: string) {
+    if (type === 'all') {
+      this.resumen = [...this.resumenOriginal];
+    } else {
+      this.resumen = this.resumenOriginal.filter(item => item.type === type);
+    }
   }
 }
