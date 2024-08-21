@@ -40,5 +40,7 @@ class UsuarioController {
     }
 }
 
+
+
 export const usuarioController = new UsuarioController();
 export default usuarioController;
