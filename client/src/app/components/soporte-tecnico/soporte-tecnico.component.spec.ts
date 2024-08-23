@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AgendaComponent } from './agenda.component';
+import { SoporteTecnicoComponent } from './soporte-tecnico.component';
 
-describe('AgendaComponent', () => {
-  let component: AgendaComponent;
-  let fixture: ComponentFixture<AgendaComponent>;
+describe('SoporteTecnicoComponent', () => {
+  let component: SoporteTecnicoComponent;
+  let fixture: ComponentFixture<SoporteTecnicoComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [AgendaComponent]
+      declarations: [SoporteTecnicoComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(AgendaComponent);
+    fixture = TestBed.createComponent(SoporteTecnicoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

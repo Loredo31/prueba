@@ -109,10 +109,25 @@ export class RegistrarseComponent implements OnInit {
           this.router.navigate(['/home']);
         },
         err => {
-          console.log(err);
-          this.notificationService.showNotification('Hubo un error al crear la cuenta');  // Muestra notificación de error
+          // Dependiendo del error devuelto por el backend, muestra el mensaje adecuado
+          let errorMessage = 'Hubo un error al crear la cuenta';
+          
+          if (err.status === 400) {
+            // Error específico basado en el código de estado HTTP 400
+            if (err.error && err.error.error) {
+              if (err.error.error === 'Correo electrónico ya registrado') {
+                errorMessage = 'Este correo electrónico ya está registrado.';
+              } else if (err.error.error === 'Nombre de usuario ya registrado') {
+                errorMessage = 'Este nombre de usuario ya está registrado.';
+              }
+            }
+          }
+  
+          this.notificationService.showNotification(errorMessage);  // Muestra notificación de error
+          console.error(err);  // Muestra el error en la consola para fines de depuración
         }
       );
     }
   }
+  
 }
